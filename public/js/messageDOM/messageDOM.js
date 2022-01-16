@@ -1,5 +1,36 @@
+function convertURIToBinary(base64) {
+    let raw = window.atob(base64);
+    let rawLength = raw.length;
+    let arr = new Uint8Array(new ArrayBuffer(rawLength));
+    for (let i = 0; i < rawLength; i++) { 
+      arr[i] = raw.charCodeAt(i);
+    }
+    return arr;
+  }
+
+export const outputAudio = function(audio) {
+    const div = document.createElement('div');
+    div.classList.add('audio');
+    const p = document.createElement('p');
+    p.classList.add('meta');
+    p.innerText = audio.username;
+    p.innerHTML += `<span>${audio.time}</span>`;
+    div.appendChild(p);
+    var binary = convertURIToBinary(audio.text);
+    var blob = new Blob([binary], {
+        type: 'audio/wav'
+        });
+    var url = (window.URL || window.webkitURL)
+                            .createObjectURL(blob);
+    var sound = document.createElement('audio');
+    sound.controls = 'controls';
+    sound.src = url;
+    div.appendChild(sound);
+    document.querySelector('.chat-messages').appendChild(div);
+}
+
 // Output message to DOM
-export const outputMessage = function(message) {
+export const outputMessage = function(message) { 
     const div = document.createElement('div');
     div.classList.add('message');
     const p = document.createElement('p');
