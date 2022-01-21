@@ -25,6 +25,11 @@
 					else
 						document.getElementById('hideDiv').style.display = 'block';
 				}
+				function usernameDefault(username,room){
+					if(room.value === "Table") {
+						username.value = "default"
+					}
+				}
 			</script>
 			<main class="join-main">
 				<form action="chat.html">
@@ -45,7 +50,7 @@
 								required
 						/>
 					</div>
-					<button type="submit" class="btn">Rejoindre le salon</button>
+					<button type="submit" class="btn" onclick="usernameDefault(username,room)">Rejoindre le salon</button>
 				</form>
 			</main>
 		</div>

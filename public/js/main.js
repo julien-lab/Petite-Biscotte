@@ -15,11 +15,11 @@ import {outputUsers} from './messageDOM/messageDOM.js'
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
  });
-  
+
 const socket = io();
-  
+
 // Join chatroom
-socket.emit('joinRoom', { username, room });
+socket.emit('joinRoom', { username , room });
 
 // Get room and users
 socket.on('roomUsers', ({ room, users }) => {
@@ -34,14 +34,14 @@ socket.on('message', (message) => {
 
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
-}); 
+});
 
 startRecord.addEventListener('click',(e) => {
   var div = document.getElementById('holderObject');
   if (div != null) div.remove();
 });
 
-// vocal submit 
+// vocal submit
 function listenSendButton() {
   sendVocalForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -133,7 +133,7 @@ jQuery(document).ready(function () {
           // Export the WAV file
           myRecorder.objects.recorder.exportWAV(function (blob) {
             var reader = new window.FileReader();
-            reader.readAsDataURL(blob); 
+            reader.readAsDataURL(blob);
             reader.onloadend = function() {
               base64Audio = reader.result;
               base64Audio = base64Audio.split(',')[1];
@@ -146,7 +146,7 @@ jQuery(document).ready(function () {
                     .attr('src', url);
 
             // Create send audio button
-            var sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');          
+            var sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');
 
             // Wrap everything in a row
             var holderObject = $('<div class="row" id="holderObject"></div>')
@@ -155,7 +155,7 @@ jQuery(document).ready(function () {
 
             // Append to the list
             listObject.append(holderObject);
-            
+
             // Listen to the send audio button
             sendVocalForm = document.getElementById('sendVocal');
             listenSendButton();
@@ -173,7 +173,7 @@ jQuery(document).ready(function () {
     // Initialize the recorder
     myRecorder.init();
 
-    // Get the button state 
+    // Get the button state
     var buttonState = !!$(this).attr('data-recording');
 
     // Toggle
