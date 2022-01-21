@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const fs = require('fs');
 const formatMessage = require('./utils/messages');
 const {
   userJoin,
@@ -10,8 +11,15 @@ const {
   getRoomUsers
 } = require('./utils/users');
 
+const options = {
+  key: fs.readFileSync(path.join(__dirname,'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname,'cert.pem'))
+};
+
 const app = express();
 const server = http.createServer(app);
+
+
 const io = socketio(server);
 
 // Set static folder
@@ -69,6 +77,7 @@ io.on('connection', socket => {
     }
   });
 });
+
 
 const PORT = process.env.PORT || 3000;
 
