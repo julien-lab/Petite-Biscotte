@@ -17,27 +17,15 @@
 		<div class="join-container">
 			<header class="join-header">
 				<h1><i class="fas fa-smile"></i> Petite Biscotte</h1>
+				<script src="js/index.js"></script>
 			</header>
-			<script type="text/javascript">
-				function hideDiv(elem) {
-					if(elem.value === "Table")
-						document.getElementById('hideDiv').style.display = "none";
-					else
-						document.getElementById('hideDiv').style.display = 'block';
-				}
-				function usernameDefault(username,room){
-					if(room.value === "Table") {
-						username.value = "default"
-					}
-				}
-			</script>
 			<main class="join-main">
-				<form action="mobile.html">
+				<form name="root" id="root" action="mobile.html">
 					<div class="form-control">
 						<label for="room">Appareil</label>
 						<select name="room" id="room" onchange="hideDiv(this)"> <!-- name is here to add itself as parameter to the url -->
-							<option value="Mobile">Mobile</option>
-							<option value="Table">Table tactile</option>
+							<option value="mobile.html">Mobile</option>
+							<option value="chat.html">Table tactile</option>
 						</select>
 					</div>
 					<div id="hideDiv" class="form-control">
