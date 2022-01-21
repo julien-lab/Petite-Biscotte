@@ -18,30 +18,34 @@
 			<header class="join-header">
 				<h1><i class="fas fa-smile"></i> Petite Biscotte</h1>
 			</header>
+			<script type="text/javascript">
+				function hideDiv(elem) {
+					if(elem.value === "Table")
+						document.getElementById('hideDiv').style.display = "none";
+					else
+						document.getElementById('hideDiv').style.display = 'block';
+				}
+			</script>
 			<main class="join-main">
 				<form action="chat.html">
 					<div class="form-control">
-						<label for="username">Username</label>
-						<input
-							type="text"
-							name="username" 
-							id="username"
-							placeholder="Enter username..."
-							required
-						/>
-					</div>
-					<div class="form-control">
-						<label for="room">Room</label>
-						<select name="room" id="room"> <!-- name is here to add itself as parameter to the url -->
-							<option value="Salle 1">Salle 1</option>
-							<option value="Salle 2">Salle 2</option>
-							<option value="Salle 3">Salle 3</option>
-							<option value="Salle 4">Salle 4</option>
-							<option value="Salle 5">Salle 5</option>
-							<option value="Salle 6">Salle 6</option>
+						<label for="room">Appareil</label>
+						<select name="room" id="room" onchange="hideDiv(this)"> <!-- name is here to add itself as parameter to the url -->
+							<option value="Mobile">Mobile</option>
+							<option value="Table">Table tactile</option>
 						</select>
 					</div>
-					<button type="submit" class="btn">Join Chat</button>
+					<div id="hideDiv" class="form-control">
+						<label for="username">Username</label>
+						<input
+								type="text"
+								name="username"
+								id="username"
+								placeholder="Enter username..."
+								required
+						/>
+					</div>
+					<button type="submit" class="btn">Rejoindre le salon</button>
 				</form>
 			</main>
 		</div>
