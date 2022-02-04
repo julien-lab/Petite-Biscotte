@@ -33,8 +33,32 @@
 
 
 <div>
-  <audio id="audio">
-    <source src="son.m4a" type="audio/mpeg">
+  <audio id="Boum" onended="testff('playPauseBtn9')">
+    <source src="sons/Boum.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Badaboum" onended="testff('playPauseBtn5')">
+    <source src="sons/Badaboum.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Badada" onended="testff('playPauseBtn8')">
+    <source src="sons/Badada.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Flip" onended="testff('playPauseBtn7')">
+    <source src="sons/Flip.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Skkrt" onended="testff('playPauseBtn1')">
+    <source src="sons/Skkrt.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Tching" onended="testff('playPauseBtn4')">
+    <source src="sons/Tching.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Toc" onended="testff('playPauseBtn6')">
+    <source src="sons/Toc.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Woaf" onended="testff('playPauseBtn3')">
+    <source src="sons/Woaf.mp3"  type="audio/mpeg">
+  </audio>
+  <audio id="Yeah" onended="testff('playPauseBtn2')">
+    <source src="sons/Yeah.mp3"  type="audio/mpeg">
   </audio>
 </div>
 <div class ="carousel-container">
@@ -43,7 +67,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn1" onClick="playPause()">&#9658;</button>
+            <button class="btn_listen" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
           </div>
           <div class="info">Skkrt</div>
         </div>
@@ -51,7 +75,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
           </div>
           <div class="info">Yeah</div>
         </div>
@@ -59,7 +83,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
           </div>
           <div class="info">Woaf</div>
         </div>
@@ -67,7 +91,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
           </div>
           <div class="info">Tching</div>
         </div>
@@ -75,7 +99,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
           </div>
           <div class="info">Badaboum</div>
         </div>
@@ -83,7 +107,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
           </div>
           <div class="info">Toc</div>
         </div>
@@ -91,7 +115,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
           </div>
           <div class="info">Flip</div>
         </div>
@@ -99,7 +123,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
           </div>
           <div class="info">Badada</div>
         </div>
@@ -107,7 +131,7 @@
       <div class="card-container">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen">&#9658</button>
+            <button class="btn_listen" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
           </div>
           <div class="info">Boum</div>
         </div>
@@ -128,20 +152,34 @@
   </div>
 </div>
 
-<script>
-  const audio = document.getElementById('audio');
-  const playPauseBtn1 = document.getElementById('playPauseBtn1');
-  let count = 0;
+<div class="carousel-container">
+  <div class="carousel-inner">
+    <div class="track">
+    </div>
+  </div>
+</div>
 
-  function playPause(){
+<script>
+
+  function testff(btn){
+    const bouton = document.getElementById(btn);
+    bouton.innerHTML = "&#9658;"
+  }
+
+  let count = 0;
+  function playPause(audioName,btn){
+    const audio = document.getElementById(audioName);
+    const bouton = document.getElementById(btn);
     if(count === 0){
       count = 1;
+      bouton.innerHTML = "&#9208;"
       audio.play();
-      playPauseBtn1.innerHTML = "&#9208;"
+      audio.onended
+
     }else{
       count = 0
       audio.pause()
-      playPauseBtn1.innerHTML = "&#9658;"
+      bouton.innerHTML = "&#9658;"
     }
   }
 </script>
