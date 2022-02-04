@@ -6,6 +6,7 @@ const userList = document.getElementById('users');
 const startRecord = document.getElementById('startRecord');
 let base64Audio;
 let listObject;
+
 import {outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'

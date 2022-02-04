@@ -1,29 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
-      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
-    <script src="https://markjivko.com/dist/recorder.js"></script>
-    <title>Petite Biscotte</title>
-  </head>
-  <body>
-    <div>azerazer
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+          integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+          crossorigin="anonymous"
+  />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
-      integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
-      crossorigin="anonymous"
-    ></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="module" src="js/main.js"></script> 
-  </body>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+  <script type="module" src="js/connectedTable.js"></script>
+  <script src="https://markjivko.com/dist/recorder.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+  <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+          integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
+          crossorigin="anonymous"
+  ></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <title>Petite Biscotte</title>
+</head>
+<body>
+
+
+<div>
+  <audio id="audio">
+    <source src="son.m4a" type="audio/mpeg">
+  </audio>
+</div>
+<div class ="carousel-container">
+  <div class="carousel-inner">
+    <div class="track">
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen" id="playPauseBtn1" onClick="playPause()">&#9658;</button>
+          </div>
+          <div class="info">Skkrt</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Yeah</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Woaf</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Tching</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Badaboum</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Toc</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Flip</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Badada</div>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="card">
+          <div class="circle">
+            <button class="btn_listen">&#9658</button>
+          </div>
+          <div class="info">Boum</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav">
+    <button class="prev">
+      <i class="material-icons">
+        keyboard_arrow_left
+      </i>
+    </button>
+    <button class="next">
+      <i class="material-icons">
+        keyboard_arrow_right
+      </i>
+    </button>
+  </div>
+</div>
+
+<script>
+  const audio = document.getElementById('audio');
+  const playPauseBtn1 = document.getElementById('playPauseBtn1');
+  let count = 0;
+
+  function playPause(){
+    if(count === 0){
+      count = 1;
+      audio.play();
+      playPauseBtn1.innerHTML = "&#9208;"
+    }else{
+      count = 0
+      audio.pause()
+      playPauseBtn1.innerHTML = "&#9658;"
+    }
+  }
+</script>
+</body>
+
 </html>
