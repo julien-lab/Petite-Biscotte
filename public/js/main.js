@@ -1,11 +1,11 @@
 const chatForm = document.getElementById('chat-form');
-var sendVocalForm;
+let sendVocalForm;
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const startRecord = document.getElementById('startRecord');
-var base64Audio;
-var listObject;
+let base64Audio;
+let listObject;
 import {outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
@@ -93,8 +93,8 @@ document.getElementById('leave-btn').addEventListener('click', () => {
 
 
 jQuery(document).ready(function () {
-  var $ = jQuery;
-  var myRecorder = {
+  let $ = jQuery;
+  let myRecorder = {
     objects: {
       context: null,
       stream: null,
@@ -108,7 +108,7 @@ jQuery(document).ready(function () {
       }
     },
     start: function () {
-      var options = {audio: true, video: false};
+      let options = {audio: true, video: false};
       navigator.mediaDevices.getUserMedia(options).then(function (stream) {
         myRecorder.objects.stream = stream;
         myRecorder.objects.recorder = new Recorder(
@@ -132,24 +132,24 @@ jQuery(document).ready(function () {
 
           // Export the WAV file
           myRecorder.objects.recorder.exportWAV(function (blob) {
-            var reader = new window.FileReader();
+            let reader = new window.FileReader();
             reader.readAsDataURL(blob); 
             reader.onloadend = function() {
               base64Audio = reader.result;
               base64Audio = base64Audio.split(',')[1];
             }
-            var url = (window.URL || window.webkitURL)
+            let url = (window.URL || window.webkitURL)
                     .createObjectURL(blob);
 
             // Prepare the playback
-            var audioObject = $('<audio controls></audio>')
+            let audioObject = $('<audio controls></audio>')
                     .attr('src', url);
 
             // Create send audio button
-            var sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');          
+            let sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');
 
             // Wrap everything in a row
-            var holderObject = $('<div class="row" id="holderObject"></div>')
+            let holderObject = $('<div class="row" id="holderObject"></div>')
                     .append(audioObject)
                     .append(sendObject)
 
@@ -174,7 +174,7 @@ jQuery(document).ready(function () {
     myRecorder.init();
 
     // Get the button state 
-    var buttonState = !!$(this).attr('data-recording');
+    let buttonState = !!$(this).attr('data-recording');
 
     // Toggle
     if (!buttonState) {

@@ -19,7 +19,7 @@
 				<h1><i class="fas fa-smile"></i> Petite Biscotte</h1>
 			</header>
 			<main class="join-main">
-				<form action="chat.html">
+				<form id="goToNextPage" action="library.html">
 					<div class="form-control">
 						<label for="username">Username</label>
 						<input
@@ -32,18 +32,26 @@
 					</div>
 					<div class="form-control">
 						<label for="room">Room</label>
-						<select name="room" id="room"> <!-- name is here to add itself as parameter to the url -->
-							<option value="Salle 1">Salle 1</option>
-							<option value="Salle 2">Salle 2</option>
-							<option value="Salle 3">Salle 3</option>
-							<option value="Salle 4">Salle 4</option>
-							<option value="Salle 5">Salle 5</option>
-							<option value="Salle 6">Salle 6</option>
+						<select name="room" id="room" onchange="setRightPath()"> <!-- name is here to add itself as parameter to the url -->
+							<option value="library" >Bibliothèque</option>
+							<option value="connectedTable" >Table Connectée</option>
 						</select>
 					</div>
 					<button type="submit" class="btn">Join Chat</button>
 				</form>
 			</main>
 		</div>
+
+		<!--<script type="module" src="js/loadPage.js"></script>-->
+		<script>
+			function setRightPath(){
+				if (document.getElementById('room').value === 'library' ){
+					document.getElementById('goToNextPage').action = 'library.html'
+				}
+				else if (document.getElementById('room').value === 'connectedTable' ){
+					document.getElementById('goToNextPage').action = 'connectedTable.html'
+				}
+		}
+		</script>
 	</body>
 </html>

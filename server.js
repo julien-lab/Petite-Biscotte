@@ -1,5 +1,5 @@
 const path = require('path');
-const http = require('http');
+const https = require('https');
 const express = require('express');
 const socketio = require('socket.io');
 const fs = require('fs');
@@ -11,13 +11,14 @@ const {
   getRoomUsers
 } = require('./utils/users');
 
+const app = express();
+
 const options = {
   key: fs.readFileSync(path.join(__dirname,'key.pem')),
   cert: fs.readFileSync(path.join(__dirname,'cert.pem'))
 };
 
-const app = express();
-const server = http.createServer(app);
+const server = https.createServer(options, app);
 
 
 const io = socketio(server);
@@ -39,11 +40,11 @@ io.on('connection', socket => {
 
     // Broadcast when a user connects
     socket.broadcast
-      .to(user.room) // ------------------------------------------------------------------------------------------------------- Test with user id
-      .emit(
-        'message',
-        formatMessage(botName, `${user.username} has joined the chat`)
-      );
+        .to(user.room) // ------------------------------------------------------------------------------------------------------- Test with user id
+        .emit(
+            'message',
+            formatMessage(botName, `${user.username} has joined the chat`)
+        );
 
     // Send users and room info
     io.to(user.room).emit('roomUsers', {
@@ -65,8 +66,8 @@ io.on('connection', socket => {
 
     if (user) {
       io.to(user.room).emit(
-        'message',
-        formatMessage(botName, `${user.username} has left the chat`)
+          'message',
+          formatMessage(botName, `${user.username} has left the chat`)
       );
 
       // Send users and room info
