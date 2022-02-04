@@ -2,7 +2,7 @@ function convertURIToBinary(base64) {
     let raw = window.atob(base64);
     let rawLength = raw.length;
     let arr = new Uint8Array(new ArrayBuffer(rawLength));
-    for (let i = 0; i < rawLength; i++) { 
+    for (let i = 0; i < rawLength; i++) {
       arr[i] = raw.charCodeAt(i);
     }
     return arr;
@@ -16,13 +16,13 @@ export const outputAudio = function(audio) {
     p.innerText = audio.username;
     p.innerHTML += `<span>${audio.time}</span>`;
     div.appendChild(p);
-    var binary = convertURIToBinary(audio.text);
-    var blob = new Blob([binary], {
+    let binary = convertURIToBinary(audio.text);
+    let blob = new Blob([binary], {
         type: 'audio/wav'
         });
-    var url = (window.URL || window.webkitURL)
+    let url = (window.URL || window.webkitURL)
                             .createObjectURL(blob);
-    var sound = document.createElement('audio');
+    let sound = document.createElement('audio');
     sound.controls = 'controls';
     sound.src = url;
     div.appendChild(sound);
@@ -30,7 +30,7 @@ export const outputAudio = function(audio) {
 }
 
 // Output message to DOM
-export const outputMessage = function(message) { 
+export const outputMessage = function(message) {
     const div = document.createElement('div');
     div.classList.add('message');
     const p = document.createElement('p');
@@ -43,12 +43,12 @@ export const outputMessage = function(message) {
     para.innerText = message.text;
     div.appendChild(para);
     document.querySelector('.chat-messages').appendChild(div); // ICI
-}
+};
 
 // Add room name to DOM
 export const outputRoomName = function(room,roomName) {
     roomName.innerText = room;
-}
+};
 
 // Add users to DOM
 export const outputUsers = function(users,userList) {
@@ -58,4 +58,4 @@ export const outputUsers = function(users,userList) {
         li.innerText = user.username;
         userList.appendChild(li);
     });
-}
+};

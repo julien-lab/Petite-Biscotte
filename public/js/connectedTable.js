@@ -4,21 +4,19 @@ const userList = document.getElementById('users');
 const startRecord = document.getElementById('startRecord');
 let base64Audio;
 let listObject;
-var base64Audio;
-var listObject;
-const next = document.querySelector('.next')
-const prev = document.querySelector('.prev')
-const track = document.querySelector('.track')
+const next = document.querySelector('.next');
+const prev = document.querySelector('.prev');
+const track = document.querySelector('.track');
 const carouselWidth = document.querySelector('.carousel-container').offsetWidth
 
 
 next.addEventListener('click', () => {
     track.style.transform = `translateX(-${carouselWidth}px)`;
-})
+});
 
 prev.addEventListener('click', () => {
     track.style.transform = `translateX(-${0}px)`;
-})
+});
 
 import {outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
