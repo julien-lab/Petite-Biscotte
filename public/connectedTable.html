@@ -67,7 +67,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
           </div>
           <div class="info">Skkrt</div>
         </div>
@@ -75,7 +75,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
           </div>
           <div class="info">Yeah</div>
         </div>
@@ -83,7 +83,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
           </div>
           <div class="info">Woaf</div>
         </div>
@@ -91,7 +91,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
           </div>
           <div class="info">Tching</div>
         </div>
@@ -99,7 +99,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
           </div>
           <div class="info">Badaboum</div>
         </div>
@@ -107,7 +107,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
           </div>
           <div class="info">Toc</div>
         </div>
@@ -115,7 +115,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
           </div>
           <div class="info">Flip</div>
         </div>
@@ -123,7 +123,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
           </div>
           <div class="info">Badada</div>
         </div>
@@ -131,7 +131,7 @@
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
           <div class="circle">
-            <button class="btn_listen" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
+            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
           </div>
           <div class="info">Boum</div>
         </div>
@@ -169,6 +169,14 @@
     bouton.innerHTML = "&#9658;"
   }
 
+  function touchend(event) {
+    const data = event.target.id
+    const str = event.target.parentElement.nextElementSibling.textContent
+    const dropzone = document.getElementById("dropzone")
+    console.log(event.changedTouches[0].pageX,event.changedTouches[0].pageY)
+    if(event.changedTouches[0].pageY >300) createCopy(dropzone,data,str)
+  }
+
   let count = 0;
   function playPause(audioName,btn){
     const audio = document.getElementById(audioName);
@@ -186,6 +194,7 @@
     }
   }
   function startDrag(event){
+    console.log(event)
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.effectAllowed = 'all'
     const id = event.target.firstElementChild.firstElementChild.firstElementChild.id
