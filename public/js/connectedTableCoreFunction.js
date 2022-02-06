@@ -3,6 +3,14 @@ function testff(btn){
     bouton.innerHTML = "&#9658;"
 }
 
+function touchend(event) {
+    const data = event.target.id
+    const str = event.target.parentElement.nextElementSibling.textContent
+    const dropzone = document.getElementById("dropzone")
+    console.log(event.changedTouches[0].pageX,event.changedTouches[0].pageY)
+    if(event.changedTouches[0].pageY >300) createCopy(dropzone,data,str)
+}
+
 let count = 0;
 function playPause(audioName,btn){
     const audio = document.getElementById(audioName);
@@ -19,6 +27,7 @@ function playPause(audioName,btn){
         bouton.innerHTML = "&#9658;"
     }
 }
+
 function startDrag(event){
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.effectAllowed = 'all'
@@ -27,6 +36,7 @@ function startDrag(event){
     event.dataTransfer.setData("id",id)
     event.dataTransfer.setData("str",str)
 }
+
 function onDrop(event) {
     event.preventDefault();
     const data = event.dataTransfer.getData("id")
