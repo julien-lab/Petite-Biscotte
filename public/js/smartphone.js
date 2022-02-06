@@ -1,3 +1,8 @@
+import {outputAudio} from './messageDOM/messageDOM.js'
+import {outputMessage} from './messageDOM/messageDOM.js'
+import {outputRoomName} from './messageDOM/messageDOM.js'
+import {outputUsers} from './messageDOM/messageDOM.js'
+
 const chatForm = document.getElementById('chat-form');
 let sendVocalForm;
 const chatMessages = document.querySelector('.chat-messages');
@@ -6,11 +11,7 @@ const userList = document.getElementById('users');
 const startRecord = document.getElementById('startRecord');
 let base64Audio;
 let listObject;
-
-import {outputAudio} from './messageDOM/messageDOM.js'
-import {outputMessage} from './messageDOM/messageDOM.js'
-import {outputRoomName} from './messageDOM/messageDOM.js'
-import {outputUsers} from './messageDOM/messageDOM.js'
+let $ = jQuery;
 
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
@@ -38,7 +39,7 @@ socket.on('message', (message) => {
 }); 
 
 startRecord.addEventListener('click',(e) => {
-  var div = document.getElementById('holderObject');
+  let div = document.getElementById('holderObject');
   if (div != null) div.remove();
 });
 
@@ -49,7 +50,7 @@ function listenSendButton() {
     socket.emit('chatMessage',base64Audio);
     base64Audio = null;
     // remove the new formed html
-    var div = document.getElementById('holderObject');
+    let div = document.getElementById('holderObject');
     div.remove();
   });
 }
@@ -86,6 +87,18 @@ document.getElementById('leave-btn').addEventListener('click', () => {
 
 
 
+const container = document.querySelector('.chat-messages');
+
+
+container.addEventListener('click', function (e) {
+  //e.target.style.display = "none";
+  if (e.target.classList.contains('btn')) {
+    socket.emit('connectedTableAudioURL',e.target.value);
+    e.target.parentNode.remove(e);
+    console.log("audio url sent");
+  }
+});
+
 
 
 /* ----------------- RECORDING PART ----------------- */
@@ -93,8 +106,7 @@ document.getElementById('leave-btn').addEventListener('click', () => {
 
 
 
-jQuery(document).ready(function () {
-  let $ = jQuery;
+$(document).ready(function () {
   let myRecorder = {
     objects: {
       context: null,
@@ -134,14 +146,13 @@ jQuery(document).ready(function () {
           // Export the WAV file
           myRecorder.objects.recorder.exportWAV(function (blob) {
             let reader = new window.FileReader();
-            reader.readAsDataURL(blob); 
+            reader.readAsDataURL(blob);
             reader.onloadend = function() {
               base64Audio = reader.result;
               base64Audio = base64Audio.split(',')[1];
             }
             let url = (window.URL || window.webkitURL)
                     .createObjectURL(blob);
-
             // Prepare the playback
             let audioObject = $('<audio controls></audio>')
                     .attr('src', url);
@@ -150,13 +161,13 @@ jQuery(document).ready(function () {
             let sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');
 
             // Wrap everything in a row
-            let holderObject = $('<div class="row" id="holderObject"></div>')
+            let holderObject = $('<div id="holderObject"></div>')
                     .append(audioObject)
                     .append(sendObject)
 
             // Append to the list
             listObject.append(holderObject);
-            
+
             // Listen to the send audio button
             sendVocalForm = document.getElementById('sendVocal');
             listenSendButton();
@@ -174,7 +185,7 @@ jQuery(document).ready(function () {
     // Initialize the recorder
     myRecorder.init();
 
-    // Get the button state 
+    // Get the button state
     let buttonState = !!$(this).attr('data-recording');
 
     // Toggle
