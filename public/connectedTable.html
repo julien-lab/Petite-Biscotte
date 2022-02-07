@@ -9,7 +9,7 @@
           integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
           crossorigin="anonymous"
   />
-
+  <link rel="stylesheet" type="text/css" href="css/loading-bar.css"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css" />
   <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
@@ -20,7 +20,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
-
+  <script type="text/javascript" src="js/loading-bar.js"></script>
   <script
           src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
           integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
@@ -168,6 +168,47 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<!--<div class="ldBar label-center"
+    data-type="stroke"
+    data-path="M 650, 150 a 600,300 0 1,0 1,0"
+    data-value="10"
+    data-stroke-width="15"
+    data-stroke-trail="gray"
+    data-stroke-trail-width="10"></div>
+ -->
+
+
+
+<svg id="table"  height="700" width="1300"  xmlns='http://www.w3.org/2000/svg'
+     onload='Init(evt)'
+     onmousedown='Grab(evt)'
+     onmousemove='Drag(evt)'
+     onmouseup='Drop(evt)' >
+ <!-- Simple rect element -->
+
+  <rect id='BackDrop' x='-10%' y='-10%' width='110%' height='110%' fill='none' pointer-events='all' />
+  <g id='Tracks'>
+    <rect id='Track1' x="50" y="50" width="1200" height="600" style="fill:yellow;stroke:purple;stroke-width:2"/>
+    <rect id='Track2' x="100" y="100" width="1100" height="500" style="fill:yellow;stroke:purple;stroke-width:2" />
+    <rect id='Track3' x="150" y="150" width="1000" height="400" style="fill:yellow;stroke:purple;stroke-width:2" />
+  </g>
+
+  <rect id='box' x="250" y="250" width="800" height="200" style="fill:gray;stroke:black;stroke-width:2" />
+  <g id='Sounds'>
+    <circle id='Sound1' cx='300' cy='350' r='20' style='fill:red; '/>
+    <circle id='Sound2' cx='350' cy='350' r='20' style='fill:red; '/>
+    <circle id='Sound3' cx='400' cy='350' r='20' style='fill:red; '/>
+    <circle id='Sound4' cx='450' cy='350' r='20' style='fill:red; '/>
+  </g>
+
+
+</svg>
+
 
 </body>
 
