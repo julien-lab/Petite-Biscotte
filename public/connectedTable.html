@@ -32,7 +32,6 @@
 </head>
 <body>
 
-
 <div id="importedAudio">
   <audio id="Boum" onended="testff('playPauseBtn9')">
     <source src="sons/Boum.mp3"  type="audio/mpeg">
@@ -62,159 +61,127 @@
     <source src="sons/Yeah.mp3"  type="audio/mpeg">
   </audio>
 </div>
-<div class ="carousel-container">
-  <div class="carousel-inner">
-    <div class="track">
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
+
+
+
+<div class="Track1"></div>
+<div class="Track2"></div>
+<div class="Track3"></div>
+
+<div class="soundbox">
+  <div class ="carousel-container">
+    <div class="carousel-inner">
+      <div class="track">
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
+            </div>
+            <div class="info">&#9708;</div>
           </div>
-          <div class="info">&#9708;</div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
+            </div>
+            <div class="info">&#11040;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
+            </div>
+            <div class="info">&#9636;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
+            </div>
+            <div class="info">&#9635;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
+            </div>
+            <div class="info">&#11055;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
+            </div>
+            <div class="info">&#9681;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
+            </div>
+            <div class="info">&#9707;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
+            </div>
+            <div class="info">&#9714;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
+            </div>
+            <div class="info">&#9672;</div>
+          </div>
         </div>
       </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
-          </div>
-          <div class="info">&#11040;</div>
-        </div>
+    </div>
+    <div class="nav">
+      <button class="prev">
+        <i class="material-icons">
+          keyboard_arrow_left
+        </i>
+      </button>
+      <button class="next">
+        <i class="material-icons">
+          keyboard_arrow_right
+        </i>
+      </button>
+    </div>
+
+  </div>
+  <br>
+  <div class="carousel-container">
+    <div class="carousel-inner">
+      <div class="track" id="newTrack">
       </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
-          </div>
-          <div class="info">&#9636;</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
-          </div>
-          <div class="info">&#9635;</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
-          </div>
-          <div class="info">&#11055;</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
-          </div>
-          <div class="info">&#9681;</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
-          </div>
-          <div class="info">&#9707;</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
-          </div>
-          <div class="info">&#9714;</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" ontouchend="touchend(event)" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
-          </div>
-          <div class="info">&#9672;</div>
+    </div>
+  </div>
+  <!--
+  <div class="carousel-container" style="border: 2px solid black">
+    <div class="carousel-inner">
+      <div class="track">
+        <div id="dropzone" ondrop="onDrop(event)" ondragover="allowDrop(event)">
         </div>
       </div>
     </div>
   </div>
-  <div class="nav">
-    <button class="prev">
-      <i class="material-icons">
-        keyboard_arrow_left
-      </i>
-    </button>
-    <button class="next">
-      <i class="material-icons">
-        keyboard_arrow_right
-      </i>
-    </button>
-  </div>
-
+ --->
 </div>
-<br>
-<div class="carousel-container">
-  <div class="carousel-inner">
-    <div class="track" id="newTrack">
-    </div>
-  </div>
-</div>
-<div class="carousel-container" style="border: 2px solid black">
-  <div class="carousel-inner">
-    <div class="track">
-      <div id="dropzone" ondrop="onDrop(event)" ondragover="allowDrop(event)">
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-<!--<div class="ldBar label-center"
-    data-type="stroke"
-    data-path="M 650, 150 a 600,300 0 1,0 1,0"
-    data-value="10"
-    data-stroke-width="15"
-    data-stroke-trail="gray"
-    data-stroke-trail-width="10"></div>
- -->
-
-
-
-<svg id="table"  height="700" width="1300"  xmlns='http://www.w3.org/2000/svg'
-     onload='Init(evt)'
-     onmousedown='Grab(evt)'
-     onmousemove='Drag(evt)'
-     onmouseup='Drop(evt)' >
- <!-- Simple rect element -->
-
-  <rect id='BackDrop' x='-10%' y='-10%' width='110%' height='110%' fill='none' pointer-events='all' />
-  <g id='Tracks'>
-    <rect id='Track1' x="50" y="50" width="1200" height="600" style="fill:yellow;stroke:purple;stroke-width:2"/>
-    <rect id='Track2' x="100" y="100" width="1100" height="500" style="fill:yellow;stroke:purple;stroke-width:2" />
-    <rect id='Track3' x="150" y="150" width="1000" height="400" style="fill:yellow;stroke:purple;stroke-width:2" />
-  </g>
-
-  <rect id='box' x="250" y="250" width="800" height="200" style="fill:gray;stroke:black;stroke-width:2" />
-  <g id='Sounds'>
-    <circle id='Sound1' cx='300' cy='350' r='20' style='fill:red; '/>
-    <circle id='Sound2' cx='350' cy='350' r='20' style='fill:red; '/>
-    <circle id='Sound3' cx='400' cy='350' r='20' style='fill:red; '/>
-    <circle id='Sound4' cx='450' cy='350' r='20' style='fill:red; '/>
-  </g>
-
-
-</svg>
-
 
 </body>
 
-<div class="circleTrack">
-  <div class="secondTrack"></div>
-  </div>
-</div>
+
+
 
 </html>
