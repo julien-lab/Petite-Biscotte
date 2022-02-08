@@ -11,32 +11,26 @@ function touchend(event) {
     //if(event.changedTouches[0].pageY >700) createCopy(dropzone,data,str)
 }
 
-/*
-Piste interieure :
-    - gauche : (536,747)
-    - droite : (2500,747)
-    - haut : (1512,270)
-    - bas : (1512,1226)
-
-Piste milieu :
-    - gauche : (427,747)
-    - droite : (2608,747)
-    - haut : (1512,197)
-    - bas : (1512,1290)
-
-Piste exterieure :
-    - gauche : (278,747)
-    - droite : (2756,747)
-    - haut : (1512,123)
-    - bas : (1512,1366)
-
- */
 
 function printMousePos(event) {
-    console.log("clientX: " + event.clientX +" - clientY: " + event.clientY);
+
 }
 
-document.addEventListener("click", printMousePos);
+function computeAngle(pX, pY){
+    centerX = window.innerWidth/2;
+    centerY =  window.innerHeight/2;
+
+    hX = centerX;
+    hY = 0;
+
+    var HC = Math.sqrt(Math.pow(centerX-hX,2)+ Math.pow(centerY-hY,2));
+    var CP = Math.sqrt(Math.pow(centerX-pX,2)+ Math.pow(centerY-pY,2));
+    var HP = Math.sqrt(Math.pow(pX-hX,2)+ Math.pow(pY-hY,2));
+    var angleRad =  Math.acos((CP*CP+HC*HC-HP*HP)/(2*CP*HC));
+    return (angleRad * 180) / Math.PI;
+}
+
+//document.addEventListener("click", printMousePos);
 
 let count = 0;
 function playPause(audioName,btn){
@@ -66,10 +60,32 @@ function startDrag(event){
 
 function onDrop(event) {
     event.preventDefault();
+    //console.log(event.target.id)
     const data = event.dataTransfer.getData("id")
     const str = event.dataTransfer.getData("str")
+
     const dropzone = document.getElementById("dropzone")
-    createCopy(dropzone,data,str)
+    //createCopy(dropzone,data,str)
+
+    //Detection de la position du son sur la piste
+    var startPos = computeAngle(event.clientX , event.clientY);
+    centerX = window.innerWidth/2;
+
+    if(event.clientX < centerX){
+        startPos = 180 + (180-startPos);
+    }
+    console.log(startPos);
+
+    var conicGradient = constructConicGradient(startPos);
+    var myDiv = document.getElementById(event.target.id);
+    myDiv.setAttribute("style", "background:" + conicGradient);
+}
+
+
+function constructConicGradient(startPos){
+    var endPos = (startPos+60);
+    var cG = "conic-gradient(lightgrey 0deg "+startPos +"deg, orange "+ startPos +"deg "+ endPos+"deg ,lightgrey "+endPos+"deg 360deg);"
+    return cG;
 }
 
 function createCopy(dropzone,id,str){
