@@ -1,3 +1,9 @@
+var logo = "";
+
+export const setLogo = function(newLogo){
+    logo = newLogo
+}
+
 function convertURIToBinary(base64) {
     let raw = window.atob(base64);
     let rawLength = raw.length;
@@ -32,8 +38,19 @@ function addAudio(audio, divLeft, div){
 
 function addConnectedTableButton(divRight, div, buttonValue){
     divRight.classList.add('divSendAudio');
-    // divRight.innerHTML = '<form><button class="btn"><i class="fas fa-paper-plane"></i> Send to table</button></form>';
-    divRight.innerHTML = '<button class="btn" value="'+buttonValue+'"><i class="fas fa-paper-plane"></i> Send to table</button>';
+    divRight.innerHTML = ' <select id="dropdown">\n' +
+        '          <option class="dropdown-child">&#11033;</option>\n' +
+        '          <option class="dropdown-child">&#11028;</option>\n' +
+        '          <option class="dropdown-child">&#9635;</option>\n' +
+        '          <option class="dropdown-child">&#9644;</option>\n' +
+        '          <option class="dropdown-child">&#9639;</option>\n' +
+        '          <option class="dropdown-child">&#9824;</option>\n' +
+        '          <option class="dropdown-child">&#9827;</option>\n' +
+        '          <option class="dropdown-child">&#9829;</option>\n' +
+        '          <option class="dropdown-child">&#9830;</option>\n' +
+        '          <option class="dropdown-child">&#966;</option>\n' +
+        '        </select>' +
+                '<button class="btn" value="'+buttonValue+'"><i class="fas fa-paper-plane"></i> Send to table</button>';
     div.appendChild(divRight);
 }
 
@@ -80,6 +97,14 @@ export const outputUsers = function(users,userList) {
 };
 
 export const addAudioToConnectedTable = function(audioURL){
+    console.log("connectedtable",audioURL)
+    let card_container = document.createElement('div')
+    card_container.classList.add("card-container")
+    let card = document.createElement('div')
+    card.classList.add("card")
+    let circle = document.createElement('div')
+    circle.classList.add("circle_sent")
+
     const importedAudioDiv = document.getElementById('importedAudio');
     const audio = document.createElement('audio');
     audio.classList.add('message');
@@ -95,13 +120,25 @@ export const addAudioToConnectedTable = function(audioURL){
     importedAudioDiv.appendChild(audio);
     const newTrack = document.getElementById('newTrack');
     const button = document.createElement('button');
-    button.classList = "btn_listen";
+    button.classList = "btn_listen_sent";
     button.id = buttonID;
+    button.ontouchend = function () {
+        touchend(event);
+    }
     button.onclick = function(){
         playPause(audioID,buttonID);
     }
     button.innerHTML = '&#9658';
-    newTrack.appendChild(button);
+
+    let name = document.createElement('div')
+    name.classList.add("info")
+    name.textContent = logo
+
+    circle.appendChild(button)
+    card.appendChild(circle)
+    card.appendChild(name)
+    card_container.appendChild(card)
+    newTrack.appendChild(card_container);
     /*const infoDiv = document.createElement('div');
     infoDiv.classList = 'info';
     infoDiv.innerHTML = "";

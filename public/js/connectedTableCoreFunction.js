@@ -8,7 +8,7 @@ function touchend(event) {
     const str = event.target.parentElement.nextElementSibling.textContent
     const dropzone = document.getElementById("dropzone")
     console.log(event.changedTouches[0].pageX,event.changedTouches[0].pageY)
-    if(event.changedTouches[0].pageY >300) createCopy(dropzone,data,str)
+    if(event.changedTouches[0].pageY >700) createCopy(dropzone,data,str)
 }
 
 let count = 0;

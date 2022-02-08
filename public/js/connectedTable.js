@@ -1,4 +1,5 @@
 import {addAudioToConnectedTable, outputAudio} from './messageDOM/messageDOM.js'
+import {setLogo} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
 import {outputUsers} from './messageDOM/messageDOM.js'
@@ -30,4 +31,9 @@ socket.on('newAudioURL', (audioURL) => {
     addAudioToConnectedTable(audioURL);
     console.log(audioURL);
     // Yeah.src = audioURL;
+});
+
+socket.on('newLogo', (logo) => {
+    setLogo(logo)
+    console.log(logo);
 });
