@@ -8,8 +8,35 @@ function touchend(event) {
     const str = event.target.parentElement.nextElementSibling.textContent
     const dropzone = document.getElementById("dropzone")
     console.log(event.changedTouches[0].pageX,event.changedTouches[0].pageY)
-    if(event.changedTouches[0].pageY >700) createCopy(dropzone,data,str)
+    //if(event.changedTouches[0].pageY >700) createCopy(dropzone,data,str)
 }
+
+/*
+Piste interieure :
+    - gauche : (536,747)
+    - droite : (2500,747)
+    - haut : (1512,270)
+    - bas : (1512,1226)
+
+Piste milieu :
+    - gauche : (427,747)
+    - droite : (2608,747)
+    - haut : (1512,197)
+    - bas : (1512,1290)
+
+Piste exterieure :
+    - gauche : (278,747)
+    - droite : (2756,747)
+    - haut : (1512,123)
+    - bas : (1512,1366)
+
+ */
+
+function printMousePos(event) {
+    console.log("clientX: " + event.clientX +" - clientY: " + event.clientY);
+}
+
+document.addEventListener("click", printMousePos);
 
 let count = 0;
 function playPause(audioName,btn){
