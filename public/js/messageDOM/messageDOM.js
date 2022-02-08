@@ -44,6 +44,11 @@ function addConnectedTableButton(divRight, div, buttonValue){
         '          <option class="dropdown-child">&#9635;</option>\n' +
         '          <option class="dropdown-child">&#9644;</option>\n' +
         '          <option class="dropdown-child">&#9639;</option>\n' +
+        '          <option class="dropdown-child">&#9824;</option>\n' +
+        '          <option class="dropdown-child">&#9827;</option>\n' +
+        '          <option class="dropdown-child">&#9829;</option>\n' +
+        '          <option class="dropdown-child">&#9830;</option>\n' +
+        '          <option class="dropdown-child">&#966;</option>\n' +
         '        </select>' +
                 '<button class="btn" value="'+buttonValue+'"><i class="fas fa-paper-plane"></i> Send to table</button>';
     div.appendChild(divRight);
