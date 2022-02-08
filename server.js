@@ -82,7 +82,12 @@ io.on('connection', socket => {
   socket.on('connectedTableAudioURL', (audioURL) => {
     io.to("connectedTable").emit('newAudioURL', audioURL)
   })
+
+  socket.on('logo', (logo) => {
+    io.to("connectedTable").emit('newLogo', logo)
+  })
 });
+
 
 
 const PORT = process.env.PORT || 3000;

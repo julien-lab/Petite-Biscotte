@@ -17,9 +17,9 @@ let $ = jQuery;
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
  });
-  
+
 const socket = io();
-  
+
 // Join chatroom
 socket.emit('joinRoom', { username, room });
 
@@ -36,14 +36,14 @@ socket.on('message', (message) => {
 
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
-}); 
+});
 
 startRecord.addEventListener('click',(e) => {
   let div = document.getElementById('holderObject');
   if (div != null) div.remove();
 });
 
-// vocal submit 
+// vocal submit
 function listenSendButton() {
   sendVocalForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -93,6 +93,7 @@ const container = document.querySelector('.chat-messages');
 container.addEventListener('click', function (e) {
   //e.target.style.display = "none";
   if (e.target.classList.contains('btn')) {
+    socket.emit('logo',document.getElementById('dropdown').value)
     socket.emit('connectedTableAudioURL',e.target.value);
     e.target.parentNode.remove(e);
     console.log("audio url sent");
