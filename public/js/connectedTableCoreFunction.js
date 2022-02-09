@@ -114,9 +114,32 @@ function constructConicGradient(startPos, soundDuration, trackTargeted){
 }
 
 function addSound(startPos, endPos, trackTargeted){
-    soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':"orange", 'track':trackTargeted});
-    soundsOnTracks = sortSoundsByStartPos();
-    console.log(soundsOnTracks);
+    if(soundCanBePlacedOnTrack(startPos, endPos, trackTargeted)){
+        soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':"orange", 'track':trackTargeted});
+        soundsOnTracks = sortSoundsByStartPos();
+    }else{
+        alert("Impossible de superposer 2 sons sur la même piste.")
+    }
+
+}
+
+function soundCanBePlacedOnTrack(startPos, endPos, trackTargeted) {
+    var test = true;
+
+    for (var i=0;i<soundsOnTracks.length;i++) {
+        if(sound.track === trackTargeted){
+            var a = {start: startPos, end: endPos};
+            var b = {start: sound.startPos, end: sound.endPos};
+            var min = (a.start < b.start  ? a : b);
+            var max = (min == a ? b : a);
+
+            if (!(min.end < max.start)){
+                test = false;
+                break;
+            }
+        }
+    }
+    return test
 }
 
 function sortSoundsByStartPos(){
