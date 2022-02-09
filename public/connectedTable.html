@@ -66,6 +66,13 @@
     <div class="track">
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings1" onClick="addFilter('Skkrt', 'btn_settings1')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
           </div>
@@ -74,6 +81,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings2" onClick="addFilter('Yeah','btn_settings2')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
           </div>
@@ -82,6 +96,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings3" onClick="addFilter('Woaf','btn_settings3')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
           </div>
@@ -90,6 +111,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id="btn_settings4" onClick="addFilter('Tching','btn_settings4')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
           </div>
@@ -98,6 +126,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id="btn_settings5" onClick="addFilter('Badaboum','btn_settings5')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
           </div>
@@ -106,6 +141,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings6" onClick="addFilter('Toc','btn_settings6')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
           </div>
@@ -114,6 +156,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings7" onClick="addFilter('Flip','btn_settings7')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
           </div>
@@ -122,6 +171,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings8" onClick="addFilter('Badada','btn_settings8')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
           </div>
@@ -130,6 +186,13 @@
       </div>
       <div class="card-container" draggable="true" ondragstart="startDrag(event)">
         <div class="card">
+          <div class="settings">
+            <button class="btn_settings" id ="btn_settings9" onClick="addFilter('Boum','btn_settings9')">
+              <i class="material-icons">
+                settings
+              </i>
+            </button>
+          </div>
           <div class="circle">
             <button class="btn_listen" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
           </div>
@@ -161,9 +224,27 @@
     </div>
   </div>
 </div>
+<div id="buttonTest">
+  <button id="btn_listenAll" onClick="playNext(0)">Lire la piste</button>
+</div>
 
 <script>
+  var allAudio = [];
 
+
+  function addFilter(audioName,btn){
+    var context = new AudioContext(),
+            audioSource = context.createMediaElementSource(document.getElementById(audioName)),
+            filter = context.createBiquadFilter();
+    audioSource.connect(filter);
+    filter.connect(context.destination);
+    filter.type = "lowshelf"
+    filter.frequency.value = 1000;
+    filter.gain.value = 25;
+    filter.detune.value = 100;
+    document.getElementById(btn).innerHTML += " Effet ajouté"
+
+  }
   function testff(btn){
     const bouton = document.getElementById(btn);
     bouton.innerHTML = "&#9658;"
@@ -177,7 +258,6 @@
       count = 1;
       bouton.innerHTML = "&#9208;"
       audio.play();
-      audio.onended
 
     }else{
       count = 0
@@ -185,6 +265,7 @@
       bouton.innerHTML = "&#9658;"
     }
   }
+
   function startDrag(event){
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.effectAllowed = 'all'
@@ -197,7 +278,10 @@
     event.preventDefault();
     const data = event.dataTransfer.getData("id")
     const str = event.dataTransfer.getData("str")
+    const son = document.getElementById(str);
     const dropzone = document.getElementById("dropzone")
+    allAudio.push(son);
+    console.log(allAudio);
     createCopy(dropzone,data,str)
   }
 
@@ -226,6 +310,24 @@
   function allowDrop(event) {
     event.preventDefault();
   }
+
+
+  function playNext(index){
+    allAudio[index].play();
+    $(allAudio[index]).bind("ended", function(){
+      index++;
+      if(index < allAudio.length){
+        playNext(index);
+      }
+    });
+  }
+
+  function openSettings(id){
+    var div = document.createElement('div');
+    document.getElementById(id).innerHTML = "Ajouter un effet sur le son"
+
+  }
+
 </script>
 
 </body>
