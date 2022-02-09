@@ -78,7 +78,16 @@ io.on('connection', socket => {
       });
     }
   });
+
+  socket.on('connectedTableAudioURL', (audioURL) => {
+    io.to("connectedTable").emit('newAudioURL', audioURL)
+  })
+
+  socket.on('logo', (logo) => {
+    io.to("connectedTable").emit('newLogo', logo)
+  })
 });
+
 
 
 const PORT = process.env.PORT || 3000;
@@ -152,3 +161,4 @@ io2.on('connection', socket => {
 const UnsafePORT = 3001;
 
 serverUnsafe.listen(UnsafePORT, () => console.log(`Server running on port ${UnsafePORT}`));
+

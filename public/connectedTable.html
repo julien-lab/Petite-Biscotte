@@ -9,7 +9,7 @@
           integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
           crossorigin="anonymous"
   />
-
+  <link rel="stylesheet" type="text/css" href="css/loading-bar.css"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css" />
   <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
@@ -20,19 +20,19 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
-
+  <script type="text/javascript" src="js/loading-bar.js"></script>
   <script
           src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
           integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
           crossorigin="anonymous"
   ></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="js/connectedTableCoreFunction.js"></script>
   <title>Petite Biscotte</title>
 </head>
 <body>
 
-
-<div>
+<div id="importedAudio">
   <audio id="Boum" onended="testff('playPauseBtn9')">
     <source src="sons/Boum.mp3"  type="audio/mpeg">
   </audio>
@@ -61,275 +61,130 @@
     <source src="sons/Yeah.mp3"  type="audio/mpeg">
   </audio>
 </div>
-<div class ="carousel-container">
-  <div class="carousel-inner">
-    <div class="track">
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings1" onClick="addFilter('Skkrt', 'btn_settings1')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
-          </div>
-          <div class="info">Skkrt</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings2" onClick="addFilter('Yeah','btn_settings2')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
-          </div>
-          <div class="info">Yeah</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings3" onClick="addFilter('Woaf','btn_settings3')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
-          </div>
-          <div class="info">Woaf</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id="btn_settings4" onClick="addFilter('Tching','btn_settings4')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
-          </div>
-          <div class="info">Tching</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id="btn_settings5" onClick="addFilter('Badaboum','btn_settings5')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
-          </div>
-          <div class="info">Badaboum</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings6" onClick="addFilter('Toc','btn_settings6')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
-          </div>
-          <div class="info">Toc</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings7" onClick="addFilter('Flip','btn_settings7')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
-          </div>
-          <div class="info">Flip</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings8" onClick="addFilter('Badada','btn_settings8')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
-          </div>
-          <div class="info">Badada</div>
-        </div>
-      </div>
-      <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="settings">
-            <button class="btn_settings" id ="btn_settings9" onClick="addFilter('Boum','btn_settings9')">
-              <i class="material-icons">
-                settings
-              </i>
-            </button>
-          </div>
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
-          </div>
-          <div class="info">Boum</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="nav">
-    <button class="prev">
-      <i class="material-icons">
-        keyboard_arrow_left
-      </i>
-    </button>
-    <button class="next">
-      <i class="material-icons">
-        keyboard_arrow_right
-      </i>
-    </button>
-  </div>
 
-</div>
-<br>
-<div class="carousel-container">
-  <div class="carousel-inner">
-    <div class="track">
-      <div id="dropzone" ondrop="onDrop(event)" ondragover="allowDrop(event)">
+
+
+<div id="Track1" class="Track1" ondrop="onDrop(event)" ondragover="allowDrop(event)" ></div>
+<div id="Track2" class="Track2" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
+<div id="Track3" class="Track3" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
+
+<div class="soundbox">
+  <div class ="carousel-container">
+    <div class="carousel-inner">
+      <div class="track">
+        <div  class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div  class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Skkrt" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
+            </div>
+            <div class="info">&#9708;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Yeah" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
+            </div>
+            <div class="info">&#11040;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Woaf" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
+            </div>
+            <div class="info">&#9636;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Tching" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
+            </div>
+            <div class="info">&#9635;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Badaboum" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
+            </div>
+            <div class="info">&#11055;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Toc" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
+            </div>
+            <div class="info">&#9681;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Flip"  id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
+            </div>
+            <div class="info">&#9707;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Badada" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
+            </div>
+            <div class="info">&#9714;</div>
+          </div>
+        </div>
+        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+          <div class="card">
+            <div class="circle">
+              <button class="btn_listen" ontouchend="touchend(event)" name="Boum" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
+            </div>
+            <div class="info">&#9672;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="prev">
+        <i class="material-icons">
+          keyboard_arrow_left
+        </i>
+      </button>
+      <button class="next">
+        <i class="material-icons">
+          keyboard_arrow_right
+        </i>
+      </button>
+    </div>
+
+  </div>
+  <br>
+  <div class="carousel-container" draggable="true" ondragstart="startDrag(event)">
+    <div class="carousel-inner">
+      <div class="track" id="newTrack">
       </div>
     </div>
   </div>
+  <!--
+  <div class="carousel-container" style="border: 2px solid black">
+    <div class="carousel-inner">
+      <div class="track">
+        <div id="dropzone" ondrop="onDrop(event)" ondragover="allowDrop(event)">
+        </div>
+      </div>
+    </div>
+  </div>
+ --->
 </div>
 <div id="buttonTest">
   <button id="btn_listenAll" onClick="playNext(0)">Lire la piste</button>
 </div>
 
-<script>
-  var allAudio = [];
-
-
-  function addFilter(audioName,btn){
-    var context = new AudioContext(),
-            audioSource = context.createMediaElementSource(document.getElementById(audioName)),
-            filter = context.createBiquadFilter();
-    audioSource.connect(filter);
-    filter.connect(context.destination);
-    filter.type = "lowshelf"
-    filter.frequency.value = 1000;
-    filter.gain.value = 25;
-    filter.detune.value = 100;
-    document.getElementById(btn).innerHTML += " Effet ajouté"
-
-  }
-  function testff(btn){
-    const bouton = document.getElementById(btn);
-    bouton.innerHTML = "&#9658;"
-  }
-
-  let count = 0;
-  function playPause(audioName,btn){
-    const audio = document.getElementById(audioName);
-    const bouton = document.getElementById(btn);
-    if(count === 0){
-      count = 1;
-      bouton.innerHTML = "&#9208;"
-      audio.play();
-
-    }else{
-      count = 0
-      audio.pause()
-      bouton.innerHTML = "&#9658;"
-    }
-  }
-
-  function startDrag(event){
-    event.dataTransfer.dropEffect = 'move'
-    event.dataTransfer.effectAllowed = 'all'
-    const id = event.target.firstElementChild.firstElementChild.firstElementChild.id
-    const str = event.target.firstElementChild.firstElementChild.nextElementSibling.textContent
-    event.dataTransfer.setData("id",id)
-    event.dataTransfer.setData("str",str)
-  }
-  function onDrop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData("id")
-    const str = event.dataTransfer.getData("str")
-    const son = document.getElementById(str);
-    const dropzone = document.getElementById("dropzone")
-    allAudio.push(son);
-    console.log(allAudio);
-    createCopy(dropzone,data,str)
-  }
-
-  function createCopy(dropzone,id,str){
-    let card_container = document.createElement('div')
-    card_container.classList.add("card-container")
-    let card = document.createElement('div')
-    card.classList.add("card")
-    let circle = document.createElement('div')
-    circle.classList.add("circle")
-    let button = document.createElement('button')
-    button.classList.add("btn_listen")
-    button.id = id + "drop";
-    button.onclick = function(){playPause(str,button.id)}
-    button.innerHTML = "&#9658;"
-    let name = document.createElement('div')
-    name.classList.add("info")
-    name.textContent = str
-    circle.appendChild(button)
-    card.appendChild(circle)
-    card.appendChild(name)
-    card_container.appendChild(card)
-    dropzone.appendChild(card_container)
-  }
-
-  function allowDrop(event) {
-    event.preventDefault();
-  }
-
-
-  function playNext(index){
-    allAudio[index].play();
-    $(allAudio[index]).bind("ended", function(){
-      index++;
-      if(index < allAudio.length){
-        playNext(index);
-      }
-    });
-  }
-
-  function openSettings(id){
-    var div = document.createElement('div');
-    document.getElementById(id).innerHTML = "Ajouter un effet sur le son"
-
-  }
-
-</script>
-
 </body>
+
+
+
 
 </html>

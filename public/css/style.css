@@ -57,6 +57,25 @@
 	height: 60px;
 }
 
+.btn_listen_sent {
+	margin-top: 65px;
+	margin-left: 30px;
+	font-size: 40px;
+	line-height: 60px;
+	min-width: 150px;
+	text-align: center;
+	cursor: pointer;
+	background: darkcyan;
+	color: #fff;
+	border-radius: 5px;
+	border: 0;
+	height: 60px;
+}
+
+.btn_listen:focus {
+	outline: none;
+}
+
 .carousel-container .card-container .card {
 	width: 100%;
 	height: 100%;
@@ -99,7 +118,8 @@
 	padding: 0;
 }
 
-body {
+html, body {
+	height: 100%;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	background: var(--light-color);
@@ -197,11 +217,14 @@ a {
 }
 
 .chat-messages .audio {
+	display: flex;
+	align-items: center;
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: #ebe4dc;
 	border-radius: 5px;
 	overflow-wrap: break-word;
+	justify-content: space-between;
 }
 
 .chat-messages .audio .meta {
@@ -296,6 +319,20 @@ a {
 	margin-left: auto;
 }
 
+.circle_sent{
+	width: 200px;
+	height: 200px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	background: darkcyan;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+
 @media (max-width: 700px) {
 	.chat-main {
 		display: block;
@@ -312,7 +349,7 @@ a {
 	background-color: #4c474c;
 	background-image: -webkit-gradient(linear, left bottom, left top, from(#4c474c), to(#141414));
 	background-image: -o-linear-gradient(bottom, #4c474c 0%, #141414 100%);
-	background-image: linear-gradient(0deg, #4c474c 0%, #141414 100%);
+	background-image: linear-gradient(0degs, #4c474c 0%, #141414 100%);
 	border-radius: 50px;
 }
 
@@ -352,13 +389,14 @@ a {
 
 [data-role="recordings"] {
 	text-align:center;
+	padding-bottom: 10px;
 }
 
 [data-role="recordings"] > .row {
 	width: auto;
 	height: auto;
 	padding: 20px;
-	line-height: 60px;
+	line-height: 50px;
 }
 
 [data-role="recordings"] > .row > audio {
@@ -394,4 +432,80 @@ a {
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#0093E9), to(#80D0C7));
 	background-image: -o-linear-gradient(top, #0093E9 0%, #80D0C7 100%);
 	background-image: linear-gradient(180deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.divSendAudio{
+	min-height: 35px;
+	min-width: 89px;
+	padding-top: 17px;
+}
+
+
+.Track1 {
+	width: 170vmin;
+	height: 85vmin;
+	position: absolute;
+	background: conic-gradient(
+			lightgrey 0deg 10deg,
+			lightgrey 10deg 360deg
+	);
+	-webkit-mask-image: radial-gradient(transparent 65%, black 65%);
+	mask-image: radial-gradient(transparent 65%, black 65%);
+	border-radius: 50%;
+}
+
+
+.Track2 {
+	width: 150vmin;
+	height: 75vmin;
+	position: absolute;
+	background: conic-gradient(
+			lightgrey 0deg 10deg,
+			lightgrey 10deg 360deg
+	);
+	-webkit-mask-image: radial-gradient(transparent 65%, black 65%);
+	mask-image: radial-gradient(transparent 65%, black 65%);
+	border-radius: 50%;
+}
+
+
+.Track3 {
+	width: 135vmin;
+	height: 65vmin;
+	position: absolute;
+	background: conic-gradient(
+			lightgrey 0deg 10deg,
+			lightgrey 10deg 360deg
+	);
+	-webkit-mask-image: radial-gradient(transparent 65%, black 65%);
+	mask-image: radial-gradient(transparent 65%, black 65%);
+	border-radius: 50%;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	height: 100vh;
+}
+#dropdown {
+	background-color: lightcyan;
+	color: white;
+	border: none;
+	cursor: pointer;
+	padding:20px;
+	margin-top:20px;
+	font-size: 30px;
+	text-align: center;
+	margin-right: 10px;
+	color: black;
+}
+
+.dropdown-child {
+	background-color: lightcyan;
+	min-width: 50px;
+	font-size: 30px;
+	text-align: center;
+	color: #141414;
 }
