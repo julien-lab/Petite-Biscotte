@@ -22,6 +22,10 @@
 	min-height: 200px;
 	position: relative;
 }
+.btn_settings{
+	border: none;
+	background-color: white;
+}
 
 .carousel-inner .carousel-container {
 	overflow: hidden;
