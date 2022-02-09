@@ -442,9 +442,8 @@ a {
 	height: 85vmin;
 	position: absolute;
 	background: conic-gradient(
-			lightgrey 0deg 180deg,
-			green 180deg 280deg,
-			lightgrey 280deg 360deg
+			lightgrey 0deg 10deg,
+			lightgrey 10deg 360deg
 	);
 	-webkit-mask-image: radial-gradient(transparent 65%, black 65%);
 	mask-image: radial-gradient(transparent 65%, black 65%);
@@ -458,8 +457,7 @@ a {
 	position: absolute;
 	background: conic-gradient(
 			lightgrey 0deg 10deg,
-			blue 10deg 60deg,
-			lightgrey 30deg 360deg
+			lightgrey 10deg 360deg
 	);
 	-webkit-mask-image: radial-gradient(transparent 65%, black 65%);
 	mask-image: radial-gradient(transparent 65%, black 65%);
@@ -472,9 +470,8 @@ a {
 	height: 65vmin;
 	position: absolute;
 	background: conic-gradient(
-			lightgrey 0deg 100deg,
-			red 100deg 200deg,
-			lightgrey 200deg 360deg
+			lightgrey 0deg 10deg,
+			lightgrey 10deg 360deg
 	);
 	-webkit-mask-image: radial-gradient(transparent 65%, black 65%);
 	mask-image: radial-gradient(transparent 65%, black 65%);
