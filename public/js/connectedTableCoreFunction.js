@@ -53,6 +53,7 @@ function startDrag(event){
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.effectAllowed = 'all'
     const id = event.target.firstElementChild.firstElementChild.firstElementChild.id
+    console.log(id)
     const str = event.target.firstElementChild.firstElementChild.nextElementSibling.textContent
     const soundName = event.target.firstElementChild.firstElementChild.firstElementChild.name
 
@@ -114,8 +115,16 @@ function constructConicGradient(startPos, soundDuration, trackTargeted, soundNam
 }
 
 function addSound(startPos, endPos, trackTargeted, soundName){
+
     if(soundCanBePlacedOnTrack(startPos, endPos, trackTargeted)){
-        soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':"orange", 'track':trackTargeted, 'soundName':soundName});
+        var color;
+        if(soundName.slice(0, 4) ==="blob"){
+            color = "#10A9AE";
+        }else{
+            color = "#FD7905"
+        }
+
+        soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':color, 'track':trackTargeted, 'soundName':soundName});
         soundsOnTracks = sortSoundsByStartPos();
     }else{
         alert("Impossible de superposer 2 sons sur la même piste.")

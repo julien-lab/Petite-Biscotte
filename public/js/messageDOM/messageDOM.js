@@ -104,6 +104,12 @@ export const addAudioToConnectedTable = function(audioURL){
     card.classList.add("card")
     let circle = document.createElement('div')
     circle.classList.add("circle_sent")
+    card_container.draggable = true;
+    card_container.ondragstart= function () {
+        startDrag(event);
+    };
+
+
 
     const importedAudioDiv = document.getElementById('importedAudio');
     const audio = document.createElement('audio');
@@ -128,6 +134,7 @@ export const addAudioToConnectedTable = function(audioURL){
     button.onclick = function(){
         playPause(audioID,buttonID);
     }
+    button.name = audioID;
     button.innerHTML = '&#9658';
 
     let name = document.createElement('div')
