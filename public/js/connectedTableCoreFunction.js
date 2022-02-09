@@ -54,16 +54,18 @@ function startDrag(event){
     event.dataTransfer.effectAllowed = 'all'
     const id = event.target.firstElementChild.firstElementChild.firstElementChild.id
     const str = event.target.firstElementChild.firstElementChild.nextElementSibling.textContent
+    const soundName = event.target.firstElementChild.firstElementChild.firstElementChild.name
+
     event.dataTransfer.setData("id",id)
     event.dataTransfer.setData("str",str)
+    event.dataTransfer.setData("soundName",soundName)
 }
 
 function onDrop(event) {
     event.preventDefault();
-    //console.log(event.target.id)
     const data = event.dataTransfer.getData("id")
     const str = event.dataTransfer.getData("str")
-
+    const soundName = event.dataTransfer.getData("soundName")
     const dropzone = document.getElementById("dropzone")
     //createCopy(dropzone,data,str)
 
@@ -74,16 +76,22 @@ function onDrop(event) {
     if(event.clientX < centerX){
         startPos = 180 + (180-startPos);
     }
-    console.log(startPos);
+    console.log(document.getElementById(soundName).duration);
 
-    var conicGradient = constructConicGradient(startPos);
+    var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration);
     var myDiv = document.getElementById(event.target.id);
     myDiv.setAttribute("style", "background:" + conicGradient);
 }
 
 
-function constructConicGradient(startPos){
-    var endPos = (startPos+60);
+function constructConicGradient(startPos, soundDuration){
+    //La loop fait 20sec
+    soundPercentage = (soundDuration*100)/20;
+
+    //Calcule de la taille du son sur la piste
+    soundLength = (360*soundPercentage)/100;
+
+    var endPos = (startPos+soundLength);
     var cG = "conic-gradient(lightgrey 0deg "+startPos +"deg, orange "+ startPos +"deg "+ endPos+"deg ,lightgrey "+endPos+"deg 360deg);"
     return cG;
 }
