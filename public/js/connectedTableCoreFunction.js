@@ -79,7 +79,7 @@ function onDrop(event) {
     }
     console.log(document.getElementById(soundName).duration);
 
-    var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted );
+    var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
     var trackDiv = document.getElementById(trackTargeted);
     console.log(conicGradient)
     trackDiv.setAttribute("style", "background:" + conicGradient);
@@ -87,7 +87,7 @@ function onDrop(event) {
 
 var soundsOnTracks= [];
 
-function constructConicGradient(startPos, soundDuration, trackTargeted){
+function constructConicGradient(startPos, soundDuration, trackTargeted, soundName){
     //La loop fait 20sec
     soundPercentage = (soundDuration*100)/20;
 
@@ -98,12 +98,12 @@ function constructConicGradient(startPos, soundDuration, trackTargeted){
     var endPos = Math.round(startPos+soundLength);
 
     //Enregistre les positions d'un nouveau son dans une chaine JSON si le son ne déborde pas sur un autre
-    addSound(startPos, endPos, trackTargeted);
+    addSound(startPos, endPos, trackTargeted, soundName);
 
     var endPosPreviousSound = 0;
     var conicGradient = "conic-gradient(";
     for (var i=0;i<soundsOnTracks.length;i++) {
-        sound = soundsOnTracks[i];
+        var sound = soundsOnTracks[i];
         if(sound.track === trackTargeted){
             conicGradient+= "lightgrey "+endPosPreviousSound +"deg "+sound.startPos +"deg, "+ sound.color +" "+ sound.startPos +"deg "+ sound.endPos+"deg, ";
             endPosPreviousSound = sound.endPos;
@@ -113,9 +113,9 @@ function constructConicGradient(startPos, soundDuration, trackTargeted){
     return conicGradient;
 }
 
-function addSound(startPos, endPos, trackTargeted){
+function addSound(startPos, endPos, trackTargeted, soundName){
     if(soundCanBePlacedOnTrack(startPos, endPos, trackTargeted)){
-        soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':"orange", 'track':trackTargeted});
+        soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':"orange", 'track':trackTargeted, 'soundName':soundName});
         soundsOnTracks = sortSoundsByStartPos();
     }else{
         alert("Impossible de superposer 2 sons sur la même piste.")
@@ -127,6 +127,7 @@ function soundCanBePlacedOnTrack(startPos, endPos, trackTargeted) {
     var test = true;
 
     for (var i=0;i<soundsOnTracks.length;i++) {
+        var sound = soundsOnTracks[i];
         if(sound.track === trackTargeted){
             var a = {start: startPos, end: endPos};
             var b = {start: sound.startPos, end: sound.endPos};
@@ -147,6 +148,27 @@ function sortSoundsByStartPos(){
         var x = a['startPos']; var y = b['startPos'];
         return ((x < y) ? -1 : ((x > y) ? 1 : 0));
     });
+}
+
+async function playComposition() {
+
+
+    for (var i = 0; i < 360; i++) {
+
+        for (var j=0;j<soundsOnTracks.length;j++) {
+            var sound = soundsOnTracks[j];
+            if(sound.startPos === i){
+                const audio = document.getElementById(sound.soundName);
+                audio.play();
+            }
+        }
+        console.log(i)
+        await sleep(55,55556);
+    }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function createCopy(dropzone,id,str){

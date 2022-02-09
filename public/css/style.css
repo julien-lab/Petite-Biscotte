@@ -112,12 +112,6 @@
 	box-sizing: border-box;
 }
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
 html, body {
 	height: 100%;
 	font-family: 'Roboto', sans-serif;
@@ -508,4 +502,32 @@ body {
 	font-size: 30px;
 	text-align: center;
 	color: #141414;
+}
+
+
+#anim {
+	width:120vmin;
+	height: 25vmin;
+	position: absolute;
+	-webkit-animation: rotation 20s linear infinite;
+	-moz-animation: rotation 20s linear infinite;
+	-ms-animation: rotation 20s linear infinite;
+}
+
+@-webkit-keyframes rotation {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes rotation {
+	0%   { -moz-transform: rotate(0deg); }
+	100% { -moz-transform: rotate(360deg); }
+}
+@-ms-keyframes rotation {
+	0%   { -ms-transform: rotate(0deg); }
+	100% { -ms-transform: rotate(360deg); }
+}
+
+
+.buttonTest {
+	z-index: 10;
 }
