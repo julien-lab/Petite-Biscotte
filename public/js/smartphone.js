@@ -90,13 +90,24 @@ document.getElementById('leave-btn').addEventListener('click', () => {
 const container = document.querySelector('.chat-messages');
 
 
-container.addEventListener('click', function (e) {
+container.addEventListener('click', async function (e) {
   //e.target.style.display = "none";
+  let localBase64 ;
   if (e.target.classList.contains('btn')) {
-    socket.emit('logo',document.getElementById('dropdown').value)
-    socket.emit('connectedTableAudioURL',e.target.value);
-    e.target.parentNode.remove(e);
-    console.log("audio url sent");
+    let blob = await fetch(e.target.value).then(r => r.blob());
+    let reader = new window.FileReader();
+    console.log(blob);
+    reader.readAsDataURL(blob);
+    reader.onloadend = function() {
+      localBase64 = reader.result;
+      localBase64 = localBase64.split(',')[1];
+      socket.emit('logo', document.getElementById('dropdown').value)
+      socket.emit('connectedTableAudioData', localBase64);
+    }
+    /*console.log(localBase64);
+    socket.emit('logo', document.getElementById('dropdown').value)
+    socket.emit('connectedTableAudioURL', e.target.value);
+    e.target.parentNode.remove(e);*/
   }
 });
 
@@ -154,6 +165,7 @@ $(document).ready(function () {
             }
             let url = (window.URL || window.webkitURL)
                     .createObjectURL(blob);
+
             // Prepare the playback
             let audioObject = $('<audio controls></audio>')
                     .attr('src', url);
