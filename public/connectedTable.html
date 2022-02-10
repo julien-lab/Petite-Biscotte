@@ -31,7 +31,8 @@
   <title>Petite Biscotte</title>
 </head>
 <body>
-
+<div id="btn_listenAll" onClick="playComposition()">&#9658;</div>
+<div id="trash"><img id="trashImg" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-trash-interface-kiranshastry-solid-kiranshastry.png"/></div>
 <div id="importedAudio">
   <audio id="Boum" onended="testff('playPauseBtn9')">
     <source src="sons/Boum.mp3"  type="audio/mpeg">
@@ -62,12 +63,9 @@
   </audio>
 </div>
 
-
-
 <div id="Track1" class="Track1" ondrop="onDrop(event)" ondragover="allowDrop(event)" ></div>
 <div id="Track2" class="Track2" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
 <div id="Track3" class="Track3" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
-
 <div class="soundbox">
   <div class ="carousel-container">
     <div class="carousel-inner">
@@ -76,7 +74,6 @@
           <div  class="card">
             <div class="circle">
               <button class="btn_listen" ontouchend="touchend(event)" name="Skkrt" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
-              <button id="btn_listenAll" onClick="playComposition()">Lire la piste</button>
             </div>
             <div class="info">&#9708;</div>
           </div>

@@ -57,6 +57,25 @@
 	height: 60px;
 }
 
+#btn_listenAll{
+	position: absolute;
+	font-size: 5vw;
+	top: 2vw;
+	left: 2vw;
+}
+
+#trash{
+	position: absolute;
+	font-size: 5vw;
+	top: 2vw;
+	left: 90vw;
+}
+
+#trashImg{
+	height: 5vw;
+	width: 5vw;
+}
+
 .btn_listen_sent {
 	margin-top: 65px;
 	margin-left: 30px;

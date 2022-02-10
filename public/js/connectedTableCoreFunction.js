@@ -1,3 +1,5 @@
+disableScroll()
+
 function testff(btn){
     const bouton = document.getElementById(btn);
     bouton.innerHTML = "&#9658;"
@@ -25,6 +27,7 @@ function playPause(audioName,btn){
     if(count === 0){
         count = 1;
         bouton.innerHTML = "&#9208;"
+        console.log(audio)
         audio.play();
         audio.onended
 
@@ -48,6 +51,7 @@ function startDrag(event){
 }
 
 function touchend(event) {
+    console.log("touchend")
     const x = event.changedTouches[0].pageX
     const y = event.changedTouches[0].pageY
     const soundName = event.target.name
@@ -72,6 +76,17 @@ function touchend(event) {
     console.log(trackDiv)
     console.log(conicGradient)
     trackDiv.setAttribute("style", "background:" + conicGradient);
+}
+
+function disableScroll() {
+    // Get the current page scroll position
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+
+        // if any scroll is attempted, set this to the previous value
+        window.onscroll = function() {
+            window.scrollTo(scrollLeft, scrollTop);
+        };
 }
 
 
@@ -174,7 +189,7 @@ function sortSoundsByStartPos(){
 }
 
 async function playComposition() {
-
+    console.log("play composition")
 
     for (var i = 0; i < 360; i++) {
 
