@@ -190,9 +190,12 @@ function sortSoundsByStartPos(){
     });
 }
 
-async function playComposition() {
-    console.log("play composition")
+let canPlay = true;
 
+async function playComposition() {
+    if (!canPlay) return;
+    console.log("play composition")
+    canPlay = false;
     for (var i = 0; i < 360; i++) {
 
         for (var j=0;j<soundsOnTracks.length;j++) {
@@ -205,6 +208,7 @@ async function playComposition() {
         console.log(i)
         await sleep(55,55556);
     }
+    canPlay = true;
 }
 
 function sleep(ms) {
