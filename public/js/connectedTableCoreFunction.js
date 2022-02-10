@@ -3,19 +3,6 @@ function testff(btn){
     bouton.innerHTML = "&#9658;"
 }
 
-function touchend(event) {
-    const data = event.target.id
-    const str = event.target.parentElement.nextElementSibling.textContent
-    const dropzone = document.getElementById("dropzone")
-    console.log(event.changedTouches[0].pageX,event.changedTouches[0].pageY)
-    //if(event.changedTouches[0].pageY >700) createCopy(dropzone,data,str)
-}
-
-
-function printMousePos(event) {
-
-}
-
 function computeAngle(pX, pY){
     centerX = window.innerWidth/2;
     centerY =  window.innerHeight/2;
@@ -30,7 +17,6 @@ function computeAngle(pX, pY){
     return (angleRad * 180) / Math.PI;
 }
 
-//document.addEventListener("click", printMousePos);
 
 let count = 0;
 function playPause(audioName,btn){
@@ -53,7 +39,6 @@ function startDrag(event){
     event.dataTransfer.dropEffect = 'move'
     event.dataTransfer.effectAllowed = 'all'
     const id = event.target.firstElementChild.firstElementChild.firstElementChild.id
-    console.log(id)
     const str = event.target.firstElementChild.firstElementChild.nextElementSibling.textContent
     const soundName = event.target.firstElementChild.firstElementChild.firstElementChild.name
 
@@ -62,15 +47,39 @@ function startDrag(event){
     event.dataTransfer.setData("soundName",soundName)
 }
 
+function touchend(event) {
+    const x = event.changedTouches[0].pageX
+    const y = event.changedTouches[0].pageY
+    const soundName = event.target.name
+    const trackTargeted = document.elementFromPoint(x, y).id
+
+    var startPos = Math.round(computeAngle(x , y))
+    centerX = window.innerWidth/2;
+    centerY = window.innerHeight/2;
+
+
+    if(x < centerX){
+        startPos = 180 + (180-startPos);
+    }
+
+    console.log(startPos)
+    console.log(document.getElementById(soundName).duration);
+    console.log(trackTargeted)
+    console.log(soundName)
+
+    var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
+    var trackDiv = document.getElementById(trackTargeted);
+    console.log(trackDiv)
+    console.log(conicGradient)
+    trackDiv.setAttribute("style", "background:" + conicGradient);
+}
+
+
 function onDrop(event) {
     event.preventDefault();
-    const data = event.dataTransfer.getData("id")
-    const str = event.dataTransfer.getData("str")
     const soundName = event.dataTransfer.getData("soundName")
-    const dropzone = document.getElementById("dropzone")
-    const trackTargeted = event.target.id;
-    //createCopy(dropzone,data,str)
 
+    const trackTargeted = event.target.id;
     //Detection de la position du son sur la piste
     var startPos = Math.round(computeAngle(event.clientX , event.clientY))
     centerX = window.innerWidth/2;
@@ -78,10 +87,15 @@ function onDrop(event) {
     if(event.clientX < centerX){
         startPos = 180 + (180-startPos);
     }
+
+    console.log(startPos)
     console.log(document.getElementById(soundName).duration);
+    console.log(trackTargeted)
+    console.log(soundName)
 
     var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
     var trackDiv = document.getElementById(trackTargeted);
+    console.log(trackDiv)
     console.log(conicGradient)
     trackDiv.setAttribute("style", "background:" + conicGradient);
 }
@@ -178,28 +192,6 @@ async function playComposition() {
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function createCopy(dropzone,id,str){
-    let card_container = document.createElement('div')
-    card_container.classList.add("card-container")
-    let card = document.createElement('div')
-    card.classList.add("card")
-    let circle = document.createElement('div')
-    circle.classList.add("circle")
-    let button = document.createElement('button')
-    button.classList.add("btn_listen")
-    button.id = id + "drop";
-    button.onclick = function(){playPause(str,button.id)}
-    button.innerHTML = "&#9658;"
-    let name = document.createElement('div')
-    name.classList.add("info")
-    name.textContent = str
-    circle.appendChild(button)
-    card.appendChild(circle)
-    card.appendChild(name)
-    card_container.appendChild(card)
-    dropzone.appendChild(card_container)
 }
 
 function allowDrop(event) {
