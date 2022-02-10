@@ -217,3 +217,10 @@ function toMenu(){
     window.location = '../index.html';
 }
 
+function clearTracks(){
+    soundsOnTracks= []
+    document.getElementById("Track1").style.background = "lightgrey"
+    document.getElementById("Track2").style.background = "lightgrey"
+    document.getElementById("Track3").style.background = "lightgrey"
+}
+
