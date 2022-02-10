@@ -30,6 +30,33 @@ function computeAngle(pX, pY){
     return (angleRad * 180) / Math.PI;
 }
 
+/*function suppressFilter(audioName, btn, circle, boutoncolor, suppressbtn){
+    document.getElementById(btn).innerHTML = "<i class=\"material-icons\">\n" +
+        "                  settings\n" +
+        "                </i>"
+    document.getElementById(circle).style.background = "coral"
+    document.getElementById(boutoncolor).style.background = "coral"
+    document.getElementById(suppressbtn).style.display = "none"
+}*/
+
+
+function addFilter(audioName,btn , circle, boutoncolor, suppressbtn){
+    var context = new AudioContext(),
+        audioSource = context.createMediaElementSource(document.getElementById(audioName)),
+        filter = context.createBiquadFilter();
+    audioSource.connect(filter);
+    filter.connect(context.destination);
+    filter.type = "lowshelf"
+    filter.frequency.value = 1000;
+    filter.gain.value = 25;
+    filter.detune.value = 100;
+    document.getElementById(btn).innerHTML += " Effet ajouté"
+    document.getElementById(circle).style.background = "red"
+    document.getElementById(boutoncolor).style.background = "red"
+    document.getElementById(suppressbtn).style.display = "inline"
+
+}
+
 //document.addEventListener("click", printMousePos);
 
 let count = 0;
@@ -67,6 +94,7 @@ function onDrop(event) {
     const data = event.dataTransfer.getData("id")
     const str = event.dataTransfer.getData("str")
     const soundName = event.dataTransfer.getData("soundName")
+    console.log(soundName)
     const dropzone = document.getElementById("dropzone")
     const trackTargeted = event.target.id;
     //createCopy(dropzone,data,str)
@@ -78,6 +106,7 @@ function onDrop(event) {
     if(event.clientX < centerX){
         startPos = 180 + (180-startPos);
     }
+
     console.log(document.getElementById(soundName).duration);
 
     var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);

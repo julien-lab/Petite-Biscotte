@@ -67,80 +67,142 @@
 <div id="Track1" class="Track1" ondrop="onDrop(event)" ondragover="allowDrop(event)" ></div>
 <div id="Track2" class="Track2" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
 <div id="Track3" class="Track3" ondrop="onDrop(event)" ondragover="allowDrop(event)"></div>
-
+<button id="btn_listenAll" onClick="playComposition()">Lire la piste</button>
 <div class="soundbox">
   <div class ="carousel-container">
     <div class="carousel-inner">
       <div class="track">
         <div  class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div  class="card">
-            <div class="circle">
+            <div class="circle" id="circle1">
               <button class="btn_listen" ontouchend="touchend(event)" name="Skkrt" id="playPauseBtn1" onClick="playPause('Skkrt', 'playPauseBtn1')">&#9658;</button>
-              <button id="btn_listenAll" onClick="playComposition()">Lire la piste</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings1" onClick="addFilter('Skkrt', 'btn_settings1' , 'circle1' , 'playPauseBtn1' , 'btn_suppress1')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9708;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle2">
               <button class="btn_listen" ontouchend="touchend(event)" name="Yeah" id="playPauseBtn2" onClick="playPause('Yeah','playPauseBtn2')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings2" onClick="addFilter('Yeah', 'btn_settings2',  'circle2' , 'playPauseBtn2')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#11040;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle3">
               <button class="btn_listen" ontouchend="touchend(event)" name="Woaf" id="playPauseBtn3" onClick="playPause('Woaf','playPauseBtn3')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings3" onClick="addFilter('Woaf', 'btn_settings3', 'circle3' , 'playPauseBtn3')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9636;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle4">
               <button class="btn_listen" ontouchend="touchend(event)" name="Tching" id="playPauseBtn4" onClick="playPause('Tching','playPauseBtn4')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings4" onClick="addFilter('Tching', 'btn_settings4' , 'circle4' , 'playPauseBtn4')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9635;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle5">
               <button class="btn_listen" ontouchend="touchend(event)" name="Badaboum" id="playPauseBtn5" onClick="playPause('Badaboum','playPauseBtn5')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings5" onClick="addFilter('Badaboum', 'btn_settings5' , 'circle5' , 'playPauseBtn5')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#11055;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle6">
               <button class="btn_listen" ontouchend="touchend(event)" name="Toc" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings6" onClick="addFilter('Toc', 'btn_settings6' , 'circle6' , 'playPauseBtn6')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9681;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle7">
               <button class="btn_listen" ontouchend="touchend(event)" name="Flip"  id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings7" onClick="addFilter('Flip', 'btn_settings7' , 'circle7' , 'playPauseBtn7')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9707;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle8">
               <button class="btn_listen" ontouchend="touchend(event)" name="Badada" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings8" onClick="addFilter('Badada', 'btn_settings8' , 'circle8' , 'playPauseBtn8')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9714;</div>
           </div>
         </div>
         <div class="card-container" draggable="true" ondragstart="startDrag(event)">
           <div class="card">
-            <div class="circle">
+            <div class="circle" id="circle9">
               <button class="btn_listen" ontouchend="touchend(event)" name="Boum" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
+            </div>
+            <div class="settings">
+              <button class="btn_settings" id ="btn_settings9" onClick="addFilter('Boum', 'btn_settings9' , 'circle9' , 'playPauseBtn9')">
+                <i class="material-icons">
+                  settings
+                </i>
+              </button>
             </div>
             <div class="info">&#9672;</div>
           </div>
