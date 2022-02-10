@@ -39,43 +39,45 @@ function playPause(audioName,btn){
 }
 
 function startDrag(event){
-    event.dataTransfer.dropEffect = 'move'
-    event.dataTransfer.effectAllowed = 'all'
-    const id = event.target.firstElementChild.firstElementChild.firstElementChild.id
-    const str = event.target.firstElementChild.firstElementChild.nextElementSibling.textContent
-    const soundName = event.target.firstElementChild.firstElementChild.firstElementChild.name
+    event.dataTransfer.dropEffect = 'move';
+    event.dataTransfer.effectAllowed = 'all';
+    const id = event.target.firstElementChild.firstElementChild.firstElementChild.id;
+    const str = event.target.firstElementChild.firstElementChild.nextElementSibling.textContent;
+    const soundName = event.target.firstElementChild.firstElementChild.firstElementChild.name;
 
-    event.dataTransfer.setData("id",id)
-    event.dataTransfer.setData("str",str)
+    event.dataTransfer.setData("id",id);
+    event.dataTransfer.setData("str",str);
     event.dataTransfer.setData("soundName",soundName)
 }
 
 function touchend(event) {
-    console.log("touchend")
-    const x = event.changedTouches[0].pageX
-    const y = event.changedTouches[0].pageY
-    const soundName = event.target.name
-    const trackTargeted = document.elementFromPoint(x, y).id
+    console.log("touchend");
+    const x = event.changedTouches[0].pageX;
+    const y = event.changedTouches[0].pageY;
+    const soundName = event.target.name;
+    const trackTargeted = document.elementFromPoint(x, y).id;
 
-    var startPos = Math.round(computeAngle(x , y))
-    centerX = window.innerWidth/2;
-    centerY = window.innerHeight/2;
+    if(trackTargeted.slice(0, 5) === "Track" ){
+        var startPos = Math.round(computeAngle(x , y));
+        centerX = window.innerWidth/2;
+        centerY = window.innerHeight/2;
 
+        if(x < centerX){
+            startPos = 180 + (180-startPos);
+        }
 
-    if(x < centerX){
-        startPos = 180 + (180-startPos);
+        console.log(startPos)
+        console.log(document.getElementById(soundName).duration);
+        console.log(trackTargeted)
+        console.log(soundName)
+
+        var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
+        var trackDiv = document.getElementById(trackTargeted);
+        console.log(trackDiv)
+        console.log(conicGradient)
+        trackDiv.setAttribute("style", "background:" + conicGradient);
     }
 
-    console.log(startPos)
-    console.log(document.getElementById(soundName).duration);
-    console.log(trackTargeted)
-    console.log(soundName)
-
-    var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
-    var trackDiv = document.getElementById(trackTargeted);
-    console.log(trackDiv)
-    console.log(conicGradient)
-    trackDiv.setAttribute("style", "background:" + conicGradient);
 }
 
 function disableScroll() {
