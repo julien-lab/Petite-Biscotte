@@ -1,4 +1,9 @@
-import {addAudioToConnectedTable, convertURIToBinary, outputAudio} from './messageDOM/messageDOM.js'
+import {
+    addAudioURLToConnectedTable,
+    convertURIToBinary,
+    createURLFromBase64Audio,
+    outputAudio
+} from './messageDOM/messageDOM.js'
 import {setLogo} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
@@ -28,13 +33,8 @@ socket.emit('joinRoom', { username, room });
 
 // Message from server
 socket.on('newAudioData', (base64Audio) => {
-    let binary = convertURIToBinary(base64Audio);
-    let blob = new Blob([binary], {
-        type: 'audio/wav'
-    });
-    let url = (window.URL || window.webkitURL)
-        .createObjectURL(blob);
-    addAudioToConnectedTable(url);
+    let url = createURLFromBase64Audio(base64Audio);
+    addAudioURLToConnectedTable(url);
     console.log(url);
 });
 

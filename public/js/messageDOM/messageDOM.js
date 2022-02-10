@@ -54,6 +54,15 @@ function addConnectedTableButton(divRight, div, buttonValue){
     div.appendChild(divRight);
 }
 
+export const createURLFromBase64Audio = function(base64Audio){
+    let binary = convertURIToBinary(base64Audio);
+    let blob = new Blob([binary], {
+        type: 'audio/wav'
+    });
+    return (window.URL || window.webkitURL)
+        .createObjectURL(blob);
+}
+
 export const outputAudio = function(audio) {
     const div = document.createElement('div');
     div.classList.add('audio');
@@ -96,8 +105,7 @@ export const outputUsers = function(users,userList) {
     });
 };
 
-export const addAudioToConnectedTable = function(audioURL){
-    console.log("connectedtable",audioURL)
+export const addAudioURLToConnectedTable = function(audioURL){
     let card_container = document.createElement('div')
     card_container.classList.add("card-container")
     let card = document.createElement('div')
@@ -119,7 +127,6 @@ export const addAudioToConnectedTable = function(audioURL){
     audio.id = audioURL;
     audio.src = audioURL;
     audio.onended = function(){
-        console.log("hello")
         const bouton = document.getElementById(buttonID);
         bouton.innerHTML = "&#9658;";
     }
@@ -135,7 +142,6 @@ export const addAudioToConnectedTable = function(audioURL){
     button.onclick = function(){
         playPause(audioID,buttonID);
     }
-    console.log(button.ontouchend)
     button.name = audioID;
     button.innerHTML = '&#9658';
 
@@ -148,18 +154,4 @@ export const addAudioToConnectedTable = function(audioURL){
     card.appendChild(name)
     card_container.appendChild(card)
     newTrack.appendChild(card_container);
-    /*const infoDiv = document.createElement('div');
-    infoDiv.classList = 'info';
-    infoDiv.innerHTML = "";
-    newTrack.appendChild()*/
-    /*
-    <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-        <div class="card">
-          <div class="circle">
-            <button class="btn_listen" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
-          </div>
-        <div class="info">Boum</div>
-      </div>
-    </div>
-     */
 }

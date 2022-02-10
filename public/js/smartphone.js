@@ -96,7 +96,6 @@ container.addEventListener('click', async function (e) {
   if (e.target.classList.contains('btn')) {
     let blob = await fetch(e.target.value).then(r => r.blob());
     let reader = new window.FileReader();
-    console.log(blob);
     reader.readAsDataURL(blob);
     reader.onloadend = function() {
       localBase64 = reader.result;
@@ -104,10 +103,6 @@ container.addEventListener('click', async function (e) {
       socket.emit('logo', document.getElementById('dropdown').value)
       socket.emit('connectedTableAudioData', localBase64);
     }
-    /*console.log(localBase64);
-    socket.emit('logo', document.getElementById('dropdown').value)
-    socket.emit('connectedTableAudioURL', e.target.value);
-    e.target.parentNode.remove(e);*/
   }
 });
 

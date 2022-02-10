@@ -98,7 +98,7 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const app2 = express();
 
-const serverUnsafe= http.createServer(app2);
+const serverUnsafe = http.createServer(app2);
 
 const io2 = socketio(serverUnsafe);
 
@@ -126,7 +126,7 @@ io2.on('connection', socket => {
         );
 
     // Send users and room info
-    io2.to(user.room).emit('roomUsers', {
+    io.to(user.room).emit('roomUsers', {
       room: user.room,
       users: getRoomUsers(user.room)
     });
@@ -136,7 +136,7 @@ io2.on('connection', socket => {
   socket.on('chatMessage', msg => {
     const user = getCurrentUser(socket.id);
 
-    io2.to(user.room).emit('message', formatMessage(user.username, msg));
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
   // Runs when client disconnects
@@ -144,18 +144,26 @@ io2.on('connection', socket => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io2.to(user.room).emit(
+      io.to(user.room).emit(
           'message',
-          formatMessage(botName2, `${user.username} has left the chat`)
+          formatMessage(botName, `${user.username} has left the chat`)
       );
 
       // Send users and room info
-      io2.to(user.room).emit('roomUsers', {
+      io.to(user.room).emit('roomUsers', {
         room: user.room,
         users: getRoomUsers(user.room)
       });
     }
   });
+
+  socket.on('connectedTableAudioData', (audioURL) => {
+    io.to("connectedTable").emit('newAudioData', audioURL)
+  })
+
+  socket.on('logo', (logo) => {
+    io.to("connectedTable").emit('newLogo', logo)
+  })
 });
 
 const UnsafePORT = 3001;
