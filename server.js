@@ -126,7 +126,7 @@ io2.on('connection', socket => {
         );
 
     // Send users and room info
-    io.to(user.room).emit('roomUsers', {
+    io2.to(user.room).emit('roomUsers', {
       room: user.room,
       users: getRoomUsers(user.room)
     });
@@ -136,7 +136,7 @@ io2.on('connection', socket => {
   socket.on('chatMessage', msg => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user.room).emit('message', formatMessage(user.username, msg));
+    io2.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
   // Runs when client disconnects
@@ -144,13 +144,13 @@ io2.on('connection', socket => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io.to(user.room).emit(
+      io2.to(user.room).emit(
           'message',
           formatMessage(botName, `${user.username} has left the chat`)
       );
 
       // Send users and room info
-      io.to(user.room).emit('roomUsers', {
+      io2.to(user.room).emit('roomUsers', {
         room: user.room,
         users: getRoomUsers(user.room)
       });
@@ -158,11 +158,11 @@ io2.on('connection', socket => {
   });
 
   socket.on('connectedTableAudioData', (audioURL) => {
-    io.to("connectedTable").emit('newAudioData', audioURL)
+    io2.to("connectedTable").emit('newAudioData', audioURL)
   })
 
   socket.on('logo', (logo) => {
-    io.to("connectedTable").emit('newLogo', logo)
+    io2.to("connectedTable").emit('newLogo', logo)
   })
 });
 
