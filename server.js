@@ -79,8 +79,8 @@ io.on('connection', socket => {
     }
   });
 
-  socket.on('connectedTableAudioURL', (audioURL) => {
-    io.to("connectedTable").emit('newAudioURL', audioURL)
+  socket.on('connectedTableAudioData', (audioURL) => {
+    io.to("connectedTable").emit('newAudioData', audioURL)
   })
 
   socket.on('logo', (logo) => {

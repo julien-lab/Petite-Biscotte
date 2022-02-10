@@ -4,7 +4,7 @@ export const setLogo = function(newLogo){
     logo = newLogo
 }
 
-function convertURIToBinary(base64) {
+export const convertURIToBinary = function(base64) {
     let raw = window.atob(base64);
     let rawLength = raw.length;
     let arr = new Uint8Array(new ArrayBuffer(rawLength));
