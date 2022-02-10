@@ -19,6 +19,34 @@ function computeAngle(pX, pY){
     return (angleRad * 180) / Math.PI;
 }
 
+function playSongWhenTouchOnTrack(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+
+    const trackTargeted = document.elementFromPoint(x, y).id;
+
+    if(trackTargeted.slice(0, 5) === "Track" ){
+        var touchPos = computeAngle(x , y);
+
+        centerX = window.innerWidth/2;
+
+        if(x < centerX){
+            touchPos = 180 + (180-touchPos);
+        }
+        for (var i=0;i<soundsOnTracks.length;i++) {
+            var sound = soundsOnTracks[i];
+            if(sound.track === trackTargeted){
+                if(sound.startPos <= touchPos && touchPos <= sound.endPos ){
+                    const audio = document.getElementById(sound.soundName);
+                    audio.play();
+                }
+            }
+        }
+    }
+}
+
+document.addEventListener("touchstart", playSongWhenTouchOnTrack);
+
 
 let count = 0;
 function playPause(audioName,btn){
