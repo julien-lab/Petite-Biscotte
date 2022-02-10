@@ -213,3 +213,7 @@ function allowDrop(event) {
     event.preventDefault();
 }
 
+function toMenu(){
+    window.location = '../index.html';
+}
+

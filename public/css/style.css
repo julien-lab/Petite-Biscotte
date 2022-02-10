@@ -71,9 +71,27 @@
 	left: 90vw;
 }
 
-#trashImg{
+.buttonImages{
 	height: 5vw;
 	width: 5vw;
+}
+
+#back{
+
+	position: absolute;
+	font-size: 5vw;
+	top: 80vmin;
+	left: 2vw;
+}
+
+#trash:active{
+	background-color: lightgray;
+}
+#back:active{
+	background-color: lightgray;
+}
+#btn_listenAll:active{
+	background-color: lightgray;
 }
 
 .btn_listen_sent {
