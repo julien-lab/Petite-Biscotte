@@ -39,6 +39,7 @@ function playSongWhenTouchOnTrack(event) {
                 if(sound.startPos <= touchPos && touchPos <= sound.endPos ){
                     const audio = document.getElementById(sound.soundName);
                     audio.play();
+                    break;
                 }
             }
         }
@@ -46,6 +47,48 @@ function playSongWhenTouchOnTrack(event) {
 }
 
 document.addEventListener("touchstart", playSongWhenTouchOnTrack);
+document.addEventListener("click", doubletap);
+
+var mylatesttap ;
+function doubletap(event) {
+
+    var x = event.clientX;
+    var y = event.clientY;
+
+    const trackTargeted = document.elementFromPoint(x, y).id;
+
+    var now = new Date().getTime();
+    var timesince = now - mylatesttap;
+    if((timesince < 600) && (timesince > 0)){
+        console.log("DOUBLE CLICK")
+
+        if(trackTargeted.slice(0, 5) === "Track" ){
+            var touchPos = computeAngle(x , y);
+
+            centerX = window.innerWidth/2;
+
+            if(x < centerX){
+                touchPos = 180 + (180-touchPos);
+            }
+            for (var i=0;i<soundsOnTracks.length;i++) {
+                var sound = soundsOnTracks[i];
+                if(sound.track === trackTargeted){
+                    if(sound.startPos <= touchPos && touchPos <= sound.endPos ){
+                        var conicGradient = constructConicGradient(sound.endPos+1, document.getElementById(sound.soundName).duration, trackTargeted , sound.soundName);
+                        var trackDiv = document.getElementById(trackTargeted);
+                        trackDiv.setAttribute("style", "background:" + conicGradient);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }else{
+        console.log("PROUT")
+    }
+
+    mylatesttap = new Date().getTime();
+}
 
 
 let count = 0;
@@ -229,7 +272,7 @@ async function playComposition() {
         for (var j=0;j<soundsOnTracks.length;j++) {
             var sound = soundsOnTracks[j];
             if(sound.startPos === i){
-                const audio = document.getElementById(sound.soundName);
+                var audio = document.getElementById(sound.soundName);
                 audio.play();
             }
         }
