@@ -12,8 +12,7 @@ function addFilter(audioName,btn , circle, boutoncolor){
     audioSource.connect(filter);
     filter.connect(context.destination);
     //filter.type = "lowshelf"
-    //filter.gain.value = 20;
-    document.getElementById(btn).innerHTML += " Effet ajouté"
+    //filter.gain.value = 20
     document.getElementById(circle).style.background = "red"
     document.getElementById(boutoncolor).style.background = "red"
 
