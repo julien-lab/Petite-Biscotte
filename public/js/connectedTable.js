@@ -1,4 +1,4 @@
-import {
+    import {
     addAudioURLToConnectedTable,
     convertURIToBinary,
     createURLFromBase64Audio,
@@ -11,7 +11,7 @@ import {outputUsers} from './messageDOM/messageDOM.js'
 
 const next = document.querySelector('.next');
 const prev = document.querySelector('.prev');
-const track = document.querySelector('.track');
+const track = document.querySelector('.soundsss');
 const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
 let $ = jQuery;
 const room = 'connectedTable';
