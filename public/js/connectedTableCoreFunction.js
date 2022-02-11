@@ -5,6 +5,21 @@ function testff(btn){
     bouton.innerHTML = "&#9658;"
 }
 
+function addFilter(audioName,btn , circle, boutoncolor){
+    var context = new AudioContext(),
+        audioSource = context.createMediaElementSource(document.getElementById(audioName)),
+        filter = context.createBiquadFilter();
+    audioSource.connect(filter);
+    filter.connect(context.destination);
+    //filter.type = "lowshelf"
+    //filter.gain.value = 20;
+    document.getElementById(btn).innerHTML += " Effet ajouté"
+    document.getElementById(circle).style.background = "red"
+    document.getElementById(boutoncolor).style.background = "red"
+
+}
+
+
 function computeAngle(pX, pY){
     centerX = window.innerWidth/2;
     centerY =  window.innerHeight/2;
