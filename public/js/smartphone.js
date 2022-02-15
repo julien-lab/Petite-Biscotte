@@ -12,6 +12,7 @@ const startRecord = document.getElementById('startRecord');
 let base64Audio;
 let listObject;
 let $ = jQuery;
+let isPlaying = false;
 
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
@@ -32,7 +33,16 @@ socket.on('roomUsers', ({ room, users }) => {
 });
 
 socket.on('talkToConnectedTable', (msg) => {
-  console.log(msg);
+  isPlaying = !isPlaying
+  if(isPlaying) {
+    document.getElementById("chat").style.visibility = "hidden"
+    document.getElementById("playing").style.visibility = "visible"
+  }
+  else{
+    document.getElementById("chat").style.visibility = "visible"
+    document.getElementById("playing").style.visibility = "hidden"
+  }
+  console.log(isPlaying)
 });
 
 // Message from server

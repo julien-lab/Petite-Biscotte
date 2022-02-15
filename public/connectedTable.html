@@ -25,6 +25,7 @@
   ></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/connectedTableCoreFunction.js"></script>
+  <script src="js/player.js"></script>
   <title>Petite Biscotte</title>
 </head>
 <body>
@@ -33,31 +34,31 @@
 <div id="back" onclick="toMenu()"><img class="buttonImages" src="https://img.icons8.com/ios-filled/100/000000/return.png"/></div>
 
 <div id="importedAudio">
-  <audio id="Boum" onended="testff('playPauseBtn9')">
+  <audio id="Boum" onended="playAnimation('playPauseBtn9')">
     <source src="sons/Boum.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="pouet2" onended="testff('playPauseBtn5')">
+  <audio id="pouet2" onended="playAnimation('playPauseBtn5')">
     <source src="sons/pouet2.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="Badada" onended="testff('playPauseBtn8')">
+  <audio id="Badada" onended="playAnimation('playPauseBtn8')">
     <source src="sons/Badada.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="Flip" onended="testff('playPauseBtn7')">
+  <audio id="Flip" onended="playAnimation('playPauseBtn7')">
     <source src="sons/Flip.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="beatbox2" onended="testff('playPauseBtn1')">
+  <audio id="beatbox2" onended="playAnimation('playPauseBtn1')">
     <source src="sons/beatbox2.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="pouet" onended="testff('playPauseBtn4')">
+  <audio id="pouet" onended="playAnimation('playPauseBtn4')">
     <source src="sons/pouet.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="Toc" onended="testff('playPauseBtn6')">
+  <audio id="Toc" onended="playAnimation('playPauseBtn6')">
     <source src="sons/Toc.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="beatbox1" onended="testff('playPauseBtn3')">
+  <audio id="beatbox1" onended="playAnimation('playPauseBtn3')">
     <source src="sons/beatbox1.mp3"  type="audio/mpeg">
   </audio>
-  <audio id="trompette" onended="testff('playPauseBtn2')">
+  <audio id="trompette" onended="playAnimation('playPauseBtn2')">
     <source src="sons/trompette.mp3"  type="audio/mpeg">
   </audio>
 </div>

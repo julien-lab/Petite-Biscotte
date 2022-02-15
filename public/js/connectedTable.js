@@ -40,7 +40,7 @@ socket.on('newLogo', (logo) => {
 });
 
 playButton.addEventListener('click',(e) => {
-    let msg = "Bonjour ceci vient de la table"
+    let msg = "change isPlaying"
 
     socket.emit('talkToConnectedTable', msg)
 });
