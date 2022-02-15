@@ -23,16 +23,6 @@ const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
  });
 
-next.addEventListener('click', () => {
-  track.style.transform = `translateX(-${carouselWidth}px)`;
-});
-
-prev.addEventListener('click', () => {
-  track.style.transform = `translateX(-${0}px)`;
-});
-
-
-
 const socket = io();
 
 // Join chatroom
@@ -49,6 +39,7 @@ socket.on('talkToConnectedTable', (msg) => {
   if(isPlaying) {
     document.getElementById("chat").style.display = "none"
     document.getElementById("playing").style.display = "block"
+    // document.getElementById("playing").style = "display: flex;flex-direction: column"
   }
   else{
     document.getElementById("chat").style.display = "block"
