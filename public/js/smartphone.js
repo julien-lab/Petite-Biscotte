@@ -190,7 +190,7 @@ $(document).ready(function () {
                     .createObjectURL(blob);
 
             // Prepare the playback
-            let audioObject = $('<audio controls></audio>')
+            let audioObject = $('<audio controls ></audio>')
                     .attr('src', url);
 
             // Create send audio button
