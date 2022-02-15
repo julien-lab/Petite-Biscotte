@@ -199,8 +199,6 @@ function addSound(startPos, endPos, trackTargeted, soundName){
 
         soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':color, 'track':trackTargeted, 'soundName':soundName});
         soundsOnTracks = sortSoundsByStartPos();
-    }else{
-        alert("Impossible de superposer 2 sons sur la même piste.")
     }
 
 }
@@ -218,10 +216,17 @@ function soundCanBePlacedOnTrack(startPos, endPos, trackTargeted) {
 
             if (!(min.end < max.start)){
                 test = false;
+                alert("Impossible de superposer 2 sons sur la même piste.")
                 break;
             }
         }
     }
+
+    if(endPos >360){
+        alert("Impossible le son est trop long.")
+        test = false;
+    }
+
     return test
 }
 
