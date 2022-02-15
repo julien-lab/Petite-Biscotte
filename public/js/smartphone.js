@@ -9,6 +9,10 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const startRecord = document.getElementById('startRecord');
+const next = document.querySelector('.next');
+const prev = document.querySelector('.prev');
+const track = document.querySelector('.soundsss');
+const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
 let base64Audio;
 let listObject;
 let $ = jQuery;
@@ -18,6 +22,14 @@ let isPlaying = false;
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
  });
+
+next.addEventListener('click', () => {
+  track.style.transform = `translateX(-${carouselWidth}px)`;
+});
+
+prev.addEventListener('click', () => {
+  track.style.transform = `translateX(-${0}px)`;
+});
 
 
 
