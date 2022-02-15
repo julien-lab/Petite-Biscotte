@@ -86,6 +86,10 @@ io.on('connection', socket => {
   socket.on('logo', (logo) => {
     io.to("connectedTable").emit('newLogo', logo)
   })
+
+  socket.on('talkToConnectedTable', (msg) => {
+    io.to("smartphone").emit('talkToConnectedTable', msg);
+  })
 });
 
 
@@ -163,6 +167,10 @@ io2.on('connection', socket => {
 
   socket.on('logo', (logo) => {
     io2.to("connectedTable").emit('newLogo', logo)
+  })
+
+  socket.on('talkToConnectedTable', (msg) => {
+    io2.to("smartphone").emit('talkToConnectedTable', msg);
   })
 });
 

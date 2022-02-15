@@ -42,3 +42,7 @@ socket.on('newLogo', (logo) => {
     setLogo(logo)
     console.log(logo);
 });
+
+let msg = "Bonjour ceci vient de la table"
+
+socket.emit('talkToConnectedTable', msg)

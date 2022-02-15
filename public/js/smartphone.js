@@ -18,6 +18,8 @@ const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
  });
 
+
+
 const socket = io();
 
 // Join chatroom
@@ -27,6 +29,10 @@ socket.emit('joinRoom', { username, room });
 socket.on('roomUsers', ({ room, users }) => {
   outputRoomName(room,roomName);
   outputUsers(users,userList);
+});
+
+socket.on('talkToConnectedTable', (msg) => {
+  console.log(msg);
 });
 
 // Message from server
