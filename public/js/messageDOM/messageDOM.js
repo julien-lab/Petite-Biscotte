@@ -125,6 +125,7 @@ export const addAudioURLToConnectedTable = function(audioURL){
     let audioID = audioURL;
     let buttonID = 'button' + audioURL;
     audio.id = audioURL;
+    card_container.title = audioID;
     audio.src = audioURL;
     audio.onended = function(){
         const bouton = document.getElementById(buttonID);
