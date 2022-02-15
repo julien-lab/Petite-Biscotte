@@ -311,7 +311,7 @@ async function playComposition() {
         await sleep(55,55556);
     }
     canPlay = true;
-    socket.emit('talkToConnectedTable', "change isPlaying")
+    // socket.emit('talkToSmartphone', "change isPlaying")
 }
 
 function sleep(ms) {

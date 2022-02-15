@@ -87,8 +87,8 @@ io.on('connection', socket => {
     io.to("connectedTable").emit('newLogo', logo)
   })
 
-  socket.on('talkToConnectedTable', (msg) => {
-    io.to("smartphone").emit('talkToConnectedTable', msg);
+  socket.on('talkToSmartphone', (msg) => {
+    io.to("smartphone").emit('talkToSmartphone', msg);
   })
 });
 

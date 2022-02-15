@@ -34,7 +34,7 @@ socket.on('roomUsers', ({ room, users }) => {
   outputUsers(users,userList);
 });
 
-socket.on('talkToConnectedTable', (msg) => {
+socket.on('talkToSmartphone', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
     document.getElementById("chat").style.display = "none"
