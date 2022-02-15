@@ -476,6 +476,18 @@ a {
 	padding-top: 17px;
 }
 
+#chat{
+	position: absolute;
+	margin-top: 0vw;
+	margin-left: 0vw;
+	height: 30vw;
+}
+#id{
+	position: absolute;
+	margin-top: 0vw;
+	margin-left: 0vw;
+}
+
 
 .Track1 {
 	width: 170vmin;

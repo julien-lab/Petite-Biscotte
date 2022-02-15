@@ -1,13 +1,8 @@
     import {
     addAudioURLToConnectedTable,
-    convertURIToBinary,
     createURLFromBase64Audio,
-    outputAudio
 } from './messageDOM/messageDOM.js'
 import {setLogo} from './messageDOM/messageDOM.js'
-import {outputMessage} from './messageDOM/messageDOM.js'
-import {outputRoomName} from './messageDOM/messageDOM.js'
-import {outputUsers} from './messageDOM/messageDOM.js'
 
 const next = document.querySelector('.next');
 const prev = document.querySelector('.prev');
@@ -17,6 +12,7 @@ let $ = jQuery;
 const room = 'connectedTable';
 const username = 'connectedTable'
 const socket = io();
+const playButton = document.getElementById('btn_listenAll');
 // const Yeah = document.getElementById('Yeah');
 
 next.addEventListener('click', () => {
@@ -41,4 +37,10 @@ socket.on('newAudioData', (base64Audio) => {
 socket.on('newLogo', (logo) => {
     setLogo(logo)
     console.log(logo);
+});
+
+playButton.addEventListener('click',(e) => {
+    let msg = "change isPlaying"
+
+    socket.emit('talkToConnectedTable', msg)
 });
