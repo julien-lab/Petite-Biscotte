@@ -47,12 +47,12 @@ socket.on('roomUsers', ({ room, users }) => {
 socket.on('talkToConnectedTable', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
-    document.getElementById("chat").style.visibility = "hidden"
-    document.getElementById("playing").style.visibility = "visible"
+    document.getElementById("chat").style.display = "none"
+    document.getElementById("playing").style.display = "block"
   }
   else{
-    document.getElementById("chat").style.visibility = "visible"
-    document.getElementById("playing").style.visibility = "hidden"
+    document.getElementById("chat").style.display = "block"
+    document.getElementById("playing").style.display = "none"
   }
   console.log(isPlaying)
 });
