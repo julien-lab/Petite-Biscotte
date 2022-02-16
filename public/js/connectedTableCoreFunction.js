@@ -77,7 +77,11 @@ function previewSoundOnTrack(event){
         var endPos = Math.round(startPos+soundLength);
 
         var soundsOnTrackTemp = [...soundsOnTracks];
-        soundsOnTrackTemp.push({'startPos':startPos,'endPos':endPos,'color': '#FFA85C', 'track':trackTargeted, 'soundName':soundName});
+        var color = '#FFA85C';
+        if(!soundCanBePlacedOnTrack(startPos, endPos, trackTargeted)){
+            color = 'red';
+        }
+        soundsOnTrackTemp.push({'startPos':startPos,'endPos':endPos,'color': color, 'track':trackTargeted, 'soundName':soundName});
         soundsOnTrackTemp = sortSoundsByStartPos(soundsOnTrackTemp);
         var conicGradient = writeConicGradientString(trackTargeted, soundsOnTrackTemp);
         var trackDiv = document.getElementById(trackTargeted);
@@ -254,6 +258,9 @@ function addSound(startPos, endPos, trackTargeted, soundName){
 
         soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':color, 'track':trackTargeted, 'soundName':soundName});
         soundsOnTracks = sortSoundsByStartPos(soundsOnTracks);
+    }else{
+        var audio = document.getElementById("error404");
+        audio.play();
     }
 
 }
@@ -271,14 +278,14 @@ function soundCanBePlacedOnTrack(startPos, endPos, trackTargeted) {
 
             if (!(min.end < max.start)){
                 test = false;
-                alert("Impossible de superposer 2 sons sur la même piste.")
+                //alert("Impossible de superposer 2 sons sur la même piste.")
                 break;
             }
         }
     }
 
     if(endPos >360){
-        alert("Impossible le son est trop long.")
+        //alert("Impossible le son est trop long.")
         test = false;
     }
 
