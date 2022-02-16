@@ -23,16 +23,6 @@ const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
  });
 
-next.addEventListener('click', () => {
-  track.style.transform = `translateX(-${carouselWidth}px)`;
-});
-
-prev.addEventListener('click', () => {
-  track.style.transform = `translateX(-${0}px)`;
-});
-
-
-
 const socket = io();
 
 // Join chatroom
@@ -44,15 +34,16 @@ socket.on('roomUsers', ({ room, users }) => {
   outputUsers(users,userList);
 });
 
-socket.on('talkToConnectedTable', (msg) => {
+socket.on('talkToSmartphone', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
-    document.getElementById("chat").style.visibility = "hidden"
-    document.getElementById("playing").style.visibility = "visible"
+    document.getElementById("chat").style.display = "none"
+    document.getElementById("playing").style.display = "block"
+    // document.getElementById("playing").style = "display: flex;flex-direction: column"
   }
   else{
-    document.getElementById("chat").style.visibility = "visible"
-    document.getElementById("playing").style.visibility = "hidden"
+    document.getElementById("chat").style.display = "block"
+    document.getElementById("playing").style.display = "none"
   }
   console.log(isPlaying)
 });
@@ -190,7 +181,7 @@ $(document).ready(function () {
                     .createObjectURL(blob);
 
             // Prepare the playback
-            let audioObject = $('<audio controls></audio>')
+            let audioObject = $('<audio controls ></audio>')
                     .attr('src', url);
 
             // Create send audio button

@@ -42,5 +42,5 @@ socket.on('newLogo', (logo) => {
 playButton.addEventListener('click',(e) => {
     let msg = "change isPlaying"
 
-    socket.emit('talkToConnectedTable', msg)
+    socket.emit('talkToSmartphone', msg)
 });
