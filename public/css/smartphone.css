@@ -515,7 +515,7 @@ body {
 
 #volume{
     transform: rotate(-90deg);
-    height: 10vw;
+    height: 20vw;
     width: 8vw;
     z-index: -1;
 }
