@@ -507,3 +507,10 @@ body {
     align-items: center;
     padding-top: 1500px;
 }
+
+#volume{
+    transform: rotate(-90deg);
+    height: 10vw;
+    width: 8vw;
+    z-index: -1;
+}

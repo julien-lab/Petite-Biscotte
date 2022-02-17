@@ -34,11 +34,14 @@
     ></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/player.js"></script>
+    <script src="js/smartphoneCoreFunctions.js"></script>
     <title>Petite Biscotte</title>
 </head>
 <body>
 
     <div class="chat-container" id="chat">
+        <div class="onglet">Sons</div>
+        <div class="onglet">Table de mixage</div>
         <header class="chat-header">
             <h1><i class="fas fa-smile"></i>Petite Biscotte</h1>
             <a id="leave-btn" class="btn">Leave Room</a>
@@ -101,7 +104,6 @@
             <audio id="trompette" onended="playAnimation('playPauseBtn2')">
                 <source src="sons/trompette.mp3" type="audio/mpeg">
             </audio>
-
             <div class="carousel-container">
                 <div class="carousel-inner" >
                     <div class="soundsss">
@@ -270,6 +272,7 @@
                     </div>
                 </div>
             </div>
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" onchange="changingVolume()"/>
         </div>
     </div>
 

@@ -5,6 +5,12 @@ var lastTrack = "Track1";
 
 const socket = io();
 
+let volume = 0.5;
+
+function setVolume(newVolume){
+    volume = newVolume
+}
+
 
 function computeAngle(pX, pY){
     centerX = window.innerWidth/2;
@@ -39,6 +45,7 @@ function playSongWhenTouchOnTrack(event) {
             if(sound.track === trackTargeted){
                 if(sound.startPos <= touchPos && touchPos <= sound.endPos ){
                     const audio = document.getElementById(sound.soundName);
+                    audio.volume = volume
                     audio.play();
                     break;
                 }
@@ -311,6 +318,7 @@ async function playComposition() {
             var sound = soundsOnTracks[j];
             if(sound.startPos === i){
                 var audio = document.getElementById(sound.soundName);
+                audio.volume = volume
                 audio.play();
             }
         }

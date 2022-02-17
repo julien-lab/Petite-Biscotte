@@ -39,6 +39,10 @@ socket.on('newLogo', (logo) => {
     console.log(logo);
 });
 
+socket.on('newVolume', (volume) => {
+    setVolume(volume)
+});
+
 playButton.addEventListener('click',(e) => {
     let msg = "change isPlaying"
 

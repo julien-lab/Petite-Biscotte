@@ -87,6 +87,10 @@ io.on('connection', socket => {
     io.to("connectedTable").emit('newLogo', logo)
   })
 
+  socket.on('changingVolume', (volume) => {
+    io.to("connectedTable").emit('newVolume', volume)
+  })
+
   socket.on('talkToSmartphone', (msg) => {
     io.to("smartphone").emit('talkToSmartphone', msg);
   })
