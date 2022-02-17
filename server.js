@@ -27,7 +27,7 @@ const io = socketio(server);
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName = 'Petite Biscotte Bot';
+const botName = 'Petite Biscotte Bot ';
 
 // Run when client connects
 io.on('connection', socket => {
@@ -113,7 +113,7 @@ const io2 = socketio(serverUnsafe);
 // Set static folder
 app2.use(express.static(path.join(__dirname, 'public')));
 
-const botName2 = 'Petite Biscotte Bot';
+const botName2 = 'Petite Biscotte Bot ';
 
 // Run when client connects
 io2.on('connection', socket => {

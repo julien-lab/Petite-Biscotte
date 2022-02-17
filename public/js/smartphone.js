@@ -18,13 +18,10 @@ let listObject;
 let $ = jQuery;
 let isPlaying = false;
 
-// Get username and room from URL
-/*const { username, room } = Qs.parse(location.search, {
-    ignoreQueryPrefix: true,
- });*/
 
 const room = 'smartphone';
 const username = 'smartphone'
+
 
 const socket = io();
 
