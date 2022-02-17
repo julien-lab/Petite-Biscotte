@@ -75,11 +75,15 @@
               <button class="btn_listen" ontouchend="touchend(event)" name="beatbox2" id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;</button>
             </div>
             <div class="settings">
-              <button class="btn_settings" id ="btn_settings1" onClick="addFilter('beatbox2', 'btn_settings1' , 'circle1' , 'playPauseBtn1')">
+              <button class="btn_settings" id ="btn_settings1" onClick="addFilter('beatbox2', 'btn_settings1' , 'circle1' , 'playPauseBtn1', 'effet1')">
                 <i class="material-icons">
                   settings
                 </i>
               </button>
+              <div>
+                <input type="range" id="effet1" name="effet1"
+                       min="-1000" max="1000">
+              </div>
             </div>
             <div class="info">&#9708;</div>
           </div>
