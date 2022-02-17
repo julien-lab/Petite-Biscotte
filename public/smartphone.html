@@ -73,6 +73,7 @@
     </div>
 
     <div id="playing" style="display: none">
+        <label for="volume"></label><input id="volume" type="range" min="0" max="100" step="1" value="50"/>
         <div id="importedAudio">
             <audio id="Boum" onended="playAnimation('playPauseBtn9')">
                 <source src="sons/Boum.mp3" type="audio/mpeg">
@@ -177,96 +178,8 @@
                                 <div class="info">&#9635;</div>
                             </div>
                         </div>
-                        <div class="card-container" >
-                            <div class="card">
-                                <div class="circle" id="circle5">
-                                    <button class="btn_listen" name="pouet2" id="playPauseBtn5"
-                                            onClick="playPause('pouet2','playPauseBtn5')">&#9658
-                                    </button>
-                                </div>
-                                <div class="settings">
-                                    <button class="btn_settings" id="btn_settings5"
-                                            onClick="addFilter('pouet2', 'btn_settings5' , 'circle5' , 'playPauseBtn5')">
-                                        <i class="material-icons">
-                                            settings
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="info">&#11055;</div>
-                            </div>
-                        </div>
-                        <div class="card-container" >
-                            <div class="card">
-                                <div class="circle" id="circle6">
-                                    <button class="btn_listen" name="Toc" id="playPauseBtn6"
-                                            onClick="playPause('Toc','playPauseBtn6')">&#9658
-                                    </button>
-                                </div>
-                                <div class="settings">
-                                    <button class="btn_settings" id="btn_settings6"
-                                            onClick="addFilter('Toc', 'btn_settings6' , 'circle6' , 'playPauseBtn6')">
-                                        <i class="material-icons">
-                                            settings
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="info">&#9681;</div>
-                            </div>
-                        </div>
-                        <div class="card-container">
-                            <div class="card">
-                                <div class="circle" id="circle7">
-                                    <button class="btn_listen" name="Flip" id="playPauseBtn7"
-                                            onClick="playPause('Flip','playPauseBtn7')">&#9658
-                                    </button>
-                                </div>
-                                <div class="settings">
-                                    <button class="btn_settings" id="btn_settings7"
-                                            onClick="addFilter('Flip', 'btn_settings7' , 'circle7' , 'playPauseBtn7')">
-                                        <i class="material-icons">
-                                            settings
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="info">&#9707;</div>
-                            </div>
-                        </div>
-                        <div class="card-container">
-                            <div class="card">
-                                <div class="circle" id="circle8">
-                                    <button class="btn_listen" name="Badada" id="playPauseBtn8"
-                                            onClick="playPause('Badada','playPauseBtn8')">&#9658
-                                    </button>
-                                </div>
-                                <div class="settings">
-                                    <button class="btn_settings" id="btn_settings8"
-                                            onClick="addFilter('Badada', 'btn_settings8' , 'circle8' , 'playPauseBtn8')">
-                                        <i class="material-icons">
-                                            settings
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="info">&#9714;</div>
-                            </div>
-                        </div>
-                        <div class="card-container">
-                            <div class="card">
-                                <div class="circle" id="circle9">
-                                    <button class="btn_listen" name="Boum" id="playPauseBtn9"
-                                            onClick="playPause('Boum','playPauseBtn9')">&#9658
-                                    </button>
-                                </div>
-                                <div class="settings">
-                                    <button class="btn_settings" id="btn_settings9"
-                                            onClick="addFilter('Boum', 'btn_settings9' , 'circle9' , 'playPauseBtn9')">
-                                        <i class="material-icons">
-                                            settings
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="info">&#9672;</div>
-                            </div>
-                        </div>
+
+
                     </div>
                 </div>
             </div>
