@@ -8,6 +8,11 @@
     min-height: 200px;
     position: relative;
 }
+
+.carousel-inner{
+    overflow-x:  scroll;
+}
+
 .btn_settings{
     border: none;
     background-color: white;
