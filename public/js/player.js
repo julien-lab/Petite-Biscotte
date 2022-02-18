@@ -21,7 +21,7 @@ function playPause(audioName,btn){
 }
 
 const MEDIA_ELEMENT_NODES = new WeakMap();
-let context = []
+let context = [];
 let allAudioEffect;
 
 function addFilter(audioName,btn , circle, boutoncolor, effet){
@@ -40,7 +40,7 @@ function addFilter(audioName,btn , circle, boutoncolor, effet){
 
     let filter;
 
-    console.log(allAudioEffect)
+    console.log(allAudioEffect);
     if (allAudioEffect === undefined){
         filter = context.createBiquadFilter();
         allAudioEffect = [[effet, filter]];

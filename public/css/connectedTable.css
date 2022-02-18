@@ -10,7 +10,7 @@
 }
 
 .carousel-inner{
-    overflow-x:  scroll;
+    overflow-x:  auto;
 }
 
 .btn_settings{
