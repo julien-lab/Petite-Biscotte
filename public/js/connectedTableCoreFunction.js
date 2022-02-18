@@ -27,8 +27,8 @@ function computeAngle(pX, pY){
 }
 
 function playSongWhenTouchOnTrack(event) {
-    var x = event.clientX;
-    var y = event.clientY;
+    const x = event.changedTouches[0].pageX;
+    const y = event.changedTouches[0].pageY;
 
     const trackTargeted = document.elementFromPoint(x, y).id;
 
@@ -54,9 +54,9 @@ function playSongWhenTouchOnTrack(event) {
     }
 }
 
-document.addEventListener("touchstart", playSongWhenTouchOnTrack);
+//document.addEventListener("touchstart", playSongWhenTouchOnTrack);
 //document.addEventListener("click", doubletap);
-document.addEventListener("touchmove", previewSoundOnTrack);
+//document.addEventListener("touchmove", previewSoundOnTrack);
 
 
 function previewSoundOnTrack(event){
