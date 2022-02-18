@@ -5,13 +5,11 @@ function playAnimation(btn){
 
 let count = 0;
 function playPause(audioName,btn){
-    console.log("play")
     const audio = document.getElementById(audioName);
     const bouton = document.getElementById(btn);
     if(count === 0){
         count = 1;
         bouton.innerHTML = "&#9208;"
-        console.log(audio)
         audio.play();
         audio.onended
 

@@ -1,5 +1,5 @@
 const socket = io()
-
+let cpt = 0;
 function changingVolume(){
     let value = document.getElementById("volume").value
     socket.emit("changingVolume",value)
@@ -37,11 +37,12 @@ function addSound(audioURL){
 
     let name = document.createElement('div')
     name.classList.add("info")
-    name.innerHTML = "x"
+    name.innerHTML = cpt.toString()
+    cpt++
 
     circle.appendChild(button)
+    circle.appendChild(name)
     card.appendChild(circle)
-    card.appendChild(name)
     card_container.appendChild(card)
     newTrack.appendChild(card_container);
 }
