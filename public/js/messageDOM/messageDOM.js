@@ -149,8 +149,18 @@ export const addAudioURLToConnectedTable = function(audioURL){
     name.textContent = logo
 
     circle.appendChild(button)
+    circle.appendChild(name)
+
+    let setting = document.createElement("div")
+    setting.classList.add("settings")
+    let divInput = document.createElement("div")
+    let input = document.createElement("input")
+    input.type = "range"
+    divInput.appendChild(input)
+    setting.appendChild(divInput)
+
     card.appendChild(circle)
-    card.appendChild(name)
+    card.appendChild(setting)
     card_container.appendChild(card)
     newTrack.appendChild(card_container);
 }
