@@ -78,7 +78,6 @@ function previewSoundOnTrack(event){
             startPos = 180 + (180-startPos);
         }
         const soundName = event.target.name;
-        console.log(soundName);
         var soundPercentage = (document.getElementById(soundName).duration*100)/20;
         var soundLength = (360*soundPercentage)/100;
         var endPos = Math.round(startPos+soundLength);
@@ -115,7 +114,7 @@ function doubletap(event) {
     var now = new Date().getTime();
     var timesince = now - mylatesttap;
     if((timesince < 600) && (timesince > 0)){
-        console.log("DOUBLE CLICK")
+        console.log("DOUBLE CLICK");
 
         if(trackTargeted.slice(0, 5) === "Track" ){
             var touchPos = computeAngle(x , y);
@@ -139,7 +138,7 @@ function doubletap(event) {
         }
 
     }else{
-        console.log("PROUT")
+        console.log("Bug")
     }
 
     mylatesttap = new Date().getTime();
@@ -159,7 +158,6 @@ function startDrag(event){
 }
 
 function touchend(event) {
-    console.log("touchend");
     clearTrackFromPreview(lastTrack);
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
@@ -176,8 +174,8 @@ function touchend(event) {
 
         var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
         var trackDiv = document.getElementById(trackTargeted);
-        console.log(trackDiv)
-        console.log(conicGradient)
+        console.log(trackDiv);
+        console.log(conicGradient);
         trackDiv.setAttribute("style", "background:" + conicGradient);
     }
 
@@ -208,15 +206,12 @@ function onDrop(event) {
         startPos = 180 + (180-startPos);
     }
 
-    console.log(startPos)
     console.log(document.getElementById(soundName).duration);
-    console.log(trackTargeted)
-    console.log(soundName)
+    console.log(trackTargeted);
 
     var conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
     var trackDiv = document.getElementById(trackTargeted);
-    console.log(trackDiv)
-    console.log(conicGradient)
+    console.log(conicGradient);
     trackDiv.setAttribute("style", "background:" + conicGradient);
 }
 
@@ -310,7 +305,6 @@ let canPlay = true;
 
 async function playComposition() {
     if (!canPlay) return;
-    console.log("play composition")
     canPlay = false;
     for (var i = 0; i < 360; i++) {
 
@@ -318,11 +312,10 @@ async function playComposition() {
             var sound = soundsOnTracks[j];
             if(sound.startPos === i){
                 var audio = document.getElementById(sound.soundName);
-                audio.volume = volume
+                audio.volume = volume;
                 audio.play();
             }
         }
-        console.log(i)
         await sleep(55,55556);
     }
     canPlay = true;

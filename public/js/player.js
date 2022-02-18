@@ -55,7 +55,6 @@ function addFilter(audioName,btn , circle, boutoncolor, effet){
         filter.type='bandpass';
         filter.detune.value=parseInt(effect.value);
     } catch (error) {
-        console.log("Nous sommes sur la bonne voie");
         filter.detune.value = parseInt(effect.value)
     }
 

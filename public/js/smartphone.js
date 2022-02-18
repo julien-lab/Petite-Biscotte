@@ -37,15 +37,14 @@ socket.on('roomUsers', ({ room, users }) => {
 socket.on('talkToSmartphone', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
-    document.getElementById("chat").style.display = "none"
-    document.getElementById("playing").style.display = "block"
+    document.getElementById("chat").style.display = "none";
+    document.getElementById("playing").style.display = "block";
     // document.getElementById("playing").style = "display: flex;flex-direction: column"
   }
   else{
-    document.getElementById("chat").style.display = "block"
-    document.getElementById("playing").style.display = "none"
+    document.getElementById("chat").style.display = "block";
+    document.getElementById("playing").style.display = "none";
   }
-  console.log(isPlaying)
 });
 
 // Message from server

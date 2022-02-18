@@ -19,12 +19,10 @@ socket.emit('joinRoom', { username, room });
 socket.on('newAudioData', (base64Audio) => {
     let url = createURLFromBase64Audio(base64Audio);
     addAudioURLToConnectedTable(url);
-    console.log(url);
 });
 
 socket.on('newLogo', (logo) => {
-    setLogo(logo)
-    console.log(logo);
+    setLogo(logo);
 });
 
 socket.on('newVolume', (volume) => {
@@ -32,7 +30,7 @@ socket.on('newVolume', (volume) => {
 });
 
 playButton.addEventListener('click',(e) => {
-    let msg = "change isPlaying"
+    let msg = "change isPlaying";
 
     socket.emit('talkToSmartphone', msg)
 });
