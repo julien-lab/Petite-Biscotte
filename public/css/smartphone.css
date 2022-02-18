@@ -37,8 +37,9 @@
     align-items: center;
     max-height: 650px;
     overflow-y: auto;
-    /*padding-top: 1500px;*/
+    overflow-x: hidden;
 }
+
 .carousel-container .card-container {
     width: 150px;
     flex-shrink: 0;
