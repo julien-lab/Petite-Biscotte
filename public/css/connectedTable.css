@@ -59,17 +59,34 @@
 }
 
 #btn_listenAll{
+     position: absolute;
+     font-size: 6vw;
+     top: 2vw;
+     left: 4vw;
+    -webkit-transform:rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+ }
+
+#btn_listenAll2{
     position: absolute;
-    font-size: 5vw;
-    top: 2vw;
-    left: 2vw;
+    font-size: 6vw;
+    top: 87vmin;
+    left: 94vw;
 }
 
 #trash{
     position: absolute;
     font-size: 5vw;
     top: 2vw;
-    left: 90vw;
+    left: 92vw;
+    -webkit-transform:rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 .buttonImages{
@@ -77,21 +94,26 @@
     width: 5vw;
 }
 
-#back{
-
+#trash2{
     position: absolute;
     font-size: 5vw;
-    top: 80vmin;
-    left: 2vw;
+    top: 85vmin;
+    left: 4vw;
+
 }
 
 #trash:active{
     background-color: lightgray;
 }
-#back:active{
+
+#trash2:active{
     background-color: lightgray;
 }
+
 #btn_listenAll:active{
+    background-color: lightgray;
+}
+#btn_listenAll2:active{
     background-color: lightgray;
 }
 
