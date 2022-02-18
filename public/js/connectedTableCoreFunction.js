@@ -337,10 +337,6 @@ function allowDrop(event) {
     event.preventDefault();
 }
 
-function toMenu(){
-    window.location = '../index.html';
-}
-
 function clearTracks(){
     soundsOnTracks= [];
     document.getElementById("Track1").style.background = "lightgrey"
