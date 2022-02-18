@@ -6,7 +6,6 @@ function changingVolume(){
 }
 
 function addSound(audioURL){
-    console.log("add sound")
     let card_container = document.createElement('div')
     card_container.classList.add("card-container")
     let card = document.createElement('div')
@@ -17,7 +16,6 @@ function addSound(audioURL){
 
     const importedAudioDiv = document.getElementById('importedAudio');
     const audio = document.createElement('audio');
-    audio.classList.add('message');
     let audioID = audioURL;
     let buttonID = 'button' + audioURL;
     audio.id = audioURL;
@@ -39,12 +37,12 @@ function addSound(audioURL){
 
     let name = document.createElement('div')
     name.classList.add("info")
+    name.innerHTML = "x"
 
     circle.appendChild(button)
     card.appendChild(circle)
     card.appendChild(name)
     card_container.appendChild(card)
     newTrack.appendChild(card_container);
-    console.log(newTrack)
 }
 

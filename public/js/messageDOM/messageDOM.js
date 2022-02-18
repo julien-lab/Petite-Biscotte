@@ -140,6 +140,7 @@ export const addAudioURLToConnectedTable = function(audioURL){
     button.onclick = function(){
         playPause(audioID,buttonID);
     }
+    button.addEventListener("touchmove",previewSoundOnTrack)
     button.name = audioID;
     button.innerHTML = '&#9658';
 

@@ -361,6 +361,18 @@ a {
     margin-left: auto;
 }
 
+.circle_sent{
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: darkcyan;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 @media (max-width: 700px) {
     .chat-main {

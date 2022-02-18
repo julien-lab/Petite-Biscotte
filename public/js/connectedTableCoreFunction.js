@@ -60,8 +60,8 @@ document.addEventListener("touchmove", previewSoundOnTrack);
 
 
 function previewSoundOnTrack(event){
-    var x = event.clientX;
-    var y = event.clientY;
+    const x = event.changedTouches[0].pageX;
+    const y = event.changedTouches[0].pageY;
 
     const trackTargeted = document.elementFromPoint(x, y).id;
 
@@ -77,7 +77,7 @@ function previewSoundOnTrack(event){
         if(x < centerX){
             startPos = 180 + (180-startPos);
         }
-        const soundName = event.target.title;
+        const soundName = event.target.name;
         console.log(soundName);
         var soundPercentage = (document.getElementById(soundName).duration*100)/20;
         var soundLength = (360*soundPercentage)/100;
