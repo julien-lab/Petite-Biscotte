@@ -40,26 +40,26 @@
     /*padding-top: 1500px;*/
 }
 .carousel-container .card-container {
-    width: 256px;
+    width: 150px;
     flex-shrink: 0;
-    height: 250px;
+    height: 150px;
     padding-right: 15px;
     box-sizing: border-box;
+    align-items: center;
+    text-align: center;
 }
 
 .btn_listen {
-    margin-top: 65px;
-    margin-left: 30px;
-    font-size: 40px;
+    font-size: 25px;
     line-height: 60px;
-    min-width: 150px;
     text-align: center;
     cursor: pointer;
     background: coral;
     color: #fff;
     border-radius: 5px;
     border: 0;
-    height: 60px;
+    height: 40px;
+    width: 25px;
 }
 
 #btn_listenAll{
@@ -100,18 +100,16 @@
 }
 
 .btn_listen_sent {
-    margin-top: 65px;
-    margin-left: 30px;
-    font-size: 40px;
+    font-size: 25px;
     line-height: 60px;
-    min-width: 150px;
     text-align: center;
     cursor: pointer;
     background: darkcyan;
     color: #fff;
     border-radius: 5px;
     border: 0;
-    height: 60px;
+    height: 40px;
+    width: 25px;
 }
 
 .btn_listen:focus {
@@ -128,7 +126,8 @@
     height: 100%;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-color: transparent;
+    background-color: transparent;
 }
 
 .nav button {
@@ -151,12 +150,9 @@
 }
 
 .card .info {
-    background: #333;
+    margin-top: 25px;
     color: #fff;
-    text-align: center;
-    font-weight: bold;
-    padding: 13px;
-    box-sizing: border-box;
+    font-size: xx-large;
 }
 
 html, body {
@@ -350,8 +346,8 @@ a {
 }
 
 .circle {
-    width: 200px;
-    height: 200px;
+    width: 130px;
+    height: 130px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
@@ -359,11 +355,13 @@ a {
     display: block;
     margin-right: auto;
     margin-left: auto;
+    align-items: center;
+    text-align: center;
 }
 
 .circle_sent{
-    width: 200px;
-    height: 200px;
+    width: 130px;
+    height: 130px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
@@ -371,6 +369,8 @@ a {
     display: block;
     margin-right: auto;
     margin-left: auto;
+    align-items: center;
+    text-align: center;
 }
 
 
