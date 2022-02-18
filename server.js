@@ -27,7 +27,7 @@ const io = socketio(server);
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName = 'Petite Biscotte Bot';
+const botName = 'Petite Biscotte Bot ';
 
 // Run when client connects
 io.on('connection', socket => {
@@ -87,6 +87,10 @@ io.on('connection', socket => {
     io.to("connectedTable").emit('newLogo', logo)
   })
 
+  socket.on('changingVolume', (volume) => {
+    io.to("connectedTable").emit('newVolume', volume)
+  })
+
   socket.on('talkToSmartphone', (msg) => {
     io.to("smartphone").emit('talkToSmartphone', msg);
   })
@@ -109,7 +113,7 @@ const io2 = socketio(serverUnsafe);
 // Set static folder
 app2.use(express.static(path.join(__dirname, 'public')));
 
-const botName2 = 'Petite Biscotte Bot';
+const botName2 = 'Petite Biscotte Bot ';
 
 // Run when client connects
 io2.on('connection', socket => {

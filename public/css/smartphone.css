@@ -17,7 +17,7 @@
 }
 
 .carousel-container {
-    width: 1280px;
+    /*height: 1280px;*/
     margin: 50px auto;
     min-height: 200px;
     position: relative;
@@ -33,6 +33,11 @@
 .carousel-container .soundsss {
     display: flex;
     transition: transform 0.5s;
+    flex-direction: column;
+    align-items: center;
+    max-height: 650px;
+    overflow-y: auto;
+    /*padding-top: 1500px;*/
 }
 .carousel-container .card-container {
     width: 256px;
@@ -356,6 +361,18 @@ a {
     margin-left: auto;
 }
 
+.circle_sent{
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: darkcyan;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 @media (max-width: 700px) {
     .chat-main {
@@ -501,9 +518,24 @@ body {
     z-index: 10;
 }
 
-.soundsss {
-    display: flex;
-    flex-direction: column;
+#volume{
+    width: 100%;
+    position: relative;
+}
+
+#logoVolume{
+    width: 30px;
+    height: 30px;
+    position: center;
+}
+
+#centrer{
     align-items: center;
-    padding-top: 1500px;
+    text-align: center;
+}
+
+#carousels{
+    display: flex;
+    align-items:flex-start;
+    justify-content: space-evenly;
 }

@@ -1,4 +1,4 @@
-import {outputAudio} from './messageDOM/messageDOM.js'
+import {addAudioURLToConnectedTable, createURLFromBase64Audio, outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
 import {outputUsers} from './messageDOM/messageDOM.js'
@@ -18,10 +18,10 @@ let listObject;
 let $ = jQuery;
 let isPlaying = false;
 
-// Get username and room from URL
-const { username, room } = Qs.parse(location.search, {
-    ignoreQueryPrefix: true,
- });
+
+const room = 'smartphone';
+const username = 'smartphone'
+
 
 const socket = io();
 
@@ -67,6 +67,7 @@ function listenSendButton() {
   sendVocalForm.addEventListener('submit', (e) => {
     e.preventDefault();
     socket.emit('chatMessage',base64Audio);
+    addSound(createURLFromBase64Audio(base64Audio))
     base64Audio = null;
     // remove the new formed html
     let div = document.getElementById('holderObject');

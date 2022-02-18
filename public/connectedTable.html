@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
@@ -78,7 +78,7 @@
         <div  class="card-container" title="beatbox2" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div  class="card">
             <div class="circle" id="circle1">
-              <button class="btn_listen" ontouchend="touchend(event)" name="beatbox2" id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="beatbox2" id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings1" onClick="addFilter('beatbox2', 'btn_settings1' , 'circle1' , 'playPauseBtn1')">
@@ -93,7 +93,7 @@
         <div class="card-container" title="trompette" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle2">
-              <button class="btn_listen" ontouchend="touchend(event)" name="trompette" id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="trompette" id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings2" onClick="addFilter('trompette', 'btn_settings2' , 'circle2' , 'playPauseBtn2')">
@@ -108,7 +108,7 @@
         <div class="card-container" title="beatbox1" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle3">
-              <button class="btn_listen" ontouchend="touchend(event)" name="beatbox1" id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="beatbox1" id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings3" onClick="addFilter('beatbox1', 'btn_settings3' , 'circle3' , 'playPauseBtn3')">
@@ -123,7 +123,7 @@
         <div class="card-container" title="pouet" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle4">
-              <button class="btn_listen" ontouchend="touchend(event)" name="pouet" id="playPauseBtn4" onClick="playPause('pouet','playPauseBtn4')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="pouet" id="playPauseBtn4" onClick="playPause('pouet','playPauseBtn4')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings4" onClick="addFilter('pouet', 'btn_settings4' , 'circle4' , 'playPauseBtn4')">
@@ -153,7 +153,7 @@
         <div class="card-container" title="Toc" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle6">
-              <button class="btn_listen" ontouchend="touchend(event)" name="Toc" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="Toc" id="playPauseBtn6" onClick="playPause('Toc','playPauseBtn6')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings6" onClick="addFilter('Toc', 'btn_settings6' , 'circle6' , 'playPauseBtn6')">
@@ -168,7 +168,7 @@
         <div class="card-container" title="Flip" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle7">
-              <button class="btn_listen" ontouchend="touchend(event)" name="Flip"  id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="Flip"  id="playPauseBtn7" onClick="playPause('Flip','playPauseBtn7')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings7" onClick="addFilter('Flip', 'btn_settings7' , 'circle7' , 'playPauseBtn7')">
@@ -183,7 +183,7 @@
         <div class="card-container" title="Badada" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle8">
-              <button class="btn_listen" ontouchend="touchend(event)" name="Badada" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="Badada" id="playPauseBtn8" onClick="playPause('Badada','playPauseBtn8')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings8" onClick="addFilter('Badada', 'btn_settings8' , 'circle8' , 'playPauseBtn8')">
@@ -198,7 +198,7 @@
         <div class="card-container" title="Boum" draggable="true" ondrag="previewSoundOnTrack(event)" ondragstart="startDrag(event)" ondragend="clearTrackFromPreview(lastTrack)">
           <div class="card">
             <div class="circle" id="circle9">
-              <button class="btn_listen" ontouchend="touchend(event)" name="Boum" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
+              <button class="btn_listen" ontouchend="touchend(event)" ontouchmove="previewSoundOnTrack(event)" name="Boum" id="playPauseBtn9" onClick="playPause('Boum','playPauseBtn9')">&#9658</button>
             </div>
             <div class="settings">
               <button class="btn_settings" id ="btn_settings9" onClick="addFilter('Boum', 'btn_settings9' , 'circle9' , 'playPauseBtn9')">

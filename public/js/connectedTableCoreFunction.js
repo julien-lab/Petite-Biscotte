@@ -5,6 +5,12 @@ var lastTrack = "Track1";
 
 const socket = io();
 
+let volume = 0.5;
+
+function setVolume(newVolume){
+    volume = newVolume
+}
+
 
 function computeAngle(pX, pY){
     centerX = window.innerWidth/2;
@@ -39,6 +45,7 @@ function playSongWhenTouchOnTrack(event) {
             if(sound.track === trackTargeted){
                 if(sound.startPos <= touchPos && touchPos <= sound.endPos ){
                     const audio = document.getElementById(sound.soundName);
+                    audio.volume = volume
                     audio.play();
                     break;
                 }
@@ -53,8 +60,8 @@ document.addEventListener("touchmove", previewSoundOnTrack);
 
 
 function previewSoundOnTrack(event){
-    var x = event.clientX;
-    var y = event.clientY;
+    const x = event.changedTouches[0].pageX;
+    const y = event.changedTouches[0].pageY;
 
     const trackTargeted = document.elementFromPoint(x, y).id;
 
@@ -70,7 +77,7 @@ function previewSoundOnTrack(event){
         if(x < centerX){
             startPos = 180 + (180-startPos);
         }
-        const soundName = event.target.title;
+        const soundName = event.target.name;
         console.log(soundName);
         var soundPercentage = (document.getElementById(soundName).duration*100)/20;
         var soundLength = (360*soundPercentage)/100;
@@ -311,6 +318,7 @@ async function playComposition() {
             var sound = soundsOnTracks[j];
             if(sound.startPos === i){
                 var audio = document.getElementById(sound.soundName);
+                audio.volume = volume
                 audio.play();
             }
         }
@@ -318,7 +326,7 @@ async function playComposition() {
         await sleep(55,55556);
     }
     canPlay = true;
-    // socket.emit('talkToSmartphone', "change isPlaying")
+    socket.emit('talkToSmartphone', "change isPlaying")
 }
 
 function sleep(ms) {

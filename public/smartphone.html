@@ -34,81 +34,85 @@
     ></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/player.js"></script>
+    <script src="js/smartphoneCoreFunctions.js"></script>
     <title>Petite Biscotte</title>
 </head>
 <body>
 
-    <div class="chat-container" id="chat">
-        <header class="chat-header">
-            <h1><i class="fas fa-smile"></i>Petite Biscotte</h1>
-            <a id="leave-btn" class="btn">Leave Room</a>
-        </header>
-        <main class="chat-main">
-            <div class="chat-sidebar">
-                <h3><i class="fas fa-comments"></i> Room Name:</h3>
-                <h2 id="room-name"></h2>
-                <h3><i class="fas fa-users"></i> Users</h3>
-                <ul id="users"></ul>
-            </div>
-            <div class="chat-messages"></div>
-        </main>
-        <div class="chat-form-container">
-            <form id="chat-form">
-                <input
-                        id="msg"
-                        type="text"
-                        placeholder="Enter Message"
-                        required
-                        autocomplete="off"
-                />
-                <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
-            </form>
+<div class="chat-container" id="chat">
+    <header class="chat-header">
+        <h1><i class="fas fa-smile"></i>Petite Biscotte</h1>
+        <a id="leave-btn" class="btn">Leave Room</a>
+    </header>
+    <main class="chat-main">
+        <div class="chat-sidebar">
+            <h3><i class="fas fa-comments"></i> Room Name:</h3>
+            <h2 id="room-name"></h2>
+            <h3><i class="fas fa-users"></i> Users</h3>
+            <ul id="users"></ul>
         </div>
-        <div class="holder">
-            <div data-role="controls">
-                <button id="startRecord"></button>
-            </div>
-            <div data-role="recordings" ></div>
-        </div>
+        <div class="chat-messages"></div>
+    </main>
+    <div class="chat-form-container">
+        <form id="chat-form">
+            <input
+                    id="msg"
+                    type="text"
+                    placeholder="Enter Message"
+                    required
+                    autocomplete="off"
+            />
+            <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
     </div>
+    <div class="holder">
+        <div data-role="controls">
+            <button id="startRecord"></button>
+        </div>
+        <div data-role="recordings" ></div>
+    </div>
+</div>
 
-    <div id="playing" style="display: none">
-        <div id="importedAudio">
-            <audio id="Boum" onended="playAnimation('playPauseBtn9')">
-                <source src="sons/Boum.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="pouet2" onended="playAnimation('playPauseBtn5')">
-                <source src="sons/pouet2.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="Badada" onended="playAnimation('playPauseBtn8')">
-                <source src="sons/Badada.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="Flip" onended="playAnimation('playPauseBtn7')">
-                <source src="sons/Flip.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="beatbox2" onended="playAnimation('playPauseBtn1')">
-                <source src="sons/beatbox2.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="pouet" onended="playAnimation('playPauseBtn4')">
-                <source src="sons/pouet.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="Toc" onended="playAnimation('playPauseBtn6')">
-                <source src="sons/Toc.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="beatbox1" onended="testff('playPauseBtn3')">
-                <source src="sons/beatbox1.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="trompette" onended="playAnimation('playPauseBtn2')">
-                <source src="sons/trompette.mp3" type="audio/mpeg">
-            </audio>
-
+<div id="playing" style="display: none">
+    <label for="volume"></label>
+    <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>
+    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" onchange="changingVolume()"/>
+    <div id="importedAudio">
+        <audio id="Boum" onended="playAnimation('playPauseBtn9')">
+            <source src="sons/Boum.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="pouet2" onended="playAnimation('playPauseBtn5')">
+            <source src="sons/pouet2.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="Badada" onended="playAnimation('playPauseBtn8')">
+            <source src="sons/Badada.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="Flip" onended="playAnimation('playPauseBtn7')">
+            <source src="sons/Flip.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="beatbox2" onended="playAnimation('playPauseBtn1')">
+            <source src="sons/beatbox2.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="pouet" onended="playAnimation('playPauseBtn4')">
+            <source src="sons/pouet.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="Toc" onended="playAnimation('playPauseBtn6')">
+            <source src="sons/Toc.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="beatbox1" onended="playAnimation('playPauseBtn3')">
+            <source src="sons/beatbox1.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="trompette" onended="playAnimation('playPauseBtn2')">
+            <source src="sons/trompette.mp3" type="audio/mpeg">
+        </audio>
+        <div id="carousels">
             <div class="carousel-container">
                 <div class="carousel-inner" >
                     <div class="soundsss">
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle1">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="beatbox2"
+                                    <button class="btn_listen" name="beatbox2"
                                             id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;
                                     </button>
                                 </div>
@@ -123,10 +127,10 @@
                                 <div class="info">&#9708;</div>
                             </div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle2">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="trompette"
+                                    <button class="btn_listen" name="trompette"
                                             id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658
                                     </button>
                                 </div>
@@ -141,10 +145,10 @@
                                 <div class="info">&#11040;</div>
                             </div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle3">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="beatbox1"
+                                    <button class="btn_listen" name="beatbox1"
                                             id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658
                                     </button>
                                 </div>
@@ -159,10 +163,10 @@
                                 <div class="info">&#9636;</div>
                             </div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle4">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="pouet" id="playPauseBtn4"
+                                    <button class="btn_listen" name="pouet" id="playPauseBtn4"
                                             onClick="playPause('pouet','playPauseBtn4')">&#9658
                                     </button>
                                 </div>
@@ -176,29 +180,28 @@
                                 </div>
                                 <div class="info">&#9635;</div>
                             </div>
-                        </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
-                            <div class="card">
-                                <div class="circle" id="circle5">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="pouet2" id="playPauseBtn5"
-                                            onClick="playPause('pouet2','playPauseBtn5')">&#9658
-                                    </button>
-                                </div>
-                                <div class="settings">
-                                    <button class="btn_settings" id="btn_settings5"
-                                            onClick="addFilter('pouet2', 'btn_settings5' , 'circle5' , 'playPauseBtn5')">
-                                        <i class="material-icons">
-                                            settings
-                                        </i>
-                                    </button>
-                                </div>
-                                <div class="info">&#11055;</div>
+                        </div><div class="card-container" >
+                        <div class="card">
+                            <div class="circle" id="circle5">
+                                <button class="btn_listen" name="pouet2" id="playPauseBtn5"
+                                        onClick="playPause('pouet2','playPauseBtn5')">&#9658
+                                </button>
                             </div>
+                            <div class="settings">
+                                <button class="btn_settings" id="btn_settings5"
+                                        onClick="addFilter('pouet2', 'btn_settings5' , 'circle5' , 'playPauseBtn5')">
+                                    <i class="material-icons">
+                                        settings
+                                    </i>
+                                </button>
+                            </div>
+                            <div class="info">&#11055;</div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                    </div>
+                        <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle6">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="Toc" id="playPauseBtn6"
+                                    <button class="btn_listen" name="Toc" id="playPauseBtn6"
                                             onClick="playPause('Toc','playPauseBtn6')">&#9658
                                     </button>
                                 </div>
@@ -213,10 +216,10 @@
                                 <div class="info">&#9681;</div>
                             </div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle7">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="Flip" id="playPauseBtn7"
+                                    <button class="btn_listen" name="Flip" id="playPauseBtn7"
                                             onClick="playPause('Flip','playPauseBtn7')">&#9658
                                     </button>
                                 </div>
@@ -231,10 +234,10 @@
                                 <div class="info">&#9707;</div>
                             </div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle8">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="Badada" id="playPauseBtn8"
+                                    <button class="btn_listen" name="Badada" id="playPauseBtn8"
                                             onClick="playPause('Badada','playPauseBtn8')">&#9658
                                     </button>
                                 </div>
@@ -249,10 +252,10 @@
                                 <div class="info">&#9714;</div>
                             </div>
                         </div>
-                        <div class="card-container" draggable="true" ondragstart="startDrag(event)">
+                        <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle9">
-                                    <button class="btn_listen" ontouchend="touchend(event)" name="Boum" id="playPauseBtn9"
+                                    <button class="btn_listen" name="Boum" id="playPauseBtn9"
                                             onClick="playPause('Boum','playPauseBtn9')">&#9658
                                     </button>
                                 </div>
@@ -267,11 +270,22 @@
                                 <div class="info">&#9672;</div>
                             </div>
                         </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="carousel-container">
+                <div class="carousel-inner">
+                    <div class="soundsss" id="newTrack">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 
