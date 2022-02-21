@@ -39,6 +39,8 @@ socket.on('askTochangeSmartphoneDisplay', (msg) => {
     }
 })
 
-playButton.addEventListener('click',(e) => {
-    socket.emit('changeSmartphoneDisplay', 'changeState')
-});
+/*playButton.addEventListener('click',(e) => {
+    if (canPlay && soundsOnTracks.length !== 0){
+        socket.emit('changeSmartphoneDisplay', 'changeState')
+    }
+});*/

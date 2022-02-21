@@ -304,6 +304,7 @@ function sortSoundsByStartPos(sOT){
 let canPlay = true;
 
 async function playComposition() {
+    socket.emit('changeSmartphoneDisplay', 'changeState')
     if (!canPlay || soundsOnTracks.length === 0) return;
     canPlay = false;
     for (var i = 0; i < 360; i++) {
