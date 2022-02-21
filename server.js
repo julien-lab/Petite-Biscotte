@@ -37,16 +37,8 @@ io.on('connection', (socket) => {
     socket.join(user.room);
 
     if(user.room === "smartphone") {
-      /// Welcome current user
+      // Welcome current user
       socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
-
-      // Broadcast when a user connects
-      socket.broadcast
-          .to("smartphone") // ------------------------------------------------------------------------------------------------------- Test with user id
-          .emit(
-              'message',
-              formatMessage(botName, `${user.username} has joined the chat`)
-          );
 
       // Send users and room info
       io.to(user.room).emit('roomUsers', {
@@ -86,11 +78,6 @@ io.on('connection', (socket) => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io.to(user.room).emit(
-          'message',
-          formatMessage(botName, `${user.username} has left the chat`)
-      );
-
       // Send users and room info
       io.to(user.room).emit('roomUsers', {
         room: user.room,
@@ -113,7 +100,11 @@ io.on('connection', (socket) => {
   })
 
   socket.on('changeSmartphoneDisplay', (msg) => {
-    io.to("smartphone").emit('changeSmartphoneDisplay', msg);
+    io.emit('changeSmartphoneDisplay', msg);
+  })
+
+  socket.on('askTochangeSmartphoneDisplay', (msg) => {
+    io.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
   })
 
   socket.on('VolumeControl', (msg) => {
@@ -152,16 +143,8 @@ io2.on('connection', (socket) => {
     socket.join(user.room);
 
     if(user.room === "smartphone") {
-      /// Welcome current user
+      // Welcome current user
       socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
-
-      // Broadcast when a user connects
-      socket.broadcast
-          .to("smartphone") // ------------------------------------------------------------------------------------------------------- Test with user id
-          .emit(
-              'message',
-              formatMessage(botName, `${user.username} has joined the chat`)
-          );
 
       // Send users and room info
       io2.to(user.room).emit('roomUsers', {
@@ -184,11 +167,6 @@ io2.on('connection', (socket) => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io2.to(user.room).emit(
-          'message',
-          formatMessage(botName, `${user.username} has left the chat`)
-      );
-
       // Send users and room info
       io2.to(user.room).emit('roomUsers', {
         room: user.room,
@@ -211,7 +189,7 @@ io2.on('connection', (socket) => {
   })
 
   socket.on('changeSmartphoneDisplay', (msg) => {
-    io2.to("smartphone").emit('changeSmartphoneDisplay', msg);
+    io2.emit('changeSmartphoneDisplay', msg);
   })
 
   socket.on('VolumeControl', (msg) => {

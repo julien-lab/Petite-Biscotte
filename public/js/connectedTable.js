@@ -26,11 +26,19 @@ socket.on('newLogo', (logo) => {
 });
 
 socket.on('newVolume', (volume) => {
-    setVolume(volume)
+    setVolume(volume);
 });
 
-playButton.addEventListener('click',(e) => {
-    let msg = "change isPlaying";
+socket.on('askTochangeSmartphoneDisplay', (msg) => {
+    if (canPlay && soundsOnTracks.length !== 0){
+        playComposition();
+        socket.emit('changeSmartphoneDisplay', 'changeState');
+    }
+    else {
+        console.log("nope")
+    }
+})
 
-    socket.emit('changeSmartphoneDisplay', msg)
+playButton.addEventListener('click',(e) => {
+    socket.emit('changeSmartphoneDisplay', 'changeState')
 });

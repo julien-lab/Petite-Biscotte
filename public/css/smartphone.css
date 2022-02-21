@@ -547,7 +547,7 @@ body {
     text-align: center;
 }
 
-.mdc-button{
+.volumeControl{
     --mdc-theme-primary: #782520;
     --mdc-theme-on-primary: var(--mdc-theme-text-primary-on-dark);
 }

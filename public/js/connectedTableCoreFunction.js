@@ -304,7 +304,7 @@ function sortSoundsByStartPos(sOT){
 let canPlay = true;
 
 async function playComposition() {
-    if (!canPlay) return;
+    if (!canPlay || soundsOnTracks.length === 0) return;
     canPlay = false;
     for (var i = 0; i < 360; i++) {
 
@@ -313,13 +313,14 @@ async function playComposition() {
             if(sound.startPos === i){
                 var audio = document.getElementById(sound.soundName);
                 audio.volume = volume;
+                audio.muted = false;
                 audio.play();
             }
         }
         await sleep(55,55556);
     }
     canPlay = true;
-    socket.emit('changeSmartphoneDisplay', "change isPlaying");
+    socket.emit('changeSmartphoneDisplay', "changeState");
     socket.emit('VolumeControl', 'reset');
 }
 

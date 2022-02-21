@@ -16,6 +16,7 @@ const next = document.querySelector('.next');
 const prev = document.querySelector('.prev');
 const track = document.querySelector('.soundsss');
 const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
+const startTrack = document.getElementById('startTrack')
 let tableVolume;
 let base64Audio;
 let listObject;
@@ -75,6 +76,11 @@ socket.on('newVolume', (volume) => {
   console.log(volume)
   volumeInput.value = volume;
 });
+
+// On start track
+startTrack.addEventListener('click', (e) => {
+  socket.emit('askTochangeSmartphoneDisplay', 'please');
+})
 
 // Volume on change
 volumeInput.addEventListener('change', (e) => {
