@@ -36,7 +36,27 @@ io.on('connection', (socket) => {
 
     socket.join(user.room);
 
-    // Welcome current user
+    if(user.room === "smartphone") {
+      /// Welcome current user
+      socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
+
+      // Broadcast when a user connects
+      socket.broadcast
+          .to("smartphone") // ------------------------------------------------------------------------------------------------------- Test with user id
+          .emit(
+              'message',
+              formatMessage(botName, `${user.username} has joined the chat`)
+          );
+
+      // Send users and room info
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    }
+  });
+
+    /*/// Welcome current user
     socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
 
     // Broadcast when a user connects
@@ -52,7 +72,7 @@ io.on('connection', (socket) => {
       room: user.room,
       users: getRoomUsers(user.room)
     });
-  });
+  });*/
 
   // Listen for chatMessage
   socket.on('chatMessage', msg => {
@@ -131,22 +151,25 @@ io2.on('connection', (socket) => {
 
     socket.join(user.room);
 
-    // Welcome current user
-    socket.emit('message', formatMessage(botName2, 'Welcome to Petite Biscotte!'));
+    if(user.room === "smartphone") {
+      /// Welcome current user
+      socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
 
-    // Broadcast when a user connects
-    socket.broadcast
-        .to(user.room) // ------------------------------------------------------------------------------------------------------- Test with user id
-        .emit(
-            'message',
-            formatMessage(botName2, `${user.username} has joined the chat`)
-        );
+      // Broadcast when a user connects
+      socket.broadcast
+          .to("smartphone") // ------------------------------------------------------------------------------------------------------- Test with user id
+          .emit(
+              'message',
+              formatMessage(botName, `${user.username} has joined the chat`)
+          );
 
-    // Send users and room info
-    io2.to(user.room).emit('roomUsers', {
-      room: user.room,
-      users: getRoomUsers(user.room)
-    });
+      // Send users and room info
+      io2.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    }
+
   });
 
   // Listen for chatMessage
