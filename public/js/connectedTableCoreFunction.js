@@ -319,7 +319,8 @@ async function playComposition() {
         await sleep(55,55556);
     }
     canPlay = true;
-    socket.emit('talkToSmartphone', "change isPlaying")
+    socket.emit('talkToSmartphone', "change isPlaying");
+    socket.emit('VolumeControl', 'reset');
 }
 
 function sleep(ms) {

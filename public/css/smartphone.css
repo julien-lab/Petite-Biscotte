@@ -540,3 +540,9 @@ body {
     align-items:flex-start;
     justify-content: space-evenly;
 }
+
+#divVolume {
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}

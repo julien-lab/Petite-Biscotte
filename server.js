@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const botName = 'Petite Biscotte Bot ';
 
 // Run when client connects
-io.on('connection', socket => {
+io.on('connection', (socket) => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
@@ -41,7 +41,7 @@ io.on('connection', socket => {
 
     // Broadcast when a user connects
     socket.broadcast
-        .to(user.room) // ------------------------------------------------------------------------------------------------------- Test with user id
+        .to("smartphone") // ------------------------------------------------------------------------------------------------------- Test with user id
         .emit(
             'message',
             formatMessage(botName, `${user.username} has joined the chat`)
@@ -84,16 +84,25 @@ io.on('connection', socket => {
   })
 
   socket.on('logo', (logo) => {
-    io.to("connectedTable").emit('newLogo', logo)
+    socket.to("connectedTable").emit('newLogo', logo)
   })
 
   socket.on('changingVolume', (volume) => {
-    io.to("connectedTable").emit('newVolume', volume)
+    socket.to("connectedTable").emit('newVolume', volume);
+    io.to("smartphone").emit('newVolume', volume)
   })
 
   socket.on('talkToSmartphone', (msg) => {
     io.to("smartphone").emit('talkToSmartphone', msg);
   })
+
+  socket.on('VolumeControl', (msg) => {
+    socket.broadcast
+        .to("smartphone")
+        .emit('VolumeControl', msg);
+    // socket.broadcast.emit('VolumeControl', msg);
+  })
+
 });
 
 
@@ -104,7 +113,7 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 /* ------------------------------------------------------------------------------------------ */
 
-const app2 = express();
+/*const app2 = express();
 
 const serverUnsafe = http.createServer(app2);
 
@@ -181,4 +190,4 @@ io2.on('connection', socket => {
 const UnsafePORT = 3001;
 
 serverUnsafe.listen(UnsafePORT, () => console.log(`Server running on port ${UnsafePORT}`));
-
+*/

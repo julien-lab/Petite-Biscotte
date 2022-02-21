@@ -9,10 +9,14 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const startRecord = document.getElementById('startRecord');
+const volumeInput = document.getElementById("volume");
+const volumeButton = document.getElementById('volumeButton');
+const volumeDiv = document.getElementById('divVolume');
 const next = document.querySelector('.next');
 const prev = document.querySelector('.prev');
 const track = document.querySelector('.soundsss');
 const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
+let tableVolume;
 let base64Audio;
 let listObject;
 let $ = jQuery;
@@ -56,9 +60,38 @@ socket.on('message', (message) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+socket.on('newVolume', (volume) => {
+  console.log(volume)
+  volumeInput.value = volume;
+});
+
+// Volume on change
+volumeInput.addEventListener('change', (e) => {
+  socket.emit("VolumeControl", 'lost');
+  socket.emit("changingVolume",volumeInput.value);
+})
+
+// Volume Control
+socket.on('VolumeControl', (msg) => {
+  if (msg === 'lost') {
+    volumeInput.style.display = 'none';
+    volumeDiv.style.display = 'block';
+  }
+  else if (msg === 'reset'){
+    volumeInput.style.display = 'block';
+    volumeDiv.style.display = 'none';
+  }
+});
+
 startRecord.addEventListener('click',(e) => {
   let div = document.getElementById('holderObject');
   if (div != null) div.remove();
+});
+
+volumeButton.addEventListener('click', () => {
+  socket.emit("VolumeControl", 'lost');
+  volumeInput.style.display = 'block';
+  volumeDiv.style.display = 'none';
 });
 
 // vocal submit
