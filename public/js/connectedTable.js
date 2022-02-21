@@ -32,5 +32,5 @@ socket.on('newVolume', (volume) => {
 playButton.addEventListener('click',(e) => {
     let msg = "change isPlaying";
 
-    socket.emit('talkToSmartphone', msg)
+    socket.emit('changeSmartphoneDisplay', msg)
 });

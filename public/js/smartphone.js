@@ -22,6 +22,15 @@ let listObject;
 let $ = jQuery;
 let isPlaying = false;
 
+var circle = new ProgressBar.Circle('#container', {
+  strokeWidth: 6,
+  duration: 20000,
+  color: '#FF0000',
+  trailColor: '#eee',
+  trailWidth: 1,
+  svgStyle: null
+});
+
 
 const room = 'smartphone';
 const username = 'smartphone'
@@ -38,11 +47,13 @@ socket.on('roomUsers', ({ room, users }) => {
   outputUsers(users,userList);
 });
 
-socket.on('talkToSmartphone', (msg) => {
+socket.on('changeSmartphoneDisplay', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
     document.getElementById("chat").style.display = "none";
     document.getElementById("playing").style.display = "block";
+    circle.set(0);
+    circle.animate(1);
     // document.getElementById("playing").style = "display: flex;flex-direction: column"
   }
   else{

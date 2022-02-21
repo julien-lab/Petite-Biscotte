@@ -92,8 +92,8 @@ io.on('connection', (socket) => {
     io.to("smartphone").emit('newVolume', volume)
   })
 
-  socket.on('talkToSmartphone', (msg) => {
-    io.to("smartphone").emit('talkToSmartphone', msg);
+  socket.on('changeSmartphoneDisplay', (msg) => {
+    io.to("smartphone").emit('changeSmartphoneDisplay', msg);
   })
 
   socket.on('VolumeControl', (msg) => {
@@ -187,8 +187,8 @@ io2.on('connection', (socket) => {
     io2.to("smartphone").emit('newVolume', volume)
   })
 
-  socket.on('talkToSmartphone', (msg) => {
-    io2.to("smartphone").emit('talkToSmartphone', msg);
+  socket.on('changeSmartphoneDisplay', (msg) => {
+    io2.to("smartphone").emit('changeSmartphoneDisplay', msg);
   })
 
   socket.on('VolumeControl', (msg) => {

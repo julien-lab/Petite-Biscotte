@@ -37,9 +37,11 @@
     <script src="js/player.js"></script>
     <script src="js/smartphoneCoreFunctions.js"></script>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
     <title>Petite Biscotte</title>
 </head>
 <body>
+
 <div class="chat-container" id="chat">
     <header class="chat-header">
         <h1><i class="fas fa-smile"></i>Petite Biscotte</h1>
@@ -73,10 +75,12 @@
         <div data-role="recordings" ></div>
     </div>
 </div>
-
 <div id="playing" style="display: none">
-    <label for="volume"></label>
-    <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>
+    <div class="topbox">
+        <label for="volume"></label>
+        <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>
+        <div id="container"></div>
+    </div>
     <br>
     <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
     <div id="divVolume" style="display: none"><button class="mdc-button mdc-button--raised" id="volumeButton"> Take back volume control</button></div>
