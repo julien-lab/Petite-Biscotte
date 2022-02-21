@@ -546,3 +546,8 @@ body {
     align-content: center;
     text-align: center;
 }
+
+.mdc-button{
+    --mdc-theme-primary: #782520;
+    --mdc-theme-on-primary: var(--mdc-theme-text-primary-on-dark);
+}
