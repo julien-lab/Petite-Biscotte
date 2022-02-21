@@ -32,15 +32,13 @@ socket.on('newVolume', (volume) => {
 socket.on('askTochangeSmartphoneDisplay', (msg) => {
     if (canPlay && soundsOnTracks.length !== 0){
         playComposition();
-        socket.emit('changeSmartphoneDisplay', 'changeState');
     }
     else {
         console.log("nope")
     }
 })
 
-/*playButton.addEventListener('click',(e) => {
-    if (canPlay && soundsOnTracks.length !== 0){
-        socket.emit('changeSmartphoneDisplay', 'changeState')
-    }
-});*/
+socket.on('stopTrack', (msg) => {
+    exit = true;
+    stopComposition();
+})

@@ -17,6 +17,7 @@ const prev = document.querySelector('.prev');
 const track = document.querySelector('.soundsss');
 const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
 const startTrack = document.getElementById('startTrack')
+const stopMusic = document.getElementById('stopMusic')
 let tableVolume;
 let base64Audio;
 let listObject;
@@ -62,6 +63,11 @@ socket.on('changeSmartphoneDisplay', (msg) => {
     document.getElementById("playing").style.display = "none";
   }
 });
+
+// listen stop music
+stopMusic.addEventListener('click', (e) => {
+  socket.emit('stopTrack', 'stop');
+})
 
 // Message from server
 socket.on('message', (message) => {

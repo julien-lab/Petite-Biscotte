@@ -107,6 +107,10 @@ io.on('connection', (socket) => {
     io.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
   })
 
+  socket.on('stopTrack', (msg) => {
+    io.to("connectedTable").emit('stopTrack',msg);
+  })
+
   socket.on('VolumeControl', (msg) => {
     socket.broadcast
         .to("smartphone")
@@ -180,7 +184,7 @@ io2.on('connection', (socket) => {
   })
 
   socket.on('logo', (logo) => {
-    io2.to("connectedTable").emit('newLogo', logo)
+    socket.to("connectedTable").emit('newLogo', logo)
   })
 
   socket.on('changingVolume', (volume) => {
@@ -190,6 +194,14 @@ io2.on('connection', (socket) => {
 
   socket.on('changeSmartphoneDisplay', (msg) => {
     io2.emit('changeSmartphoneDisplay', msg);
+  })
+
+  socket.on('askTochangeSmartphoneDisplay', (msg) => {
+    io2.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
+  })
+
+  socket.on('stopTrack', (msg) => {
+    io2.to("connectedTable").emit('stopTrack',msg);
   })
 
   socket.on('VolumeControl', (msg) => {

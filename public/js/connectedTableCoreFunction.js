@@ -303,12 +303,29 @@ function sortSoundsByStartPos(sOT){
 
 let canPlay = true;
 
+function stopComposition(){
+    for (let i = 0; i < 360; i++) {
+        for (let j=0;j<soundsOnTracks.length;j++) {
+            let sound = soundsOnTracks[j];
+            if(sound.startPos === i){
+                let audio = document.getElementById(sound.soundName);
+                audio.volume = volume;
+                audio.muted = true;
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }
+    }
+}
+
+let exit = false;
+
 async function playComposition() {
     socket.emit('changeSmartphoneDisplay', 'changeState')
     if (!canPlay || soundsOnTracks.length === 0) return;
     canPlay = false;
     for (var i = 0; i < 360; i++) {
-
+        console.log('hello')
         for (var j=0;j<soundsOnTracks.length;j++) {
             var sound = soundsOnTracks[j];
             if(sound.startPos === i){
@@ -318,8 +335,10 @@ async function playComposition() {
                 audio.play();
             }
         }
+        if (exit) break;
         await sleep(55,55556);
     }
+    exit = false;
     canPlay = true;
     socket.emit('changeSmartphoneDisplay', "changeState");
     socket.emit('VolumeControl', 'reset');
