@@ -186,6 +186,7 @@ container.addEventListener('click', async function (e) {
       socket.emit('logo', document.getElementById('dropdown').value)
       socket.emit('connectedTableAudioData', localBase64);
     }
+    e.target.style.display = 'none';
   }
 });
 
