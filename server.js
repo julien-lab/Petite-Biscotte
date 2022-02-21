@@ -113,7 +113,7 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 /* ------------------------------------------------------------------------------------------ */
 
-/*const app2 = express();
+const app2 = express();
 
 const serverUnsafe = http.createServer(app2);
 
@@ -125,7 +125,7 @@ app2.use(express.static(path.join(__dirname, 'public')));
 const botName2 = 'Petite Biscotte Bot ';
 
 // Run when client connects
-io2.on('connection', socket => {
+io2.on('connection', (socket) => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
@@ -182,12 +182,24 @@ io2.on('connection', socket => {
     io2.to("connectedTable").emit('newLogo', logo)
   })
 
-  socket.on('talkToConnectedTable', (msg) => {
-    io2.to("smartphone").emit('talkToConnectedTable', msg);
+  socket.on('changingVolume', (volume) => {
+    socket.to("connectedTable").emit('newVolume', volume);
+    io2.to("smartphone").emit('newVolume', volume)
+  })
+
+  socket.on('talkToSmartphone', (msg) => {
+    io2.to("smartphone").emit('talkToSmartphone', msg);
+  })
+
+  socket.on('VolumeControl', (msg) => {
+    socket.broadcast
+        .to("smartphone")
+        .emit('VolumeControl', msg);
+    // socket.broadcast.emit('VolumeControl', msg);
   })
 });
 
 const UnsafePORT = 3001;
 
 serverUnsafe.listen(UnsafePORT, () => console.log(`Server running on port ${UnsafePORT}`));
-*/
+
