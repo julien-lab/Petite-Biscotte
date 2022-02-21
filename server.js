@@ -118,6 +118,10 @@ io.on('connection', (socket) => {
     // socket.broadcast.emit('VolumeControl', msg);
   })
 
+  socket.on('clearTracks', (e) => {
+    io.to("connectedTable").emit('clearTracks',e);
+  })
+
 });
 
 
@@ -209,6 +213,10 @@ io2.on('connection', (socket) => {
         .to("smartphone")
         .emit('VolumeControl', msg);
     // socket.broadcast.emit('VolumeControl', msg);
+  })
+
+  socket.on('clearTracks', (e) => {
+    io.to("connectedTable").emit('clearTracks',e);
   })
 });
 

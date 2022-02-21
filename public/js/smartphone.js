@@ -38,6 +38,14 @@ const room = 'smartphone';
 const username = 'smartphone'
 
 
+function getOrientation(){
+  if (window.innerWidth > window.innerHeight) {
+    socket.emit('clearTracks', 'youhouuuuuuuuuuu');
+  }
+}
+
+window.onresize = function(){ getOrientation(); }
+
 const socket = io();
 
 // Join chatroom

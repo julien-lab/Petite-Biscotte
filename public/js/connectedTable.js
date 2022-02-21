@@ -29,6 +29,10 @@ socket.on('newVolume', (volume) => {
     setVolume(volume);
 });
 
+socket.on('clearTracks', (e) => {
+    clearTracks();
+});
+
 socket.on('askTochangeSmartphoneDisplay', (msg) => {
     if (canPlay && soundsOnTracks.length !== 0){
         playComposition();

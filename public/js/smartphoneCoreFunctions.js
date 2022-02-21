@@ -1,11 +1,5 @@
 const socket = io()
 let cpt = 0;
-/*function changingVolume(){
-    // let value = document.getElementById("volume").value
-    let volumeDiv = document.getElementById("volume");
-    socket.emit("VolumeControl", 'lost');
-    socket.emit("changingVolume",volumeDiv.value);
-}*/
 
 function addSound(audioURL){
     let card_container = document.createElement('div')
