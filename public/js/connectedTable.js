@@ -1,16 +1,8 @@
-    import {
-    addAudioURLToConnectedTable,
-    createURLFromBase64Audio,
-} from './messageDOM/messageDOM.js'
+import {addAudioURLToConnectedTable, createURLFromBase64Audio} from './messageDOM/messageDOM.js'
 import {setLogo} from './messageDOM/messageDOM.js'
-
-const track = document.querySelector('.soundsss');
-const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
-let $ = jQuery;
 const room = 'connectedTable';
 const username = 'connectedTable'
 const socket = io();
-const playButton = document.getElementById('btn_listenAll');
 
 // Join chatroom
 socket.emit('joinRoom', { username, room });

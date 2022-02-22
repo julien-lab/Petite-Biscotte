@@ -14,9 +14,15 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/smartphone.css"/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
     <script type="module" src="js/smartphone.js"></script>
+    <script type="module" src="js/smartphoneEventListener.js"></script>
+    <script type="module" src="js/smartphoneRecording.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/smartphoneCoreFunctions.js"></script>
+    <script src="js/progressbar.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://markjivko.com/dist/recorder.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -26,18 +32,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-
-
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
             integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
             crossorigin="anonymous"
     ></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/smartphoneCoreFunctions.js"></script>
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <script src="js/progressbar.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/alexgibson/shake.js/master/shake.js"></script>
     <title>Petite Biscotte</title>
 </head>
@@ -79,6 +79,7 @@
     <div style="text-align: center;" >
         <button class="mdc-button mdc-button--raised" id="startTrack"> Start the audio track</button>
     </div>
+    <br>
 </div>
 <div id="playing" style="display: none">
     <div class="topbox">
@@ -126,12 +127,14 @@
             <div class="carousel-container">
                 <div class="carousel-inner" >
                     <div class="soundsss">
-                        <div class="card-container" >
+                        <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle1">
-                                    <button class="btn_listen" name="beatbox2"
-                                            id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="beatbox2"
+                                                 id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;
+                                        </button>
+                                    </div>
                                     <div class="info">&#9708;</div>
                                 </div>
                                 <div class="settings">
@@ -141,9 +144,11 @@
                         <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle2">
-                                    <button class="btn_listen" name="trompette"
-                                            id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="trompette"
+                                                id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#11040;</div>
                                 </div>
                                 <div class="settings">
@@ -153,9 +158,11 @@
                         <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle3">
-                                    <button class="btn_listen" name="beatbox1"
-                                            id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="beatbox1"
+                                                id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9636;</div>
                                 </div>
                                 <div class="settings">
@@ -165,9 +172,11 @@
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle4">
-                                    <button class="btn_listen" name="pouet" id="playPauseBtn4"
-                                            onClick="playPause('pouet','playPauseBtn4')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="pouet" id="playPauseBtn4"
+                                                onClick="playPause('pouet','playPauseBtn4')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9635;</div>
                                 </div>
                                 <div class="settings">
@@ -177,9 +186,11 @@
                         <div class="card-container" >
                         <div class="card">
                             <div class="circle" id="circle5">
-                                <button class="btn_listen" name="pouet2" id="playPauseBtn5"
-                                        onClick="playPause('pouet2','playPauseBtn5')">&#9658
-                                </button>
+                                <div class="lowerDiv">
+                                    <button class="btn_listen" name="pouet2" id="playPauseBtn5"
+                                            onClick="playPause('pouet2','playPauseBtn5')">&#9658
+                                    </button>
+                                </div>
                                 <div class="info">&#11055;</div>
                             </div>
                             <div class="settings">
@@ -189,9 +200,11 @@
                         <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle6">
-                                    <button class="btn_listen" name="Toc" id="playPauseBtn6"
-                                            onClick="playPause('Toc','playPauseBtn6')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Toc" id="playPauseBtn6"
+                                                onClick="playPause('Toc','playPauseBtn6')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9681;</div>
                                 </div>
                                 <div class="settings">
@@ -201,9 +214,11 @@
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle7">
-                                    <button class="btn_listen" name="Flip" id="playPauseBtn7"
-                                            onClick="playPause('Flip','playPauseBtn7')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Flip" id="playPauseBtn7"
+                                                onClick="playPause('Flip','playPauseBtn7')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9707;</div>
                                 </div>
                                 <div class="settings">
@@ -213,9 +228,11 @@
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle8">
-                                    <button class="btn_listen" name="Badada" id="playPauseBtn8"
-                                            onClick="playPause('Badada','playPauseBtn8')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Badada" id="playPauseBtn8"
+                                                onClick="playPause('Badada','playPauseBtn8')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9714;</div>
                                 </div>
                                 <div class="settings">
@@ -225,9 +242,11 @@
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle9">
-                                    <button class="btn_listen" name="Boum" id="playPauseBtn9"
-                                            onClick="playPause('Boum','playPauseBtn9')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Boum" id="playPauseBtn9"
+                                                onClick="playPause('Boum','playPauseBtn9')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9672;</div>
                                 </div>
                                 <div class="settings">
