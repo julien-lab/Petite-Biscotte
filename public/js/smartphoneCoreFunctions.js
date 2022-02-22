@@ -7,7 +7,7 @@ function addSound(audioURL){
     let circle = document.createElement('div');
 
     // Ajoute les classes des divs principales
-    setClasses(card_container, card, circle)
+    setClasses(card_container, card, circle, audioURL)
 
     // Rajoute l'audio dans le carousel des nouveaux sons sur le téléphone
     addImportedDiv(audioURL);
@@ -39,7 +39,7 @@ function addInputSlider(audioURL){
     input.min = "-1000";
     input.max = "1000";
     input.onchange = function (){
-        addFilter(audioURL , 'circle9' , input.id);
+        addFilter(audioURL , 'circle' + audioURL , input.id);
     }
     wrapperDiv.appendChild(input);
     outerDiv.appendChild(wrapperDiv);
@@ -78,8 +78,9 @@ function tagAudio() {
     return name;
 }
 
-function setClasses(card_container, card, circle){
+function setClasses(card_container, card, circle, audioURL){
     card_container.classList.add("card-container");
     card.classList.add("card");
     circle.classList.add("circle_sent");
+    circle.id = 'circle' + audioURL;
 }

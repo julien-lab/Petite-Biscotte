@@ -33,7 +33,6 @@ function addFilter(audioName, circle, effet){
     if (MEDIA_ELEMENT_NODES.has(document.getElementById(audioName))) {
         audioSource = MEDIA_ELEMENT_NODES.get(document.getElementById(audioName));
     } else {
-        console.log(document.getElementById(audioName))
         audioSource = context.createMediaElementSource(document.getElementById(audioName))
         MEDIA_ELEMENT_NODES.set(document.getElementById(audioName), audioSource);
     }
@@ -56,7 +55,7 @@ function addFilter(audioName, circle, effet){
 
 function addEffect(audioSource, filter, effectDiv, circle) {
     effectIntensity(filter, effectDiv);
-    borderColorEffect(effectDiv.value, circle, filter);
+    borderColorEffect(effectDiv.value, circle);
 }
 
 function effectIntensity(filter, effectDiv) {
@@ -72,7 +71,7 @@ function effectIntensity(filter, effectDiv) {
     }
 }
 
-function borderColorEffect(value, circle, filter){
+function borderColorEffect(value, circle){
     if (parseInt(value) < -800) {
         document.getElementById(circle).style.border = '';
     }

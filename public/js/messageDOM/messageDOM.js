@@ -110,9 +110,8 @@ export const addAudioURLToConnectedTable = function(audioURL){
     let card_container = document.createElement('div')
     let card = document.createElement('div')
     let circle = document.createElement('div')
-
     // Configure les classes et le drag and drop
-    setClasses(card_container, card, circle);
+    setClasses(card_container, card, circle, audioURL);
 
     // Rajoute l'audio dans le carousel des nouveaux sons sur la table
     addImportedDiv(audioURL, card_container);
@@ -124,7 +123,7 @@ export const addAudioURLToConnectedTable = function(audioURL){
     let name = addAudioLogo();
 
     // Ajouter input slider et récupérer les valeurs des effets quand ils étaient sur le téléphone
-    const inputDiv = addInputSlider(audioURL);
+    const inputDiv = addInputSlider(audioURL, circle);
 
     circle.appendChild(button)
     circle.appendChild(name)
@@ -134,10 +133,11 @@ export const addAudioURLToConnectedTable = function(audioURL){
     newTrack.appendChild(card_container);
 }
 
-function setClasses(card_container, card, circle){
+function setClasses(card_container, card, circle, audioURL){
     card_container.classList.add("card-container");
     card.classList.add("card");
     circle.classList.add("circle_sent");
+    circle.id = 'circle' + audioURL;
     card_container.draggable = true;
     card_container.ondragstart= function () {
         startDrag(event);
@@ -167,7 +167,6 @@ function createButtonToPlayAudio(audioURL){
     button.onclick = function(){
         playPause(audioURL,'button' + audioURL);
     }
-
     button.addEventListener("touchmove",previewSoundOnTrack)
     button.name = audioURL;
     button.innerHTML = '&#9658';
@@ -181,7 +180,7 @@ function addAudioLogo() {
     return name;
 }
 
-function addInputSlider(audioURL) {
+function addInputSlider(audioURL, circle) {
     const outerDiv = document.createElement('div');
     outerDiv.classList.add('settings');
     const wrapperDiv = document.createElement('div');
@@ -191,7 +190,7 @@ function addInputSlider(audioURL) {
     input.min = "-1000";
     input.max = "1000";
     input.onchange = function (){
-        addFilter(audioURL , 'circle9' , input.id);
+        addFilter(audioURL , circle.id , input.id);
     }
     wrapperDiv.appendChild(input);
     outerDiv.appendChild(wrapperDiv);
