@@ -345,6 +345,9 @@ async function playComposition() {
     canPlay = true;
     socket.emit('changeSmartphoneDisplay', "changeState");
     socket.emit('VolumeControl', 'reset');
+    socket.emit("hideTrack1", "false");
+    socket.emit("hideTrack2", "false");
+    socket.emit("hideTrack3", "false");
 }
 
 function sleep(ms) {
