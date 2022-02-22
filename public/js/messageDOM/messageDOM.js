@@ -110,6 +110,7 @@ export const addAudioURLToConnectedTable = function(audioURL){
     let card_container = document.createElement('div')
     let card = document.createElement('div')
     let circle = document.createElement('div')
+
     // Configure les classes et le drag and drop
     setClasses(card_container, card, circle, audioURL);
 
