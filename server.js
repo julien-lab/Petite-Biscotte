@@ -122,6 +122,18 @@ io.on('connection', (socket) => {
     io.to("connectedTable").emit('clearTracks',e);
   })
 
+  socket.on('hideTrack1', (msg) => {
+    io.emit('hideTrack1',msg);
+  })
+
+  socket.on('hideTrack2', (msg) => {
+    io.emit('hideTrack2',msg);
+  })
+
+  socket.on('hideTrack3', (msg) => {
+    io.emit('hideTrack3',msg);
+  })
+
 });
 
 
@@ -218,6 +230,19 @@ io2.on('connection', (socket) => {
   socket.on('clearTracks', (e) => {
     io.to("connectedTable").emit('clearTracks',e);
   })
+
+  socket.on('hideTrack1', (msg) => {
+    io2.emit('hideTrack1',msg);
+  })
+
+  socket.on('hideTrack2', (msg) => {
+    io2.emit('hideTrack2',msg);
+  })
+
+  socket.on('hideTrack3', (msg) => {
+    io2.emit('hideTrack3',msg);
+  })
+
 });
 
 const UnsafePORT = 3001;

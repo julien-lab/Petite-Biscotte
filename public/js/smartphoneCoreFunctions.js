@@ -1,4 +1,3 @@
-const socket = io()
 let cpt = 0;
 
 function addSound(audioURL){

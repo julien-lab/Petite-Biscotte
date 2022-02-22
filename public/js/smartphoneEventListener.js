@@ -10,12 +10,43 @@ const volumeButton = document.getElementById('volumeButton');
 const volumeDiv = document.getElementById('divVolume');
 const chatForm = document.getElementById('chat-form');
 const leaveRoom = document.getElementById('leave-btn');
+const switch1 = document.getElementById('customSwitches1');
+const switch2 = document.getElementById('customSwitches2');
+const switch3 = document.getElementById('customSwitches3');
+
 let sendVocalForm;
 let socket;
 
 export function setIo(){
     socket = getIo();
 }
+
+switch1.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (switch1.checked) {
+        socket.emit("hideTrack1", "false");
+    } else {
+        socket.emit("hideTrack1", "true");
+    }
+})
+
+switch2.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (switch2.checked) {
+        socket.emit("hideTrack2", "false");
+    } else {
+        socket.emit("hideTrack2", "true");
+    }
+})
+
+switch3.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (switch3.checked) {
+        socket.emit("hideTrack3", "false");
+    } else {
+        socket.emit("hideTrack3", "true");
+    }
+})
 
 stopMusic.addEventListener('click', (e) => {
     socket.emit('stopTrack', 'stop');

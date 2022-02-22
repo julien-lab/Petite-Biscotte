@@ -45,6 +45,21 @@ socket.on('roomUsers', ({ room, users }) => {
   outputUsers(users,userList);
 });
 
+socket.on('hideTrack1', (msg) => {
+  const switch1 = document.getElementById('customSwitches1');
+  switch1.checked = msg !== 'true';
+})
+
+socket.on('hideTrack2', (msg) => {
+  const switch2 = document.getElementById('customSwitches2');
+  switch2.checked = msg !== 'true';
+})
+
+socket.on('hideTrack3', (msg) => {
+  const switch3 = document.getElementById('customSwitches3');
+  switch3.checked = msg !== 'true';
+})
+
 socket.on('changeSmartphoneDisplay', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
