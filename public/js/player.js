@@ -77,6 +77,6 @@ function borderColorEffect(value, circle, filter){
         document.getElementById(circle).style.border = '';
     }
     else {
-        document.getElementById(circle).style.border = (parseInt(value)+ 1000) * 0.004 + "px solid red";
+        document.getElementById(circle).style.border = (parseInt(value)+ 800) * 0.004 + "px solid red";
     }
 }
