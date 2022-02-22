@@ -251,7 +251,6 @@ function writeConicGradientString(trackTargeted, sOT){
 }
 
 function addSound(startPos, endPos, trackTargeted, soundName){
-
     if(soundCanBePlacedOnTrack(startPos, endPos, trackTargeted)){
         let color;
         if(soundName.slice(0, 4) ==="blob"){
@@ -259,7 +258,6 @@ function addSound(startPos, endPos, trackTargeted, soundName){
         }else{
             color = "#FD7905"
         }
-
         soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':color, 'track':trackTargeted, 'soundName':soundName});
         soundsOnTracks = sortSoundsByStartPos(soundsOnTracks);
     }else{
@@ -323,15 +321,17 @@ function stopComposition(){
 let exit = false;
 
 async function playComposition() {
-    socket.emit('changeSmartphoneDisplay', 'changeState')
     if (!canPlay || soundsOnTracks.length === 0) return;
+    socket.emit('changeSmartphoneDisplay', 'changeState');
     canPlay = false;
     for (let i = 0; i < 360; i++) {
         console.log('hello')
+        let promise = sleep(55);
         for (let j=0;j<soundsOnTracks.length;j++) {
             //if (canPlayTrack1 &&)
             let sound = soundsOnTracks[j];
-            if(sound.startPos === i){
+            if(sound.startPos === i &&
+                ((sound.track === 'Track1' && canPlayTrack1) || (sound.track === 'Track2' && canPlayTrack2) || (sound.track === 'Track3' && canPlayTrack3))){
                 let audio = document.getElementById(sound.soundName);
                 audio.volume = volume;
                 audio.muted = false;
@@ -339,7 +339,7 @@ async function playComposition() {
             }
         }
         if (exit) break;
-        await sleep(55,55556);
+        await promise;
     }
     exit = false;
     canPlay = true;

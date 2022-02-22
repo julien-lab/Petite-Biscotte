@@ -23,7 +23,7 @@ export function getIo(){
 
 let circle = new ProgressBar.Circle('#container', {
   strokeWidth: 6,
-  duration: 20000,
+  duration: 22500,
   color: '#FF0000',
   trailColor: '#eee',
   trailWidth: 1,
