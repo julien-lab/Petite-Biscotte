@@ -117,25 +117,19 @@ export const addAudioURLToConnectedTable = function(audioURL){
     // Rajoute l'audio dans le carousel des nouveaux sons sur la table
     addImportedDiv(audioURL, card_container);
 
-    // Créer un bouton pour jouer l'audio
+    // Crée un bouton pour jouer l'audio
     const button = createButtonToPlayAudio(audioURL);
 
-    // Ajouter tag sur l'audio
-    let name = addAutioTag();
+    // Ajoute le logo sur l'audio
+    let name = addAudioLogo();
 
     // Ajouter input slider et récupérer les valeurs des effets quand ils étaient sur le téléphone
-    let setting = document.createElement("div")
-    setting.classList.add("settings")
-    let divInput = document.createElement("div")
-    let input = document.createElement("input")
-    input.type = "range"
+    const inputDiv = addInputSlider(audioURL);
 
     circle.appendChild(button)
     circle.appendChild(name)
-    divInput.appendChild(input)
-    setting.appendChild(divInput)
     card.appendChild(circle)
-    card.appendChild(setting)
+    card.appendChild(inputDiv)
     card_container.appendChild(card)
     newTrack.appendChild(card_container);
 }
@@ -180,9 +174,26 @@ function createButtonToPlayAudio(audioURL){
     return button;
 }
 
-function addAutioTag() {
+function addAudioLogo() {
     let name = document.createElement('div');
     name.classList.add("info");
     name.textContent = logo;
     return name;
+}
+
+function addInputSlider(audioURL) {
+    const outerDiv = document.createElement('div');
+    outerDiv.classList.add('settings');
+    const wrapperDiv = document.createElement('div');
+    const input = document.createElement('input');
+    input.type = "range";
+    input.id = 'input' + audioURL;
+    input.min = "-1000";
+    input.max = "1000";
+    input.onchange = function (){
+        addFilter(audioURL , 'circle9' , input.id);
+    }
+    wrapperDiv.appendChild(input);
+    outerDiv.appendChild(wrapperDiv);
+    return outerDiv;
 }
