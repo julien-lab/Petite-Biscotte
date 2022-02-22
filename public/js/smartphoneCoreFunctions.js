@@ -1,41 +1,25 @@
 let cpt = 0;
 
 function addSound(audioURL){
-    let card_container = document.createElement('div')
-    card_container.classList.add("card-container")
-    let card = document.createElement('div')
-    card.classList.add("card")
-    let circle = document.createElement('div')
-    circle.classList.add("circle_sent")
-
-
-    const importedAudioDiv = document.getElementById('importedAudio');
-    const audio = document.createElement('audio');
-    let audioID = audioURL;
-    let buttonID = 'button' + audioURL;
-    audio.id = audioURL;
-    audio.src = audioURL;
-    audio.onended = function(){
-        const bouton = document.getElementById(buttonID);
-        bouton.innerHTML = "&#9658;";
-    }
-    importedAudioDiv.appendChild(audio);
     const newTrack = document.getElementById('newTrack');
-    const button = document.createElement('button');
-    button.classList = "btn_listen_sent";
-    button.id = buttonID;
-    button.onclick = function(){
-        playPause(audioID,buttonID);
-    }
-    button.name = audioID;
-    button.innerHTML = '&#9658';
+    let card_container = document.createElement('div');
+    let card = document.createElement('div');
+    let circle = document.createElement('div');
 
-    let name = document.createElement('div')
-    name.classList.add("info")
-    name.innerHTML = cpt.toString()
-    cpt++
+    // Ajoute les classes des divs principales
+    setClasses(card_container, card, circle)
 
+    // Rajoute l'audio dans le carousel des nouveaux sons sur le téléphone
+    addImportedDiv(audioURL);
+
+    // Créer le bouton pour jouer l'audio
+    const button = createButtonToPlayAudio(audioURL);
+
+    // Créer l'input qui permettra d'ajouter et modifier les effets sur les nouveaux sons enregistrés
     const inputDiv = addInputSlider(audioURL);
+
+    // Avant les logos, affiche 1,2,3,etc pour les nouveaux sons qui ne sont pas envoyés
+    let name = tagAudio();
 
     circle.appendChild(button)
     circle.appendChild(name)
@@ -62,3 +46,40 @@ function addInputSlider(audioURL){
     return outerDiv;
 }
 
+function addImportedDiv(audioURL) {
+    const importedAudioDiv = document.getElementById('importedAudio');
+    const audio = document.createElement('audio');
+    audio.id = audioURL;
+    audio.src = audioURL;
+    audio.onended = function(){
+        const bouton = document.getElementById('button' + audioURL);
+        bouton.innerHTML = "&#9658;";
+    }
+    importedAudioDiv.appendChild(audio);
+}
+
+function createButtonToPlayAudio(audioURL){
+    const button = document.createElement('button');
+    button.classList = "btn_listen_sent";
+    button.id = 'button' + audioURL;
+    button.onclick = function(){
+        playPause(audioURL,'button' + audioURL);
+    }
+    button.name = audioURL;
+    button.innerHTML = '&#9658';
+    cpt++;
+    return button;
+}
+
+function tagAudio() {
+    let name = document.createElement('div')
+    name.classList.add("info")
+    name.innerHTML = cpt.toString()
+    return name;
+}
+
+function setClasses(card_container, card, circle){
+    card_container.classList.add("card-container");
+    card.classList.add("card");
+    circle.classList.add("circle_sent");
+}

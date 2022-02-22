@@ -106,61 +106,83 @@ export const outputUsers = function(users,userList) {
 };
 
 export const addAudioURLToConnectedTable = function(audioURL){
-    let card_container = document.createElement('div')
-    card_container.classList.add("card-container")
-    let card = document.createElement('div')
-    card.classList.add("card")
-    let circle = document.createElement('div')
-    circle.classList.add("circle_sent")
-    card_container.draggable = true;
-    card_container.ondragstart= function () {
-        startDrag(event);
-    };
-
-
-
-    const importedAudioDiv = document.getElementById('importedAudio');
-    const audio = document.createElement('audio');
-    audio.classList.add('message');
-    let audioID = audioURL;
-    let buttonID = 'button' + audioURL;
-    audio.id = audioURL;
-    card_container.title = audioID;
-    audio.src = audioURL;
-    audio.onended = function(){
-        const bouton = document.getElementById(buttonID);
-        bouton.innerHTML = "&#9658;";
-    }
-    importedAudioDiv.appendChild(audio);
     const newTrack = document.getElementById('newTrack');
-    const button = document.createElement('button');
-    button.classList = "btn_listen_sent";
-    button.id = buttonID;
-    button.addEventListener("touchend",touchend)
-    button.onclick = function(){
-        playPause(audioID,buttonID);
-    }
-    button.addEventListener("touchmove",previewSoundOnTrack)
-    button.name = audioID;
-    button.innerHTML = '&#9658';
+    let card_container = document.createElement('div')
+    let card = document.createElement('div')
+    let circle = document.createElement('div')
 
-    let name = document.createElement('div')
-    name.classList.add("info")
-    name.textContent = logo
+    // Configure les classes et le drag and drop
+    setClasses(card_container, card, circle);
 
-    circle.appendChild(button)
-    circle.appendChild(name)
+    // Rajoute l'audio dans le carousel des nouveaux sons sur la table
+    addImportedDiv(audioURL, card_container);
 
+    // Créer un bouton pour jouer l'audio
+    const button = createButtonToPlayAudio(audioURL);
+
+    // Ajouter tag sur l'audio
+    let name = addAutioTag();
+
+    // Ajouter input slider et récupérer les valeurs des effets quand ils étaient sur le téléphone
     let setting = document.createElement("div")
     setting.classList.add("settings")
     let divInput = document.createElement("div")
     let input = document.createElement("input")
     input.type = "range"
+
+    circle.appendChild(button)
+    circle.appendChild(name)
     divInput.appendChild(input)
     setting.appendChild(divInput)
-
     card.appendChild(circle)
     card.appendChild(setting)
     card_container.appendChild(card)
     newTrack.appendChild(card_container);
+}
+
+function setClasses(card_container, card, circle){
+    card_container.classList.add("card-container");
+    card.classList.add("card");
+    circle.classList.add("circle_sent");
+    card_container.draggable = true;
+    card_container.ondragstart= function () {
+        startDrag(event);
+    };
+}
+
+function addImportedDiv(audioURL, card_container) {
+    const importedAudioDiv = document.getElementById('importedAudio');
+    const audio = document.createElement('audio');
+    audio.classList.add('message');
+    let audioID = audioURL;
+    audio.id = audioURL;
+    card_container.title = audioID;
+    audio.src = audioURL;
+    audio.onended = function(){
+        const bouton = document.getElementById('button' + audioURL);
+        bouton.innerHTML = "&#9658;";
+    }
+    importedAudioDiv.appendChild(audio);
+}
+
+function createButtonToPlayAudio(audioURL){
+    const button = document.createElement('button');
+    button.classList = "btn_listen_sent";
+    button.id = 'button' + audioURL;
+    button.addEventListener("touchend",touchend)
+    button.onclick = function(){
+        playPause(audioURL,'button' + audioURL);
+    }
+
+    button.addEventListener("touchmove",previewSoundOnTrack)
+    button.name = audioURL;
+    button.innerHTML = '&#9658';
+    return button;
+}
+
+function addAutioTag() {
+    let name = document.createElement('div');
+    name.classList.add("info");
+    name.textContent = logo;
+    return name;
 }

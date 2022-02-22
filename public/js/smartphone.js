@@ -1,8 +1,8 @@
-import {addAudioURLToConnectedTable, createURLFromBase64Audio, outputAudio} from './messageDOM/messageDOM.js'
+import {outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
 import {outputUsers} from './messageDOM/messageDOM.js'
-import {setIo, listenSendButton} from "./smartphoneEventListener.js";
+import {setIo} from "./smartphoneEventListener.js";
 
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
