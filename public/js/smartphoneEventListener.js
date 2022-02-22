@@ -21,6 +21,22 @@ export function setIo(){
     socket = getIo();
 }
 
+let alreadySentLogos = new Map()
+initLogos()
+
+function initLogos(){
+    alreadySentLogos.set("⬙", false);
+    alreadySentLogos.set("⬔", false);
+    alreadySentLogos.set("▣", false);
+    alreadySentLogos.set("▬", false);
+    alreadySentLogos.set("▧", false);
+    alreadySentLogos.set("♠", false);
+    alreadySentLogos.set("♣", false);
+    alreadySentLogos.set("♥", false);
+    alreadySentLogos.set("♦", false);
+    alreadySentLogos.set("φ", false);
+}
+
 switch1.addEventListener('click', (e) => {
     e.preventDefault();
     if (switch1.checked) {
@@ -110,10 +126,17 @@ container.addEventListener('click', async function (e) {
         reader.onloadend = function() {
             localBase64 = reader.result;
             localBase64 = localBase64.split(',')[1];
-            socket.emit('logo', document.getElementById('dropdown').value)
-            socket.emit('connectedTableAudioData', localBase64);
+            if(alreadySentLogos.get(e.target.parentNode.firstElementChild.value) === false){
+                alreadySentLogos.set(e.target.parentNode.firstElementChild.value,true)
+                socket.emit('logo', e.target.parentNode.firstElementChild.value)
+                socket.emit('connectedTableAudioData', localBase64);
+                e.target.parentNode.firstElementChild.remove()
+                e.target.style.display = 'none';
+            }
+            else{
+                alert("Logo déjà utilisé")
+            }
         }
-        e.target.style.display = 'none';
     }
 });
 
