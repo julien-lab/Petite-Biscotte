@@ -3,6 +3,7 @@ import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
 import {outputUsers} from './messageDOM/messageDOM.js'
 import {setIo, listenSendButton} from "./smartphoneEventListener.js";
+import {alreadySentLogos} from "./smartphoneEventListener.js";
 
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
@@ -95,4 +96,8 @@ socket.on('VolumeControl', (msg) => {
     volumeDiv.style.display = 'none';
   }
 });
+
+socket.on("newMap",(choice)=>{
+  alreadySentLogos.set(choice,true)
+})
 

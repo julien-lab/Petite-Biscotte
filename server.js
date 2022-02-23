@@ -99,6 +99,10 @@ io.on('connection', (socket) => {
     io.to("smartphone").emit('newVolume', volume)
   })
 
+  socket.on("updateMap",(choice) =>{
+    io.to("smartphone").emit('newMap',choice)
+  })
+
   socket.on('changeSmartphoneDisplay', (msg) => {
     io.emit('changeSmartphoneDisplay', msg);
   })

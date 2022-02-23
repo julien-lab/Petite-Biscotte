@@ -21,7 +21,7 @@ export function setIo(){
     socket = getIo();
 }
 
-let alreadySentLogos = new Map()
+export let alreadySentLogos = new Map()
 initLogos()
 
 function initLogos(){
@@ -130,6 +130,7 @@ container.addEventListener('click', async function (e) {
                 alreadySentLogos.set(e.target.parentNode.firstElementChild.value,true)
                 socket.emit('logo', e.target.parentNode.firstElementChild.value)
                 socket.emit('connectedTableAudioData', localBase64);
+                socket.emit('updateMap',e.target.parentNode.firstElementChild.value)
                 e.target.parentNode.firstElementChild.remove()
                 e.target.style.display = 'none';
             }
