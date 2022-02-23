@@ -1,4 +1,4 @@
-import {addAudioURLToConnectedTable, createURLFromBase64Audio, outputAudio} from './messageDOM/messageDOM.js'
+import {outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
 import {outputUsers} from './messageDOM/messageDOM.js'
@@ -24,7 +24,7 @@ export function getIo(){
 
 let circle = new ProgressBar.Circle('#container', {
   strokeWidth: 6,
-  duration: 20000,
+  duration: 22500,
   color: '#FF0000',
   trailColor: '#eee',
   trailWidth: 1,

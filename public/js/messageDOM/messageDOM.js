@@ -106,61 +106,94 @@ export const outputUsers = function(users,userList) {
 };
 
 export const addAudioURLToConnectedTable = function(audioURL){
+    const newTrack = document.getElementById('newTrack');
     let card_container = document.createElement('div')
-    card_container.classList.add("card-container")
     let card = document.createElement('div')
-    card.classList.add("card")
     let circle = document.createElement('div')
-    circle.classList.add("circle_sent")
+
+    // Configure les classes et le drag and drop
+    setClasses(card_container, card, circle, audioURL);
+
+    // Rajoute l'audio dans le carousel des nouveaux sons sur la table
+    addImportedDiv(audioURL, card_container);
+
+    // Crée un bouton pour jouer l'audio
+    const button = createButtonToPlayAudio(audioURL);
+
+    // Ajoute le logo sur l'audio
+    let name = addAudioLogo();
+
+    // Ajouter input slider et récupérer les valeurs des effets quand ils étaient sur le téléphone
+    const inputDiv = addInputSlider(audioURL, circle);
+
+    circle.appendChild(button)
+    circle.appendChild(name)
+    card.appendChild(circle)
+    card.appendChild(inputDiv)
+    card_container.appendChild(card)
+    newTrack.appendChild(card_container);
+}
+
+function setClasses(card_container, card, circle, audioURL){
+    card_container.classList.add("card-container");
+    card.classList.add("card");
+    circle.classList.add("circle_sent");
+    circle.id = 'circle' + audioURL;
     card_container.draggable = true;
     card_container.ondragstart= function () {
         startDrag(event);
     };
+}
 
-
-
+function addImportedDiv(audioURL, card_container) {
     const importedAudioDiv = document.getElementById('importedAudio');
     const audio = document.createElement('audio');
     audio.classList.add('message');
     let audioID = audioURL;
-    let buttonID = 'button' + audioURL;
     audio.id = audioURL;
     card_container.title = audioID;
     audio.src = audioURL;
     audio.onended = function(){
-        const bouton = document.getElementById(buttonID);
+        const bouton = document.getElementById('button' + audioURL);
         bouton.innerHTML = "&#9658;";
     }
     importedAudioDiv.appendChild(audio);
-    const newTrack = document.getElementById('newTrack');
+}
+
+function createButtonToPlayAudio(audioURL){
     const button = document.createElement('button');
     button.classList = "btn_listen_sent";
-    button.id = buttonID;
+    button.id = 'button' + audioURL;
     button.addEventListener("touchend",touchend)
     button.onclick = function(){
-        playPause(audioID,buttonID);
+        playPause(audioURL,'button' + audioURL);
     }
     button.addEventListener("touchmove",previewSoundOnTrack)
-    button.name = audioID;
+    button.name = audioURL;
     button.innerHTML = '&#9658';
+    return button;
+}
 
-    let name = document.createElement('div')
-    name.classList.add("info")
-    name.textContent = logo
+function addAudioLogo() {
+    let name = document.createElement('div');
+    name.classList.add("info");
+    name.textContent = logo;
+    return name;
+}
 
-    circle.appendChild(button)
-    circle.appendChild(name)
-
-    let setting = document.createElement("div")
-    setting.classList.add("settings")
-    let divInput = document.createElement("div")
-    let input = document.createElement("input")
-    input.type = "range"
-    divInput.appendChild(input)
-    setting.appendChild(divInput)
-
-    card.appendChild(circle)
-    card.appendChild(setting)
-    card_container.appendChild(card)
-    newTrack.appendChild(card_container);
+function addInputSlider(audioURL, circle) {
+    const outerDiv = document.createElement('div');
+    outerDiv.classList.add('settings');
+    const wrapperDiv = document.createElement('div');
+    const input = document.createElement('input');
+    input.type = "range";
+    input.id = 'input' + audioURL;
+    input.min = "-1000";
+    input.max = "1000";
+    input.onchange = function (){
+        addFilter(audioURL , circle.id , input.id);
+    }
+    wrapperDiv.appendChild(input);
+    outerDiv.appendChild(wrapperDiv);
+    return outerDiv;
 }
