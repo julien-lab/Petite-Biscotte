@@ -69,6 +69,15 @@ function playSongWhenTouchOnTrack(event) {
 //document.addEventListener("touchmove", previewSoundOnTrack);
 
 
+function extracted(event) {
+    let soundName
+
+    if (event.target.classList[0] === "circle") soundName = event.target.childNodes[1].name
+    else if (event.target.classList[0] === "btn_listen") soundName = event.target.name
+    else if (event.target.classList[0] === "info") soundName = event.target.parentNode.firstElementChild.name
+    return soundName;
+}
+
 function previewSoundOnTrack(event){
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
@@ -87,7 +96,9 @@ function previewSoundOnTrack(event){
         if(x < centerX){
             startPos = 180 + (180-startPos);
         }
-        const soundName = event.target.name;
+
+        const soundName = extracted(event);
+
         let soundPercentage = (document.getElementById(soundName).duration*100)/20;
         let soundLength = (360*soundPercentage)/100;
         let endPos = Math.round(startPos+soundLength);
@@ -171,11 +182,9 @@ function touchend(event) {
     clearTrackFromPreview(lastTrack);
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
-    const soundName = event.target.name;
 
-    // pou récupérer le logo (marche pour l'instant sur les sons preenregistres)
+    const soundName = extracted(event)
     let logo = document.getElementById("logo"+event.target.id.substr(12,14))
-
     const trackTargeted = document.elementFromPoint(x, y).id;
 
     if(trackTargeted.slice(0, 5) === "Track" ){
@@ -188,9 +197,17 @@ function touchend(event) {
 
         let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName, logo);
         let trackDiv = document.getElementById(trackTargeted);
-        console.log(trackDiv);
-        console.log(conicGradient);
         trackDiv.setAttribute("style", "background:" + conicGradient);
+        /*var logo = document.createElement("div");
+        logo.textContent = event.target.parentElement.childNodes[3].textContent
+        logo.style.position = "absolute"
+        logo.style.top = y +"px"
+        logo.style.left = x +"px"
+        logo.style.zIndex = "100"
+        logo.style.fontSize = "35px"
+        console.log(logo)*/
+        //document.body.appendChild(logo)
+
     }
 
 }
