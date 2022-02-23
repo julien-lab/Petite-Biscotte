@@ -13,6 +13,14 @@ function setVolume(newVolume){
     volume = newVolume
 }
 
+function getOffset(el) {
+    const rect = el.getBoundingClientRect();
+    return {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY
+    };
+}
+
 
 function computeAngle(pX, pY){
     let centerX = window.innerWidth/2;
@@ -164,6 +172,10 @@ function touchend(event) {
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
     const soundName = event.target.name;
+
+    // pou récupérer le logo (marche pour l'instant sur les sons preenregistres)
+    let logo = document.getElementById("logo"+event.target.id.substr(12,14))
+
     const trackTargeted = document.elementFromPoint(x, y).id;
 
     if(trackTargeted.slice(0, 5) === "Track" ){
@@ -174,7 +186,7 @@ function touchend(event) {
             startPos = 180 + (180-startPos);
         }
 
-        let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
+        let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName, logo);
         let trackDiv = document.getElementById(trackTargeted);
         console.log(trackDiv);
         console.log(conicGradient);
@@ -219,7 +231,7 @@ function onDrop(event) {
 
 var soundsOnTracks= [];
 
-function constructConicGradient(startPos, soundDuration, trackTargeted, soundName){
+function constructConicGradient(startPos, soundDuration, trackTargeted, soundName, logo){
     //La loop fait 20sec
     let soundPercentage = (soundDuration*100)/20;
 
@@ -231,6 +243,7 @@ function constructConicGradient(startPos, soundDuration, trackTargeted, soundNam
 
     //Enregistre les positions d'un nouveau son dans une chaine JSON si le son ne déborde pas sur un autre
     addSound(startPos, endPos, trackTargeted, soundName);
+    //console.log((startPos+endPos)/2)
 
     return writeConicGradientString(trackTargeted, soundsOnTracks);
 }
@@ -259,6 +272,7 @@ function addSound(startPos, endPos, trackTargeted, soundName){
             color = "#FD7905"
         }
         soundsOnTracks.push({'startPos':startPos,'endPos':endPos,'color':color, 'track':trackTargeted, 'soundName':soundName});
+        //console.log(soundsOnTracks)
         soundsOnTracks = sortSoundsByStartPos(soundsOnTracks);
     }else{
         let audio = document.getElementById("error404");
@@ -319,11 +333,13 @@ function stopComposition(){
 }
 
 let exit = false;
+let canSuppress = true
 
 async function playComposition() {
     if (!canPlay || soundsOnTracks.length === 0) return;
     socket.emit('changeSmartphoneDisplay', 'changeState');
     canPlay = false;
+    canSuppress = false;
     for (let i = 0; i < 360; i++) {
         console.log('hello')
         let promise = sleep(55);
@@ -338,9 +354,11 @@ async function playComposition() {
                 audio.play();
             }
         }
-        if (exit) break;
+        if (exit) break
+
         await promise;
     }
+    canSuppress = true
     exit = false;
     canPlay = true;
     socket.emit('changeSmartphoneDisplay', "changeState");
@@ -359,9 +377,11 @@ function allowDrop(event) {
 }
 
 function clearTracks(){
-    soundsOnTracks= [];
-    document.getElementById("Track1").style.background = "lightgrey"
-    document.getElementById("Track2").style.background = "lightgrey"
-    document.getElementById("Track3").style.background = "lightgrey"
+    if (canSuppress) {
+        soundsOnTracks = [];
+        document.getElementById("Track1").style.background = "lightgrey"
+        document.getElementById("Track2").style.background = "lightgrey"
+        document.getElementById("Track3").style.background = "lightgrey"
+    }
 }
 
