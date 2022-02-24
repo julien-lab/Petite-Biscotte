@@ -186,25 +186,24 @@ function startDrag(event){
 }
 
 function touchend(event) {
+    //let logo = null
     clearTrackFromPreview(lastTrack);
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
 
     const soundName = extracted(event)
-    condition = event.target.id.substr(0,1)
-    if (condition === 'p'){
-        let logo = document.getElementById("logo"+event.target.id.substr(12,14))
-        console.log(logo)
-        console.log(logo.innerHTML)
+    console.log(event.target.id)
+    let condition = event.target.id.substr(0,1)
+    /*if (condition === 'p'){
+        logo = document.getElementById("logo"+event.target.id.substr(12,14))
     } else if(condition === 'c'){
-        let logo = document.getElementById("logo"+event.target.id.substr(6,8))
-        console.log(logo)
-        console.log(logo.innerHTML)
+        logo = document.getElementById("logo"+event.target.id.substr(6,8))
     } else if(condition === 'l'){
-        let logo = document.getElementById("logo"+event.target.id.substr(4,6))
-        console.log(logo)
-        console.log(logo.innerHTML)
+        logo = document.getElementById("logo"+event.target.id.substr(4,6))
+
     }
+    console.log(logo)
+    console.log(logo.innerHTML)*/
 
 
     const trackTargeted = document.elementFromPoint(x, y).id;
@@ -217,7 +216,7 @@ function touchend(event) {
             startPos = 180 + (180-startPos);
         }
 
-        let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName, logo);
+        let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
         let trackDiv = document.getElementById(trackTargeted);
         trackDiv.setAttribute("style", "background:" + conicGradient);
     }
@@ -259,7 +258,7 @@ function onDrop(event) {
 
 var soundsOnTracks= [];
 
-function constructConicGradient(startPos, soundDuration, trackTargeted, soundName, logo){
+function constructConicGradient(startPos, soundDuration, trackTargeted, soundName){
     //La loop fait 20sec
     let soundPercentage = (soundDuration*100)/20;
 

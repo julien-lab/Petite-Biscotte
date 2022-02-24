@@ -296,6 +296,16 @@ body {
     background: dimgray;
 }
 
+.test{
+    float: left;
+    margin-left: -40px;
+    margin-top: 170px;
+}
+
+.test2{
+    margin-left: 1%;
+}
+
 #dropdown {
     background-color: lightcyan;
     border: none;
