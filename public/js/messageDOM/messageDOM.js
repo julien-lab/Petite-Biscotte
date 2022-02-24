@@ -32,6 +32,7 @@ function addAudio(audio, divLeft, div){
     let sound = document.createElement('audio');
     sound.controls = 'controls';
     sound.src = url;
+    sound.id = url;
     divLeft.appendChild(sound);
     div.appendChild(divLeft);
 }

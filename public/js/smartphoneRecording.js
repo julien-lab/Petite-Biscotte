@@ -55,13 +55,14 @@ $(document).ready(function () {
                         let audioObject = $('<audio controls ></audio>')
                             .attr('src', url);
 
-                        let sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');
+                        let sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i>Add to Library</button></form>');
 
                         let holderObject = $('<div id="holderObject"></div>')
                             .append(audioObject)
                             .append(sendObject)
 
                         listObject.append(holderObject);
+
                     });
                 }
             }

@@ -67,7 +67,7 @@ function effectIntensity(filter, effectDiv) {
     else {
         filter.type='bandpass';
         filter.gain.value= 40/900 * parseInt(effectDiv.value) + 40/900*-100; // coeff directeur 40/900 ordonnée à l'origine -100*40/900
-        filter.detune.value=parseInt(effectDiv.value)*3;
+        filter.detune.value = -parseInt(effectDiv.value)*3;
     }
 }
 

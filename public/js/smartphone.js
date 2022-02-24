@@ -16,6 +16,21 @@ const username = 'smartphone'
 
 const socket = io();
 
+let audioMap = new Map();
+
+function setAudioMap() {
+  audioMap.set("beatbox2", 'playPauseBtn1');
+  audioMap.set("trompette", 'playPauseBtn2');
+  audioMap.set("beatbox1", 'playPauseBtn3');
+  audioMap.set("pouet", 'playPauseBtn4');
+  audioMap.set("pouet2", 'playPauseBtn5');
+  audioMap.set("Toc", 'playPauseBtn6');
+  audioMap.set("Flip", 'playPauseBtn7');
+  audioMap.set("Badada", 'playPauseBtn8');
+  audioMap.set("Boum", 'playPauseBtn9');
+}
+setAudioMap();
+
 setIo();
 
 export function getIo(){
@@ -24,7 +39,7 @@ export function getIo(){
 
 let circle = new ProgressBar.Circle('#container', {
   strokeWidth: 6,
-  duration: 22500,
+  duration: 21500,
   color: '#FF0000',
   trailColor: '#eee',
   trailWidth: 1,
@@ -72,6 +87,20 @@ socket.on('changeSmartphoneDisplay', (msg) => {
   else{
     document.getElementById("chat").style.display = "block";
     document.getElementById("playing").style.display = "none";
+    // stopper les audios en cours et remttre tous les audios à 0
+    for (let audio of document.getElementsByTagName('audio')){
+        if (audio.currentTime !==0 && audio.paused === false){
+          let button = document.getElementById('button' + audio.id)
+          if (button !== undefined && button !== null ) {
+            button.click();
+          }
+          else {
+            button = document.getElementById(audioMap.get(audio.id));
+            button.click()
+          }
+        }
+        audio.currentTime = 0;
+    }
   }
 });
 
