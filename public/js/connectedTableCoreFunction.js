@@ -71,9 +71,8 @@ function playSongWhenTouchOnTrack(event) {
 
 function extracted(event) {
     let soundName
-
-    if (event.target.classList[0] === "circle") soundName = event.target.childNodes[1].name
-    else if (event.target.classList[0] === "btn_listen") soundName = event.target.name
+    if (event.target.classList[0] === "circle" || event.target.classList[0] === "circle_sent") soundName = event.target.firstElementChild.name
+    else if (event.target.classList[0] === "btn_listen" || event.target.classList[0] === "btn_listen_sent") soundName = event.target.name
     else if (event.target.classList[0] === "info") soundName = event.target.parentNode.firstElementChild.name
     return soundName;
 }

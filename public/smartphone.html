@@ -42,10 +42,9 @@
     <title>Petite Biscotte</title>
 </head>
 <body>
-
 <div class="chat-container" id="chat">
     <header class="chat-header">
-        <h1><i class="fas fa-smile"></i>Petite Biscotte</h1>
+        <h1>Music</h1>
         <a id="leave-btn" class="btn">Leave Room</a>
     </header>
     <main class="chat-main">
@@ -62,11 +61,10 @@
             <input
                     id="msg"
                     type="text"
-                    placeholder="Enter Message"
+                    placeholder="Enter audio title"
                     required
                     autocomplete="off"
             />
-            <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
         </form>
     </div>
     <div class="holder">
@@ -75,40 +73,42 @@
         </div>
         <div data-role="recordings" ></div>
     </div>
-    <br>
     <div style="text-align: center;" >
         <button class="mdc-button mdc-button--raised" id="startTrack"> Start the audio track</button>
     </div>
     <br>
 </div>
 <div id="playing" style="display: none">
-    <div class="divToggleButton">
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitches1" checked>
-            <label class="custom-control-label" for="customSwitches1"></label>
-        </div>
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitches2" checked>
-            <label class="custom-control-label" for="customSwitches2"></label>
-        </div>
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitches3" checked>
-            <label class="custom-control-label" for="customSwitches3"></label>
-        </div>
-    </div>
 
     <div class="topbox">
-        <label for="volume"></label>
-        <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>
         <div id="container"></div>
     </div>
     <div class="topbox2">
+        <img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/>
         <img id="stopMusic" height="40px" width="40px" src="https://www.freeiconspng.com/uploads/music-round-sound-stop-stop-button-technology-icon-15.png"/>
     </div>
 
+
+    <!--<label for="volume"></label>
+    <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>-->
     <br>
     <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
     <div id="divVolume" class="volumeControl" style="display: none"><button class="mdc-button mdc-button--raised" id="volumeButton"> Take back volume control</button></div>
+    <br>
+    <div class="divToggleButton">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches1" checked>
+            <label class="custom-control-label" for="customSwitches1">Exterior </label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches2" checked>
+            <label class="custom-control-label" for="customSwitches2">Middle </label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches3" checked>
+            <label class="custom-control-label" for="customSwitches3">Interior </label>
+        </div>
+    </div>
     <div id="importedAudio">
         <audio id="Boum" onended="playAnimation('playPauseBtn9')">
             <source src="sons/Boum.mp3" type="audio/mpeg">

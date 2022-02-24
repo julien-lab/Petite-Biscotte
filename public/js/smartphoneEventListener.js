@@ -90,11 +90,21 @@ volumeButton.addEventListener('click', () => {
     volumeDiv.style.display = 'none';
 });
 
-// vocal submit
+// vocal and tag submit
 export const listenSendButton = function(base64Audio) {
     sendVocalForm = document.getElementById('sendVocal');
     sendVocalForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        // text
+        let msg = document.getElementById('msg').value;
+        msg = msg.trim();
+        if (msg) {
+            socket.emit('chatMessage', msg);
+            document.getElementById('msg').value = '';
+        }
+
+        // audio
         socket.emit('chatMessage',base64Audio);
         addSound(createURLFromBase64Audio(base64Audio))
         base64Audio = null;
@@ -103,21 +113,8 @@ export const listenSendButton = function(base64Audio) {
     });
 }
 
-
-// Message submit
-chatForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let msg = e.target.elements.msg.value;
-    msg = msg.trim();
-    if (!msg) {
-        return false;
-    }
-    socket.emit('chatMessage', msg);
-    e.target.elements.msg.value = '';
-    e.target.elements.msg.focus();
-});
-
 container.addEventListener('click', async function (e) {
+    // audio
     let localBase64 ;
     if (e.target.classList.contains('btn')) {
         let blob = await fetch(e.target.value).then(r => r.blob());

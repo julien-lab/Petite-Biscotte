@@ -139,6 +139,8 @@ function setClasses(card_container, card, circle, audioURL){
     card.classList.add("card");
     circle.classList.add("circle_sent");
     circle.id = 'circle' + audioURL;
+    circle.addEventListener("touchend",touchend)
+    circle.addEventListener("touchmove",previewSoundOnTrack)
     card_container.draggable = true;
     card_container.ondragstart= function () {
         startDrag(event);
@@ -164,11 +166,9 @@ function createButtonToPlayAudio(audioURL){
     const button = document.createElement('button');
     button.classList = "btn_listen_sent";
     button.id = 'button' + audioURL;
-    button.addEventListener("touchend",touchend)
     button.onclick = function(){
         playPause(audioURL,'button' + audioURL);
     }
-    button.addEventListener("touchmove",previewSoundOnTrack)
     button.name = audioURL;
     button.innerHTML = '&#9658';
     return button;
