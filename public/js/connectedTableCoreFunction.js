@@ -44,34 +44,42 @@ function computeAngle(pX, pY){
     return (angleRad * 180) / Math.PI;
 }
 
-function playSongWhenTouchOnTrack(event) {
+async function playSongWhenTouchOnTrack(event) {
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
 
     const trackTargeted = document.elementFromPoint(x, y).id;
 
-    if(trackTargeted.slice(0, 5) === "Track" ){
-        let touchPos = computeAngle(x , y);
+    if (trackTargeted.slice(0, 5) === "Track") {
+        let touchPos = computeAngle(x, y);
 
-        let centerX = window.innerWidth/2;
+        let centerX = window.innerWidth / 2;
 
-        if(x < centerX){
-            touchPos = 180 + (180-touchPos);
+        if (x < centerX) {
+            touchPos = 180 + (180 - touchPos);
         }
-        for (let i=0;i<soundsOnTracks.length;i++) {
+        for (let i = 0; i < soundsOnTracks.length; i++) {
             let sound = soundsOnTracks[i];
-            if(sound.track === trackTargeted){
-                if(sound.startPos <= touchPos && touchPos <= sound.endPos ){
-                    const audio = document.getElementById(sound.soundName);
-                    audio.volume = volume
-                    audio.play();
+            if (sound.track === trackTargeted) {
+                if (sound.startPos <= touchPos && touchPos <= sound.endPos) {
+                    var isDoubleTaped = doubletap(x, y);
+                    let promise = sleep(800);
+                    await promise;
+
+                    if(!doubleClickOn ){
+                        const audio = document.getElementById(sound.soundName);
+                        audio.volume = volume
+                        audio.play();
+                    }
+
+                    if(isDoubleTaped && doubleClickOn){
+                        doubleClickOn=false;
+                    }
                     break;
                 }
             }
         }
     }
-    doubletap(x, y);
-
 
 }
 
@@ -135,20 +143,20 @@ function clearTrackFromPreview(track) {
 
 
 var mylatesttap ;
+var doubleClickOn = false;
 function doubletap(x, y) {
-
+    var isDoubleTaped = false;
     const trackTargeted = document.elementFromPoint(x, y).id;
 
     let now = new Date().getTime();
     let timesince = now - mylatesttap;
     if((timesince < 600) && (timesince > 0)){
         console.log("DOUBLE CLICK");
-
+        isDoubleTaped = true;
         if(trackTargeted.slice(0, 5) === "Track" ){
             let touchPos = computeAngle(x , y);
-
             let centerX = window.innerWidth/2;
-
+            doubleClickOn = true;
             if(x < centerX){
                 touchPos = 180 + (180-touchPos);
             }
@@ -170,6 +178,7 @@ function doubletap(x, y) {
     }
 
     mylatesttap = new Date().getTime();
+    return isDoubleTaped;
 }
 
 
