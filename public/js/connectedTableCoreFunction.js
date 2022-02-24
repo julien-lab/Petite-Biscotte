@@ -183,10 +183,22 @@ function touchend(event) {
     const y = event.changedTouches[0].pageY;
 
     const soundName = extracted(event)
-    console.log(event.target.id)
-    let logo = document.getElementById("logo"+event.target.id.substr(12,13))
-    console.log(logo)
-    console.log(logo.innerHTML)
+    condition = event.target.id.substr(0,1)
+    if (condition === 'p'){
+        let logo = document.getElementById("logo"+event.target.id.substr(12,14))
+        console.log(logo)
+        console.log(logo.innerHTML)
+    } else if(condition === 'c'){
+        let logo = document.getElementById("logo"+event.target.id.substr(6,8))
+        console.log(logo)
+        console.log(logo.innerHTML)
+    } else if(condition === 'l'){
+        let logo = document.getElementById("logo"+event.target.id.substr(4,6))
+        console.log(logo)
+        console.log(logo.innerHTML)
+    }
+
+
     const trackTargeted = document.elementFromPoint(x, y).id;
 
     if(trackTargeted.slice(0, 5) === "Track" ){
@@ -209,14 +221,6 @@ function touchend(event) {
         logo.style.fontSize = "35px"
         console.log(logo)*/
         //document.body.appendChild(logo)
-
-        // crée un nouvel élément div
-        var newDiv = document.createElement("div");
-        // et lui donne un peu de contenu
-        var newContent = document.createTextNode('Hi there and greetings!');
-        // ajoute le nœud texte au nouveau div créé
-        newDiv.appendChild(newContent);
-
     }
 
 }
