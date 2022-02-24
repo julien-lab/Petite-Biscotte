@@ -577,7 +577,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .lowerDiv {
@@ -589,4 +589,9 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+input,label {
+    display:flex;
+    flex-direction:column;
 }
