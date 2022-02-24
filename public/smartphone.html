@@ -9,12 +9,19 @@
             integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
             crossorigin="anonymous"
     />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/smartphone.css"/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
     <script type="module" src="js/smartphone.js"></script>
+    <script type="module" src="js/smartphoneEventListener.js"></script>
+    <script type="module" src="js/smartphoneRecording.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/smartphoneCoreFunctions.js"></script>
+    <script src="js/progressbar.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="https://markjivko.com/dist/recorder.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -25,23 +32,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-
-
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
             integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
             crossorigin="anonymous"
     ></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/smartphoneCoreFunctions.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/alexgibson/shake.js/master/shake.js"></script>
     <title>Petite Biscotte</title>
 </head>
 <body>
-
 <div class="chat-container" id="chat">
     <header class="chat-header">
-        <h1><i class="fas fa-smile"></i>Petite Biscotte</h1>
+        <h1>Music</h1>
         <a id="leave-btn" class="btn">Leave Room</a>
     </header>
     <main class="chat-main">
@@ -58,11 +61,10 @@
             <input
                     id="msg"
                     type="text"
-                    placeholder="Enter Message"
+                    placeholder="Enter audio title"
                     required
                     autocomplete="off"
             />
-            <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
         </form>
     </div>
     <div class="holder">
@@ -71,12 +73,42 @@
         </div>
         <div data-role="recordings" ></div>
     </div>
+    <div style="text-align: center;" >
+        <button class="mdc-button mdc-button--raised" id="startTrack"> Start the audio track</button>
+    </div>
+    <br>
 </div>
-
 <div id="playing" style="display: none">
-    <label for="volume"></label>
-    <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>
-    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" onchange="changingVolume()"/>
+
+    <div class="topbox">
+        <div id="container"></div>
+    </div>
+    <div class="topbox2">
+        <img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/>
+        <img id="stopMusic" height="40px" width="40px" src="https://www.freeiconspng.com/uploads/music-round-sound-stop-stop-button-technology-icon-15.png"/>
+    </div>
+
+
+    <!--<label for="volume"></label>
+    <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>-->
+    <br>
+    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    <div id="divVolume" class="volumeControl" style="display: none"><button class="mdc-button mdc-button--raised" id="volumeButton"> Take back volume control</button></div>
+    <br>
+    <div class="divToggleButton">
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches1" checked>
+            <label class="custom-control-label" for="customSwitches1">Exterior </label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches2" checked>
+            <label class="custom-control-label" for="customSwitches2">Middle </label>
+        </div>
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches3" checked>
+            <label class="custom-control-label" for="customSwitches3">Interior </label>
+        </div>
+    </div>
     <div id="importedAudio">
         <audio id="Boum" onended="playAnimation('playPauseBtn9')">
             <source src="sons/Boum.mp3" type="audio/mpeg">
@@ -109,116 +141,168 @@
             <div class="carousel-container">
                 <div class="carousel-inner" >
                     <div class="soundsss">
-                        <div class="card-container" >
+                        <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle1">
-                                    <button class="btn_listen" name="beatbox2"
-                                            id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="beatbox2"
+                                                id="playPauseBtn1" onClick="playPause('beatbox2', 'playPauseBtn1')">&#9658;
+                                        </button>
+                                    </div>
                                     <div class="info">&#9708;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet1" name="effet1"
+                                               min="-1000" max="1000" onchange="addFilter('beatbox2','circle1','effet1')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle2">
-                                    <button class="btn_listen" name="trompette"
-                                            id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="trompette"
+                                                id="playPauseBtn2" onClick="playPause('trompette','playPauseBtn2')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#11040;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet2" name="effet2"
+                                               min="-1000" max="1000" onchange="addFilter('trompette','circle2','effet2')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle3">
-                                    <button class="btn_listen" name="beatbox1"
-                                            id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="beatbox1"
+                                                id="playPauseBtn3" onClick="playPause('beatbox1','playPauseBtn3')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9636;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet3" name="effet3"
+                                               min="-1000" max="1000" onchange="addFilter('beatbox1','circle3','effet3')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle4">
-                                    <button class="btn_listen" name="pouet" id="playPauseBtn4"
-                                            onClick="playPause('pouet','playPauseBtn4')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="pouet" id="playPauseBtn4"
+                                                onClick="playPause('pouet','playPauseBtn4')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9635;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet4" name="effet4"
+                                               min="-1000" max="1000" onchange="addFilter('pouet','circle4','effet4')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container" >
-                        <div class="card">
-                            <div class="circle" id="circle5">
-                                <button class="btn_listen" name="pouet2" id="playPauseBtn5"
-                                        onClick="playPause('pouet2','playPauseBtn5')">&#9658
-                                </button>
-                                <div class="info">&#11055;</div>
-                            </div>
-                            <div class="settings">
+                            <div class="card">
+                                <div class="circle" id="circle5">
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="pouet2" id="playPauseBtn5"
+                                                onClick="playPause('pouet2','playPauseBtn5')">&#9658
+                                        </button>
+                                    </div>
+                                    <div class="info">&#11055;</div>
+                                </div>
+                                <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet5" name="effet5"
+                                               min="-1000" max="1000" onchange="addFilter('pouet2','circle5','effet5')">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                         <div class="card-container" >
                             <div class="card">
                                 <div class="circle" id="circle6">
-                                    <button class="btn_listen" name="Toc" id="playPauseBtn6"
-                                            onClick="playPause('Toc','playPauseBtn6')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Toc" id="playPauseBtn6"
+                                                onClick="playPause('Toc','playPauseBtn6')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9681;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet6" name="effet6"
+                                               min="-1000" max="1000" onchange="addFilter('Toc','circle6','effet6')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle7">
-                                    <button class="btn_listen" name="Flip" id="playPauseBtn7"
-                                            onClick="playPause('Flip','playPauseBtn7')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Flip" id="playPauseBtn7"
+                                                onClick="playPause('Flip','playPauseBtn7')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9707;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet7" name="effet7"
+                                               min="-1000" max="1000" onchange="addFilter('Flip','circle7','effet7')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle8">
-                                    <button class="btn_listen" name="Badada" id="playPauseBtn8"
-                                            onClick="playPause('Badada','playPauseBtn8')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Badada" id="playPauseBtn8"
+                                                onClick="playPause('Badada','playPauseBtn8')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9714;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet8" name="effet8"
+                                               min="-1000" max="1000" onchange="addFilter('Badada','circle8','effet8')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-container">
                             <div class="card">
                                 <div class="circle" id="circle9">
-                                    <button class="btn_listen" name="Boum" id="playPauseBtn9"
-                                            onClick="playPause('Boum','playPauseBtn9')">&#9658
-                                    </button>
+                                    <div class="lowerDiv">
+                                        <button class="btn_listen" name="Boum" id="playPauseBtn9"
+                                                onClick="playPause('Boum','playPauseBtn9')">&#9658
+                                        </button>
+                                    </div>
                                     <div class="info">&#9672;</div>
                                 </div>
                                 <div class="settings">
+                                    <div>
+                                        <input type="range" id="effet9" name="effet9"
+                                               min="-1000" max="1000" onchange="addFilter('Boum','circle9','effet9')">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

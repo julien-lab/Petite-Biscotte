@@ -30,28 +30,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 const botName = 'Petite Biscotte Bot ';
 
 // Run when client connects
-io.on('connection', socket => {
+io.on('connection', (socket) => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
 
-    // Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
+    if(user.room === "smartphone") {
+      // Welcome current user
+      socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
 
-    // Broadcast when a user connects
-    socket.broadcast
-        .to(user.room) // ------------------------------------------------------------------------------------------------------- Test with user id
-        .emit(
-            'message',
-            formatMessage(botName, `${user.username} has joined the chat`)
-        );
-
-    // Send users and room info
-    io.to(user.room).emit('roomUsers', {
-      room: user.room,
-      users: getRoomUsers(user.room)
-    });
+      // Send users and room info
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    }
   });
 
   // Listen for chatMessage
@@ -66,11 +60,6 @@ io.on('connection', socket => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io.to(user.room).emit(
-          'message',
-          formatMessage(botName, `${user.username} has left the chat`)
-      );
-
       // Send users and room info
       io.to(user.room).emit('roomUsers', {
         room: user.room,
@@ -84,16 +73,53 @@ io.on('connection', socket => {
   })
 
   socket.on('logo', (logo) => {
-    io.to("connectedTable").emit('newLogo', logo)
+    socket.to("connectedTable").emit('newLogo', logo)
   })
 
   socket.on('changingVolume', (volume) => {
-    io.to("connectedTable").emit('newVolume', volume)
+    socket.to("connectedTable").emit('newVolume', volume);
+    io.to("smartphone").emit('newVolume', volume)
   })
 
-  socket.on('talkToSmartphone', (msg) => {
-    io.to("smartphone").emit('talkToSmartphone', msg);
+  socket.on("updateMap",(choice) =>{
+    io.to("smartphone").emit('newMap',choice)
   })
+
+  socket.on('changeSmartphoneDisplay', (msg) => {
+    io.emit('changeSmartphoneDisplay', msg);
+  })
+
+  socket.on('askTochangeSmartphoneDisplay', (msg) => {
+    io.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
+  })
+
+  socket.on('stopTrack', (msg) => {
+    io.to("connectedTable").emit('stopTrack',msg);
+  })
+
+  socket.on('VolumeControl', (msg) => {
+    socket.broadcast
+        .to("smartphone")
+        .emit('VolumeControl', msg);
+    // socket.broadcast.emit('VolumeControl', msg);
+  })
+
+  socket.on('clearTracks', (e) => {
+    io.to("connectedTable").emit('clearTracks',e);
+  })
+
+  socket.on('hideTrack1', (msg) => {
+    io.emit('hideTrack1',msg);
+  })
+
+  socket.on('hideTrack2', (msg) => {
+    io.emit('hideTrack2',msg);
+  })
+
+  socket.on('hideTrack3', (msg) => {
+    io.emit('hideTrack3',msg);
+  })
+
 });
 
 
@@ -116,28 +142,23 @@ app2.use(express.static(path.join(__dirname, 'public')));
 const botName2 = 'Petite Biscotte Bot ';
 
 // Run when client connects
-io2.on('connection', socket => {
+io2.on('connection', (socket) => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
 
-    // Welcome current user
-    socket.emit('message', formatMessage(botName2, 'Welcome to Petite Biscotte!'));
+    if(user.room === "smartphone") {
+      // Welcome current user
+      socket.emit('message', formatMessage(botName, 'Welcome to Petite Biscotte!'));
 
-    // Broadcast when a user connects
-    socket.broadcast
-        .to(user.room) // ------------------------------------------------------------------------------------------------------- Test with user id
-        .emit(
-            'message',
-            formatMessage(botName2, `${user.username} has joined the chat`)
-        );
+      // Send users and room info
+      io2.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
+    }
 
-    // Send users and room info
-    io2.to(user.room).emit('roomUsers', {
-      room: user.room,
-      users: getRoomUsers(user.room)
-    });
   });
 
   // Listen for chatMessage
@@ -152,11 +173,6 @@ io2.on('connection', socket => {
     const user = userLeave(socket.id);
 
     if (user) {
-      io2.to(user.room).emit(
-          'message',
-          formatMessage(botName, `${user.username} has left the chat`)
-      );
-
       // Send users and room info
       io2.to(user.room).emit('roomUsers', {
         room: user.room,
@@ -170,12 +186,53 @@ io2.on('connection', socket => {
   })
 
   socket.on('logo', (logo) => {
-    io2.to("connectedTable").emit('newLogo', logo)
+    socket.to("connectedTable").emit('newLogo', logo)
   })
 
-  socket.on('talkToConnectedTable', (msg) => {
-    io2.to("smartphone").emit('talkToConnectedTable', msg);
+  socket.on('changingVolume', (volume) => {
+    socket.to("connectedTable").emit('newVolume', volume);
+    io2.to("smartphone").emit('newVolume', volume)
   })
+
+  socket.on("updateMap",(choice) =>{
+    io2.to("smartphone").emit('newMap',choice)
+  })
+
+  socket.on('changeSmartphoneDisplay', (msg) => {
+    io2.emit('changeSmartphoneDisplay', msg);
+  })
+
+  socket.on('askTochangeSmartphoneDisplay', (msg) => {
+    io2.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
+  })
+
+  socket.on('stopTrack', (msg) => {
+    io2.to("connectedTable").emit('stopTrack',msg);
+  })
+
+  socket.on('VolumeControl', (msg) => {
+    socket.broadcast
+        .to("smartphone")
+        .emit('VolumeControl', msg);
+    // socket.broadcast.emit('VolumeControl', msg);
+  })
+
+  socket.on('clearTracks', (e) => {
+    io2.to("connectedTable").emit('clearTracks',e);
+  })
+
+  socket.on('hideTrack1', (msg) => {
+    io2.emit('hideTrack1',msg);
+  })
+
+  socket.on('hideTrack2', (msg) => {
+    io2.emit('hideTrack2',msg);
+  })
+
+  socket.on('hideTrack3', (msg) => {
+    io2.emit('hideTrack3',msg);
+  })
+
 });
 
 const UnsafePORT = 3001;

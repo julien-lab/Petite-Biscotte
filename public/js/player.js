@@ -22,43 +22,60 @@ function playPause(audioName,btn){
 
 const MEDIA_ELEMENT_NODES = new WeakMap();
 let context = [];
-let allAudioEffect;
+let allAudioEffect = [];
 
-function addFilter(audioName,btn , circle, boutoncolor, effet){
-
-    const effect = document.getElementById(effet);
+function addFilter(audioName, circle, effet){
+    const effectDiv = document.getElementById(effet);
 
     context = (window.AudioContext) ? new AudioContext() : new window["webkitAudioContext"]();
     let audioSource;
 
     if (MEDIA_ELEMENT_NODES.has(document.getElementById(audioName))) {
-        audioSource = MEDIA_ELEMENT_NODES.get(document.getElementById(audioName))
+        audioSource = MEDIA_ELEMENT_NODES.get(document.getElementById(audioName));
     } else {
         audioSource = context.createMediaElementSource(document.getElementById(audioName))
-        MEDIA_ELEMENT_NODES.set(document.getElementById(audioName), audioSource)
+        MEDIA_ELEMENT_NODES.set(document.getElementById(audioName), audioSource);
     }
 
     let filter;
 
-    console.log(allAudioEffect);
-    if (allAudioEffect === undefined){
-        filter = context.createBiquadFilter();
-        allAudioEffect = [[effet, filter]];
+    for (let effect of allAudioEffect) {
+        if (effect[0] === effet) {
+            filter = effect[1];
+            addEffect(audioSource, filter, effectDiv, circle);
+            return;
+        }
+    }
+    filter = context.createBiquadFilter();
+    allAudioEffect.push([effet, filter])
+    audioSource.connect(filter);
+    filter.connect(context.destination);
+    addEffect(audioSource, filter, effectDiv, circle);
+}
+
+function addEffect(audioSource, filter, effectDiv, circle) {
+    effectIntensity(filter, effectDiv);
+    borderColorEffect(effectDiv.value, circle);
+}
+
+function effectIntensity(filter, effectDiv) {
+    /*filter.frequency.value = 1000;
+    filter.frequency.value=1200;*/
+    if (parseInt(effectDiv.value) < -800) {
+        filter.type='allpass';
     }
     else {
-        filter = allAudioEffect[0][1];
-    }
-
-    try {
-        audioSource.connect(filter);
-        filter.connect(context.destination);
         filter.type='bandpass';
-        filter.detune.value=parseInt(effect.value);
-    } catch (error) {
-        filter.detune.value = parseInt(effect.value)
+        filter.gain.value= 40/900 * parseInt(effectDiv.value) + 40/900*-100; // coeff directeur 40/900 ordonnée à l'origine -100*40/900
+        filter.detune.value = -parseInt(effectDiv.value)*3;
     }
+}
 
-    document.getElementById(circle).style.background = "red"
-    document.getElementById(boutoncolor).style.background = "red"
-
+function borderColorEffect(value, circle){
+    if (parseInt(value) < -800) {
+        document.getElementById(circle).style.border = '';
+    }
+    else {
+        document.getElementById(circle).style.border = (parseInt(value)+ 800) * 0.004 + "px solid red";
+    }
 }

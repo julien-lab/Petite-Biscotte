@@ -1,227 +1,132 @@
-import {addAudioURLToConnectedTable, createURLFromBase64Audio, outputAudio} from './messageDOM/messageDOM.js'
+import {outputAudio} from './messageDOM/messageDOM.js'
 import {outputMessage} from './messageDOM/messageDOM.js'
 import {outputRoomName} from './messageDOM/messageDOM.js'
 import {outputUsers} from './messageDOM/messageDOM.js'
+import {setIo, listenSendButton} from "./smartphoneEventListener.js";
+import {alreadySentLogos} from "./smartphoneEventListener.js";
 
-const chatForm = document.getElementById('chat-form');
-let sendVocalForm;
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
-const startRecord = document.getElementById('startRecord');
-const next = document.querySelector('.next');
-const prev = document.querySelector('.prev');
-const track = document.querySelector('.soundsss');
-const carouselWidth = document.querySelector('.carousel-container').offsetWidth;
-let base64Audio;
-let listObject;
-let $ = jQuery;
+const volumeInput = document.getElementById("volume");
+const volumeDiv = document.getElementById('divVolume');
 let isPlaying = false;
-
-
 const room = 'smartphone';
 const username = 'smartphone'
 
-
 const socket = io();
 
-// Join chatroom
+let audioMap = new Map();
+
+function setAudioMap() {
+  audioMap.set("beatbox2", 'playPauseBtn1');
+  audioMap.set("trompette", 'playPauseBtn2');
+  audioMap.set("beatbox1", 'playPauseBtn3');
+  audioMap.set("pouet", 'playPauseBtn4');
+  audioMap.set("pouet2", 'playPauseBtn5');
+  audioMap.set("Toc", 'playPauseBtn6');
+  audioMap.set("Flip", 'playPauseBtn7');
+  audioMap.set("Badada", 'playPauseBtn8');
+  audioMap.set("Boum", 'playPauseBtn9');
+}
+setAudioMap();
+
+setIo();
+
+export function getIo(){
+  return socket;
+}
+
+let circle = new ProgressBar.Circle('#container', {
+  strokeWidth: 6,
+  duration: 21500,
+  color: '#FF0000',
+  trailColor: '#eee',
+  trailWidth: 1,
+  svgStyle: null
+});
+
+window.onresize = function(){ getOrientation(); }
+
+function getOrientation(){
+  if (window.innerWidth > window.innerHeight) {
+    socket.emit('clearTracks', 'youhouuuuuuuuuuu');
+  }
+}
+
 socket.emit('joinRoom', { username, room });
 
-// Get room and users
 socket.on('roomUsers', ({ room, users }) => {
   outputRoomName(room,roomName);
   outputUsers(users,userList);
 });
 
-socket.on('talkToSmartphone', (msg) => {
+socket.on('hideTrack1', (msg) => {
+  const switch1 = document.getElementById('customSwitches1');
+  switch1.checked = msg !== 'true';
+})
+
+socket.on('hideTrack2', (msg) => {
+  const switch2 = document.getElementById('customSwitches2');
+  switch2.checked = msg !== 'true';
+})
+
+socket.on('hideTrack3', (msg) => {
+  const switch3 = document.getElementById('customSwitches3');
+  switch3.checked = msg !== 'true';
+})
+
+socket.on('changeSmartphoneDisplay', (msg) => {
   isPlaying = !isPlaying
   if(isPlaying) {
     document.getElementById("chat").style.display = "none";
     document.getElementById("playing").style.display = "block";
-    // document.getElementById("playing").style = "display: flex;flex-direction: column"
+    circle.set(0);
+    circle.animate(1);
   }
   else{
     document.getElementById("chat").style.display = "block";
     document.getElementById("playing").style.display = "none";
+    // stopper les audios en cours et remttre tous les audios à 0
+    for (let audio of document.getElementsByTagName('audio')){
+        if (audio.currentTime !==0 && audio.paused === false){
+          let button = document.getElementById('button' + audio.id)
+          if (button !== undefined && button !== null ) {
+            button.click();
+          }
+          else {
+            button = document.getElementById(audioMap.get(audio.id));
+            button.click()
+          }
+        }
+        audio.currentTime = 0;
+    }
   }
 });
 
-// Message from server
 socket.on('message', (message) => {
   if (message.text.length < 1500 ) outputMessage(message);
   else outputAudio(message);
-
-  // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-startRecord.addEventListener('click',(e) => {
-  let div = document.getElementById('holderObject');
-  if (div != null) div.remove();
+socket.on('newVolume', (volume) => {
+  console.log(volume)
+  volumeInput.value = volume;
 });
 
-// vocal submit
-function listenSendButton() {
-  sendVocalForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    socket.emit('chatMessage',base64Audio);
-    addSound(createURLFromBase64Audio(base64Audio))
-    base64Audio = null;
-    // remove the new formed html
-    let div = document.getElementById('holderObject');
-    div.remove();
-  });
-}
-
-// Message submit
-chatForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  // Get message text
-  let msg = e.target.elements.msg.value;
-
-  msg = msg.trim();
-
-  if (!msg) {
-    return false;
+socket.on('VolumeControl', (msg) => {
+  if (msg === 'lost') {
+    volumeInput.style.display = 'none';
+    volumeDiv.style.display = 'block';
   }
-
-  // Emit message to server
-  socket.emit('chatMessage', msg);
-
-  // Clear input
-  e.target.elements.msg.value = '';
-  e.target.elements.msg.focus();
-});
-
-//Prompt the user before leave chat room
-document.getElementById('leave-btn').addEventListener('click', () => {
-  const leaveRoom = confirm('Are you sure you want to leave the chatroom?');
-  if (leaveRoom) {
-    window.location = '../index.html';
-  } else {
+  else if (msg === 'reset'){
+    volumeInput.style.display = 'block';
+    volumeDiv.style.display = 'none';
   }
 });
 
+socket.on("newMap",(choice)=>{
+  alreadySentLogos.set(choice,true)
+})
 
-
-const container = document.querySelector('.chat-messages');
-
-
-container.addEventListener('click', async function (e) {
-  //e.target.style.display = "none";
-  let localBase64 ;
-  if (e.target.classList.contains('btn')) {
-    let blob = await fetch(e.target.value).then(r => r.blob());
-    let reader = new window.FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = function() {
-      localBase64 = reader.result;
-      localBase64 = localBase64.split(',')[1];
-      socket.emit('logo', document.getElementById('dropdown').value)
-      socket.emit('connectedTableAudioData', localBase64);
-    }
-  }
-});
-
-
-
-/* ----------------- RECORDING PART ----------------- */
-
-
-
-
-$(document).ready(function () {
-  let myRecorder = {
-    objects: {
-      context: null,
-      stream: null,
-      recorder: null
-    },
-    init: function () {
-      if (null === myRecorder.objects.context) {
-        myRecorder.objects.context = new (
-          window.AudioContext || window.webkitAudioContext
-          );
-      }
-    },
-    start: function () {
-      let options = {audio: true, video: false};
-      navigator.mediaDevices.getUserMedia(options).then(function (stream) {
-        myRecorder.objects.stream = stream;
-        myRecorder.objects.recorder = new Recorder(
-          myRecorder.objects.context.createMediaStreamSource(stream),
-          {numChannels: 1}
-        );
-        myRecorder.objects.recorder.record();
-      }).catch(function (err) {});
-    },
-    stop: function (listObject) {
-      if (null !== myRecorder.objects.stream) {
-        myRecorder.objects.stream.getAudioTracks()[0].stop();
-      }
-      if (null !== myRecorder.objects.recorder) {
-        myRecorder.objects.recorder.stop();
-
-        // Validate object
-        if (null !== listObject
-                && 'object' === typeof listObject
-                && listObject.length > 0) {
-
-          // Export the WAV file
-          myRecorder.objects.recorder.exportWAV(function (blob) {
-            let reader = new window.FileReader();
-            reader.readAsDataURL(blob);
-            reader.onloadend = function() {
-              base64Audio = reader.result;
-              base64Audio = base64Audio.split(',')[1];
-            }
-            let url = (window.URL || window.webkitURL)
-                    .createObjectURL(blob);
-
-            // Prepare the playback
-            let audioObject = $('<audio controls ></audio>')
-                    .attr('src', url);
-
-            // Create send audio button
-            let sendObject = $('<form id="sendVocal"><button class="btn"><i class="fas fa-paper-plane"></i> Send</button></form>');
-
-            // Wrap everything in a row
-            let holderObject = $('<div id="holderObject"></div>')
-                    .append(audioObject)
-                    .append(sendObject)
-
-            // Append to the list
-            listObject.append(holderObject);
-
-            // Listen to the send audio button
-            sendVocalForm = document.getElementById('sendVocal');
-            listenSendButton();
-          });
-        }
-      }
-    }
-  };
-
-  // Prepare the recordings list
-  listObject = $('[data-role="recordings"]');
-
-  // Prepare the record button
-  $('[data-role="controls"] > button').click(function () {
-    // Initialize the recorder
-    myRecorder.init();
-
-    // Get the button state
-    let buttonState = !!$(this).attr('data-recording');
-
-    // Toggle
-    if (!buttonState) {
-      $(this).attr('data-recording', 'true');
-      myRecorder.start();
-    } else {
-      $(this).attr('data-recording', '');
-      myRecorder.stop(listObject);
-    }
-  });
-});
