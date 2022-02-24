@@ -21,6 +21,14 @@ function getOffset(el) {
     };
 }
 
+function touchHandler(event){
+    if(event.touches.length > 1){
+        event.preventDefault()
+    }
+}
+
+window.addEventListener("touchstart", touchHandler, false);
+
 
 function computeAngle(pX, pY){
     let centerX = window.innerWidth/2;
@@ -212,15 +220,6 @@ function touchend(event) {
         let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName, logo);
         let trackDiv = document.getElementById(trackTargeted);
         trackDiv.setAttribute("style", "background:" + conicGradient);
-        /*var logo = document.createElement("div");
-        logo.textContent = event.target.parentElement.childNodes[3].textContent
-        logo.style.position = "absolute"
-        logo.style.top = y +"px"
-        logo.style.left = x +"px"
-        logo.style.zIndex = "100"
-        logo.style.fontSize = "35px"
-        console.log(logo)*/
-        //document.body.appendChild(logo)
     }
 
 }
@@ -255,7 +254,6 @@ function onDrop(event) {
 
     let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
     let trackDiv = document.getElementById(trackTargeted);
-    console.log(conicGradient);
     trackDiv.setAttribute("style", "background:" + conicGradient);
 }
 
