@@ -52,10 +52,13 @@ function playSongWhenTouchOnTrack(event) {
             }
         }
     }
+    doubletap(x, y);
+
+
 }
 
 //document.addEventListener("touchstart", playSongWhenTouchOnTrack);
-//document.addEventListener("click", doubletap);
+//document.addEventListener("touchend", doubletap);
 //document.addEventListener("touchmove", previewSoundOnTrack);
 
 
@@ -104,11 +107,7 @@ function clearTrackFromPreview(track) {
 
 
 var mylatesttap ;
-function doubletap(event) {
-
-    var x = event.clientX;
-    var y = event.clientY;
-
+function doubletap(x, y) {
     const trackTargeted = document.elementFromPoint(x, y).id;
 
     var now = new Date().getTime();
@@ -138,7 +137,7 @@ function doubletap(event) {
         }
 
     }else{
-        console.log("Bug")
+        console.log("Simple click")
     }
 
     mylatesttap = new Date().getTime();
@@ -313,6 +312,9 @@ async function playComposition() {
             if(sound.startPos === i){
                 var audio = document.getElementById(sound.soundName);
                 audio.volume = volume;
+                if(!audio.paused){
+                    audio.currentTime = 0
+                }
                 audio.play();
             }
         }
