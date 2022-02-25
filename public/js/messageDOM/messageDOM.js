@@ -191,6 +191,7 @@ function addInputSlider(audioURL, circle) {
     input.id = 'input' + audioURL;
     input.min = "-1000";
     input.max = "1000";
+    input.value = "-1000"
     input.onchange = function (){
         addFilter(audioURL , circle.id , input.id);
     }
