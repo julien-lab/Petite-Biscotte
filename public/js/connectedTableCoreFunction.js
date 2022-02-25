@@ -1,5 +1,30 @@
 disableScroll();
 
+let positionsTrack1 = [[1171,129],[1217,131],[1262,133],[1316,133],[1359,139],[1417,145],[1467,154],[1523,161],[1589,173],[1654,193],
+    [1727,212],[1808,236],[1886,269],[1975,313],[2055,368],[2134,434],[2199,507],[2239,601], [2236,699],[2216,793],[2163,868],[2086,945],
+    [2003,997],[1921,1048],[1832,1083],[1760,1111],[1670,1137],[1603,1151],[1539,1167],[1480,1173],[1427,1181],[1373,1187],
+    [1330,1193],[1280,1193],[1233,1197],[1177,1198],[1133,1197],[1081,1198],[1041,1198],[987,1196],[946,1191],[895,1187],
+    [841,1177],[771,1169],[707,1155],[639,1138],[573,1117],[490,1096],[416,1060],[327,1018],[241,961],[167,893],[104,819],[67,713],
+    [59,629],[92,536],[145,453],[225,388],[308,323],[387,279],[469,245],[547,217],[628,191],[699,176],[761,159],[819,151],[873,145],
+    [926,140],[976,133],[1027,131],[1075,131],[1130,129]]
+
+let positionsTrack2 = [[1166,200],[1211,202],[1250,206],[1292,206],[1335,212],[1381,217],[1425,220],[1477,227],[1538,238],[1600,253],
+    [1661,271],[1725,292],[1797,320],[1873,358],[1947,404],[2018,463],[2079,531],[2120,620],[2122,699],[2093,781],[2044,855],[1987,910],
+    [1901,963],[1826,1007],[1754,1037],[1682,1059],[1612,1078],[1549,1095],[1493,1101],[1445,1113],[1391,1123],[1352,1126],
+    [1307,1125],[1265,1129],[1221,1133],[1172,1135],[1137,1136],[1095,1133],[1057,1132],[1009,1130],[971,1126],[921,1119],
+    [874,1117],[824,1108],[763,1095],[706,1079],[645,1063],[577,1042],[497,1013],[421,980],[353,937],[286,878],[221,803],[190,711],
+    [182,633],[211,551],[260,478],[326,422],[406,369],[483,331],[555,301],[622,275],[698,255],[761,243],[811,229],[861,220],[914,213],
+    [952,208],[997,203],[1040,201],[1082,197],[1124,200]]
+
+let positionsTrack3 = [[1166,266],[1203,265],[1233,262],[1273,263],[1313,271],[1351,274],[1390,278],[1436,285],[1486,292],[1539,307],
+    [1595,321],[1655,339],[1717,363],[1787,394],[1852,434],[1922,484],[1971,541],[2006,625],[2007,694],[1987,771],[1941,831],[1877,883],
+    [1813,926],[1743,963],[1676,989],[1616,1009],[1549,1028],[1495,1036],[1451,1046],[1407,1052],[1364,1057],[1323,1065],
+    [1287,1066],[1249,1067],[1210,1069],[1172,1073],[1141,1073],[1102,1071],[1071,1072],[1027,1070],[993,1067],[951,1063],
+    [910,1058],[866,1052],[811,1040],[759,1029],[704,1013],[639,997],[583,971],[514,940],[445,899],[386,850],[334,782],[296,705],
+    [295,633],[319,568],[362,497],[429,446],[493,403],[565,370],[628,346],[689,325],[753,308],[808,293],[857,284],[903,279],[941,272],
+    [983,269],[1021,267],[1053,263],[1095,263],[1133,262]]
+
+
 let lastTrack = "Track1";
 let canPlayTrack1 = true;
 let canPlayTrack2 = true;
@@ -83,17 +108,21 @@ async function playSongWhenTouchOnTrack(event) {
 
 }
 
-//document.addEventListener("touchstart", playSongWhenTouchOnTrack);
-//document.addEventListener("touchend", doubletap);
-//document.addEventListener("touchmove", previewSoundOnTrack);
 
-
-function extracted(event) {
+function extractSoundName(event) {
     let soundName
     if (event.target.classList[0] === "circle" || event.target.classList[0] === "circle_sent") soundName = event.target.firstElementChild.name
     else if (event.target.classList[0] === "btn_listen" || event.target.classList[0] === "btn_listen_sent") soundName = event.target.name
     else if (event.target.classList[0] === "info") soundName = event.target.parentNode.firstElementChild.name
     return soundName;
+}
+
+function extractLogo(event) {
+    let logo
+    if (event.target.classList[0] === "circle" || event.target.classList[0] === "circle_sent") logo = event.target.childNodes[3].textContent
+    else if (event.target.classList[0] === "btn_listen" || event.target.classList[0] === "btn_listen_sent") logo = event.target.parentElement.childNodes[3].textContent
+    else if (event.target.classList[0] === "info") logo = event.target.textContent
+    return logo;
 }
 
 function previewSoundOnTrack(event){
@@ -115,7 +144,7 @@ function previewSoundOnTrack(event){
             startPos = 180 + (180-startPos);
         }
 
-        const soundName = extracted(event);
+        const soundName = extractSoundName(event);
 
         let soundPercentage = (document.getElementById(soundName).duration*100)/20;
         let soundLength = (360*soundPercentage)/100;
@@ -200,19 +229,8 @@ function touchend(event) {
     const x = event.changedTouches[0].pageX;
     const y = event.changedTouches[0].pageY;
 
-    const soundName = extracted(event)
+    const soundName = extractSoundName(event)
     console.log(event.target.id)
-    let condition = event.target.id.substr(0,1)
-    /*if (condition === 'p'){
-        logo = document.getElementById("logo"+event.target.id.substr(12,14))
-    } else if(condition === 'c'){
-        logo = document.getElementById("logo"+event.target.id.substr(6,8))
-    } else if(condition === 'l'){
-        logo = document.getElementById("logo"+event.target.id.substr(4,6))
-
-    }
-    console.log(logo)
-    console.log(logo.innerHTML)*/
 
 
     const trackTargeted = document.elementFromPoint(x, y).id;
@@ -225,9 +243,10 @@ function touchend(event) {
             startPos = 180 + (180-startPos);
         }
 
-        let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
+        let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName,true);
         let trackDiv = document.getElementById(trackTargeted);
         trackDiv.setAttribute("style", "background:" + conicGradient);
+        placeLogo(startPos,document.getElementById(soundName).duration,trackTargeted);
     }
 
 }
@@ -263,6 +282,7 @@ function onDrop(event) {
     let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
     let trackDiv = document.getElementById(trackTargeted);
     trackDiv.setAttribute("style", "background:" + conicGradient);
+
 }
 
 var soundsOnTracks= [];
@@ -282,6 +302,42 @@ function constructConicGradient(startPos, soundDuration, trackTargeted, soundNam
     //console.log((startPos+endPos)/2)
 
     return writeConicGradientString(trackTargeted, soundsOnTracks);
+}
+
+function placeLogo(startPos,soundDuration, track) {
+    let soundPercentage = (soundDuration*100)/20;
+
+    //Calcule de la taille du son sur la piste
+    let soundLength = (360*soundPercentage)/100;
+
+    //Calcule la position de fin du son
+    let endPos = Math.round(startPos+soundLength);
+
+    var logo = document.createElement("div");
+    logo.textContent = extractLogo(event)
+    logo.style.position = "absolute"
+    var index = Math.round(((startPos + endPos) / 10) - 1)
+    let x,y
+    if(track === "Track1"){
+        x = positionsTrack1[index][0]
+        y = positionsTrack1[index][1] - 15
+    }
+    else if (track === "Track2"){
+        x = positionsTrack2[index][0]
+        y = positionsTrack2[index][1] - 15
+    }
+    else{
+        x = positionsTrack3[index][0]
+        y = positionsTrack3[index][1] - 20
+    }
+    console.log(index, positionsTrack1.length, positionsTrack1[index])
+    logo.style.left = x + "px"
+    logo.style.top = y + "px"
+    logo.style.zIndex = "100"
+    logo.style.fontSize = "xx-large"
+    logo.classList.add("placedLogo");
+    document.body.appendChild(logo)
+
 }
 
 function writeConicGradientString(trackTargeted, sOT){
@@ -482,6 +538,16 @@ function clearTracks(){
         document.getElementById("Track1").style.background = "lightgrey"
         document.getElementById("Track2").style.background = "lightgrey"
         document.getElementById("Track3").style.background = "lightgrey"
+        const logos = document.querySelectorAll('.placedLogo');
+
+        logos.forEach(logo => {
+            logo.remove();
+        });
     }
 }
 
+function printMousePos(event) {
+    console.log(event.clientX,event.clientY)
+}
+
+//document.addEventListener("click", printMousePos);
