@@ -374,12 +374,16 @@ let canSuppress = true
 async function playComposition() {
     // sert à arrêter les audioz avant le démarrage de la piste par exemple quand un audio est en train d'être écouté
     stopComposition();
+    initCursor('Track1');
+    initCursor('Track2');
+    initCursor('Track3');
     if (!canPlay || soundsOnTracks.length === 0) return;
     socket.emit('changeSmartphoneDisplay', 'changeState');
     canPlay = false;
     canSuppress = false;
-    for (let i = 0; i < 360; i++) {
+    for (let i = 0; i < 720; i++) {
         console.log('hello')
+
         let promise = sleep(55);
         for (let j=0;j<soundsOnTracks.length;j++) {
             //if (canPlayTrack1 &&)
@@ -407,6 +411,61 @@ async function playComposition() {
     socket.emit("hideTrack1", "false");
     socket.emit("hideTrack2", "false");
     socket.emit("hideTrack3", "false");
+
+}
+
+function initCursor(track){
+    var trackDiv = document.getElementById(track);
+    const height = trackDiv.offsetHeight;
+    const width = trackDiv.offsetWidth;
+    console.log(height, width);
+
+    const sH = window.screen.height;
+    const sW = window.screen.width;
+
+    var hPercentage;
+    var wPercentage;
+    if(track === 'Track1'){
+        hPercentage = 87.5;
+        wPercentage =98;
+    }else if(track === 'Track2'){
+        hPercentage = 77.1;
+        wPercentage =88;
+    }else{
+        hPercentage = 67.5;
+        wPercentage =78;
+    }
+    var hPxToAdd = (sH - ((sH*hPercentage)/100));
+    var wPxToAdd = (sW - ((sW*wPercentage)/100));
+    moveCursor((height/2),(width/2), hPxToAdd, wPxToAdd, track);
+}
+
+
+
+async function moveCursor(h, w, hPxToAdd, wPxToAdd, track) {
+   var test = true;
+   var i = 540;
+    while(test){
+        let promise = sleep(27.5);
+        var x = wPxToAdd + w + (w * Math.cos((i/2) * Math.PI / 180));
+        var y = hPxToAdd + h + (h * Math.sin((i/2) * Math.PI / 180));
+        if(track === 'Track1'){
+            $('#cursor1').css({left: x, top: y});
+        }else if(track === 'Track2'){
+            $('#cursor2').css({left: x, top: y});
+        }else{
+            $('#cursor3').css({left: x, top: y});
+        }
+        i++;
+        if(i === 721){
+            i=0;
+        }
+        if(i === 539){
+            test = false;
+        }
+        await promise;
+    }
+
 }
 
 function sleep(ms) {

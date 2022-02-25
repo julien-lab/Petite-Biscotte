@@ -247,7 +247,7 @@ a {
 
 
 .Track1 {
-    width: 99%;
+    width: 98%;
     height: 86%;
     position: absolute;
     background: conic-gradient(
@@ -285,6 +285,36 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+}
+
+#cursor1 {
+    position: absolute;
+    z-index: 10;
+    top: 6.6%;
+    left: 50%;
+    color: blueviolet;
+    font-size: 72px;
+    font-weight: bold;
+}
+
+#cursor2 {
+    position: absolute;
+    z-index: 10;
+    top: 12.2%;
+    left: 50%;
+    color: blueviolet;
+    font-size: 63px;
+    font-weight: bold;
+}
+
+#cursor3 {
+    position: absolute;
+    z-index: 10;
+    top: 17.4%;
+    left: 50%;
+    color: blueviolet;
+    font-size: 55px;
+    font-weight: bold;
 }
 
 body {
