@@ -120,8 +120,10 @@ function extractSoundName(event) {
 
 function extractLogo(event) {
     let logo
-    if (event.target.classList[0] === "circle" || event.target.classList[0] === "circle_sent") logo = event.target.childNodes[3].textContent
-    else if (event.target.classList[0] === "btn_listen" || event.target.classList[0] === "btn_listen_sent") logo = event.target.parentElement.childNodes[3].textContent
+    if (event.target.classList[0] === "circle") logo = event.target.childNodes[3].textContent
+    else if (event.target.classList[0] === "circle_sent") logo = event.target.childNodes[1].textContent
+    else if (event.target.classList[0] === "btn_listen") logo = event.target.parentElement.childNodes[3].textContent
+    else if (event.target.classList[0] === "btn_listen_sent") logo = event.target.parentElement.childNodes[1].textContent
     else if (event.target.classList[0] === "info") logo = event.target.textContent
     return logo;
 }
@@ -171,6 +173,15 @@ function clearTrackFromPreview(track) {
     trackDiv.setAttribute("style", "background:" + conicGradient);
 }
 
+function findLogoWhenDuplicate(soundName){
+    let playButton = document.getElementsByName(soundName)[0]
+    let logo
+    if (playButton.classList[0] === "btn_listen") logo = playButton.parentElement.childNodes[3].textContent
+    else if (playButton.classList[0] === "btn_listen_sent") logo = playButton.parentElement.childNodes[1].textContent
+    return logo
+
+}
+
 
 var mylatesttap ;
 var doubleClickOn = false;
@@ -197,6 +208,8 @@ function doubletap(x, y) {
                         let conicGradient = constructConicGradient(sound.endPos+1, document.getElementById(sound.soundName).duration, trackTargeted , sound.soundName);
                         let trackDiv = document.getElementById(trackTargeted);
                         trackDiv.setAttribute("style", "background:" + conicGradient);
+                        let logo = findLogoWhenDuplicate(sound.soundName)
+                        placeLogo(sound.endPos+1,document.getElementById(sound.soundName).duration,trackTargeted,logo)
                         break;
                     }
                 }
@@ -231,7 +244,6 @@ function touchend(event) {
     const y = event.changedTouches[0].pageY;
 
     const soundName = extractSoundName(event)
-    console.log(event.target.id)
 
 
     const trackTargeted = document.elementFromPoint(x, y).id;
@@ -277,8 +289,6 @@ function onDrop(event) {
         startPos = 180 + (180-startPos);
     }
 
-    console.log(document.getElementById(soundName).duration);
-    console.log(trackTargeted);
 
     let conicGradient = constructConicGradient(startPos, document.getElementById(soundName).duration, trackTargeted , soundName);
     let trackDiv = document.getElementById(trackTargeted);
@@ -305,7 +315,7 @@ function constructConicGradient(startPos, soundDuration, trackTargeted, soundNam
     return writeConicGradientString(trackTargeted, soundsOnTracks);
 }
 
-function placeLogo(startPos,soundDuration, track) {
+function placeLogo(startPos,soundDuration, track, foundLogo = undefined) {
     let soundPercentage = (soundDuration*100)/20;
 
     //Calcule de la taille du son sur la piste
@@ -315,7 +325,11 @@ function placeLogo(startPos,soundDuration, track) {
     let endPos = Math.round(startPos+soundLength);
 
     var logo = document.createElement("div");
-    logo.textContent = extractLogo(event)
+    if(foundLogo!==undefined) {
+        console.log(foundLogo)
+        logo.textContent = foundLogo
+    }
+    else logo.textContent = extractLogo(event)
     logo.style.position = "absolute"
     var index = Math.round(((startPos + endPos) / 10) - 1)
     let x,y
@@ -331,7 +345,7 @@ function placeLogo(startPos,soundDuration, track) {
         x = positionsTrack3[index][0]
         y = positionsTrack3[index][1] - (30*100/1296)
     }
-    console.log(index, positionsTrack1.length, positionsTrack1[index])
+    console.log(x,y)
     logo.style.left = x + "%"
     logo.style.top = y + "%"
     logo.style.zIndex = "100"
@@ -440,7 +454,6 @@ async function playComposition() {
     canSuppress = false;
     for (let i = 0; i < 720; i++) {
         console.log('hello')
-
         let promise = sleep(55);
         for (let j=0;j<soundsOnTracks.length;j++) {
             //if (canPlayTrack1 &&)
@@ -552,4 +565,4 @@ function printMousePos(event) {
     console.log($(window).width(),$(window).height())
 }
 
-document.addEventListener("click", printMousePos);
+//document.addEventListener("click", printMousePos);
