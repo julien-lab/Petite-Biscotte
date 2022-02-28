@@ -430,10 +430,10 @@ let canSuppress = true
 async function playComposition() {
     // sert à arrêter les audioz avant le démarrage de la piste par exemple quand un audio est en train d'être écouté
     stopComposition();
+    if (!canPlay || soundsOnTracks.length === 0) return;
     initCursor('Track1');
     initCursor('Track2');
     initCursor('Track3');
-    if (!canPlay || soundsOnTracks.length === 0) return;
     socket.emit('changeSmartphoneDisplay', 'changeState');
     canPlay = false;
     canSuppress = false;
@@ -493,7 +493,7 @@ function initCursor(track){
     }
     var hPxToAdd = (sH - ((sH*hPercentage)/100));
     var wPxToAdd = (sW - ((sW*wPercentage)/100));
-    moveCursor((height/2),(width/2), hPxToAdd, wPxToAdd, track);
+    moveCursor((height/2)-20,(width/2)-20, hPxToAdd, wPxToAdd, track);
 }
 
 
@@ -501,17 +501,26 @@ function initCursor(track){
 async function moveCursor(h, w, hPxToAdd, wPxToAdd, track) {
    var test = true;
    var i = 540;
+   var deg = 0;
+   var time = 55.1;
     while(test){
-        let promise = sleep(27.5);
+        let promise = sleep(time);
         var x = wPxToAdd + w + (w * Math.cos((i/2) * Math.PI / 180));
         var y = hPxToAdd + h + (h * Math.sin((i/2) * Math.PI / 180));
         if(track === 'Track1'){
+            var cursor = document.getElementById("cursor1");
+            cursor.setAttribute("style", "transform: rotate("+(deg/2) + "deg)" );
             $('#cursor1').css({left: x, top: y});
         }else if(track === 'Track2'){
+            var cursor = document.getElementById("cursor2");
+            cursor.setAttribute("style", "transform: rotate("+(deg/2) + "deg)" );
             $('#cursor2').css({left: x, top: y});
         }else{
+            var cursor = document.getElementById("cursor3");
+            cursor.setAttribute("style", "transform: rotate("+(deg/2) + "deg)" );
             $('#cursor3').css({left: x, top: y});
         }
+        deg++;
         i++;
         if(i === 721){
             i=0;
@@ -519,6 +528,12 @@ async function moveCursor(h, w, hPxToAdd, wPxToAdd, track) {
         if(i === 539){
             test = false;
         }
+        if( (i >=540 && i<=  720) || (i >=180 && i<= 360)){
+            time-=0.305;
+        }else{
+            time+=0.305;
+        }
+
         await promise;
     }
 
