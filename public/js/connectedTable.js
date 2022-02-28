@@ -10,6 +10,11 @@ const track3 = document.getElementById('Track3');
 // Join chatroom
 socket.emit('joinRoom', { username, room });
 
+window.addEventListener('contextmenu', function (e) {
+    // do something here...
+    e.preventDefault();
+}, false);
+
 // Message from server
 socket.on('newAudioData', (base64Audio) => {
     let url = createURLFromBase64Audio(base64Audio);
