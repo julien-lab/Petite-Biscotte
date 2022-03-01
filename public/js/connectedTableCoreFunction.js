@@ -237,7 +237,11 @@ function startDrag(event){
     event.dataTransfer.setData("soundName",soundName)
 }
 
+let onlyOnetouchAtTime = true;
+
 function touchend(event) {
+    if (!onlyOnetouchAtTime) return;
+    onlyOnetouchAtTime = false;
     //let logo = null
     clearTrackFromPreview(lastTrack);
     const x = event.changedTouches[0].pageX;
@@ -261,6 +265,7 @@ function touchend(event) {
         trackDiv.setAttribute("style", "background:" + conicGradient);
         placeLogo(startPos,document.getElementById(soundName).duration,trackTargeted);
     }
+    onlyOnetouchAtTime = true;
 
 }
 
