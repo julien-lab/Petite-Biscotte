@@ -92,21 +92,23 @@
     <!--<label for="volume"></label>
     <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>-->
     <br>
-    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    <div style="display: flex; justify-content: center">
+        <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    </div>
     <div id="divVolume" class="volumeControl" style="display: none"><button class="mdc-button mdc-button--raised" id="volumeButton"> Take back volume control</button></div>
     <br>
     <div class="divToggleButton">
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitches1" checked>
-            <label class="custom-control-label" for="customSwitches1">Exterior </label>
+            <label class="custom-control-label" for="customSwitches1">Exterior Track </label>
         </div>
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitches2" checked>
-            <label class="custom-control-label" for="customSwitches2">Middle </label>
+            <label class="custom-control-label" for="customSwitches2">Middle Track </label>
         </div>
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitches3" checked>
-            <label class="custom-control-label" for="customSwitches3">Interior </label>
+            <label class="custom-control-label" for="customSwitches3">Interior Track </label>
         </div>
     </div>
     <div id="importedAudio">

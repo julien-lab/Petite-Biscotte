@@ -240,7 +240,10 @@ function startDrag(event){
 let onlyOnetouchAtTime = true;
 
 function touchend(event) {
-    if (!onlyOnetouchAtTime) return;
+    if (!onlyOnetouchAtTime) {
+        event.preventDefault();
+        return;
+    }
     onlyOnetouchAtTime = false;
     //let logo = null
     clearTrackFromPreview(lastTrack);
