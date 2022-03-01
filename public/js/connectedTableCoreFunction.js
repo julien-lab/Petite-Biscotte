@@ -450,15 +450,21 @@ function stopComposition(){
 let exit = false;
 let canSuppress = true
 
+function delay(){
+    if (canPlay) {
+        socket.emit('warnBeforeChange');
+        setTimeout(function() {playComposition()}, 5000);
+        canPlay = false;
+    }
+}
+
 async function playComposition() {
     // sert à arrêter les audioz avant le démarrage de la piste par exemple quand un audio est en train d'être écouté
     stopComposition();
-    if (!canPlay || soundsOnTracks.length === 0) return;
     initCursor('Track1');
     initCursor('Track2');
     initCursor('Track3');
     socket.emit('changeSmartphoneDisplay', 'changeState');
-    canPlay = false;
     canSuppress = false;
     for (let i = 0; i < 720; i++) {
         console.log('hello')

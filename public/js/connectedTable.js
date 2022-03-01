@@ -65,6 +65,7 @@ socket.on('clearTracks', (e) => {
 
 socket.on('askTochangeSmartphoneDisplay', (msg) => {
     if (canPlay && soundsOnTracks.length !== 0){
+        canPlay = false;
         playComposition();
     }
     else {

@@ -84,3 +84,16 @@ function setClasses(card_container, card, circle, audioURL){
     circle.classList.add("circle_sent");
     circle.id = 'circle' + audioURL;
 }
+
+
+function openFAB() {
+    let popup = document.querySelector('.fab')
+    console.log(popup)
+    popup.style.display = 'block';
+    setTimeout(function () {closeFAB()}, 4000);
+}
+
+function closeFAB() {
+    let popup = document.querySelector('.fab')
+    popup.style.display = 'none';
+}
