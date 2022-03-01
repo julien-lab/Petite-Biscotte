@@ -79,3 +79,13 @@ function borderColorEffect(value, circle){
         document.getElementById(circle).style.border = (parseInt(value)+ 800) * 0.004 + "px solid red";
     }
 }
+
+function disableRefresh(e){
+    switch (e.keyCode) {
+        case 116: // 'F5'
+            event.returnValue = false;
+            event.keyCode = 0;
+            window.status = "Refresh is disabled";
+            break;
+    }
+}

@@ -165,6 +165,7 @@ html, body {
     font-size: 16px;
     background: var(--light-color);
     margin: 0;
+    overscroll-behavior: contain;
 }
 
 ul {
