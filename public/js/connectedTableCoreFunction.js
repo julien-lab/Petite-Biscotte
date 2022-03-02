@@ -37,6 +37,7 @@ let volume = 0.5;
 
 function setVolume(newVolume){
     volume = newVolume
+    document.getElementById("volume").value = newVolume
 }
 
 function getOffset(el) {

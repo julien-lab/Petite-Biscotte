@@ -10,6 +10,7 @@
     margin: 50px auto;
     min-height: 200px;
     position: relative;
+    z-index: 2;
 }
 
 .carousel-inner{
@@ -257,6 +258,7 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+    z-index: 1;
 }
 
 
@@ -271,6 +273,7 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+    z-index: 1;
 }
 
 
@@ -285,6 +288,7 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+    z-index: 1;
 }
 
 #cursor1 {
@@ -356,6 +360,10 @@ body {
     color: #141414;
 }
 
+#volume{
+    z-index: 4;
+    width: 40%;
+}
 
 @-webkit-keyframes rotation {
     0%   { -webkit-transform: rotate(0deg); }

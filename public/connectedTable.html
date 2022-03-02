@@ -211,7 +211,10 @@
       </div>
     </div>
   </div>
-  <br>
+  <div style="display: flex; justify-content: center">
+    <img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/>
+    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)"/>
+  </div>
   <div class="carousel-container">
     <div class="carousel-inner">
       <div class="soundsss" id="newTrack">

@@ -11,7 +11,6 @@ const track3 = document.getElementById('Track3');
 socket.emit('joinRoom', { username, room });
 
 window.addEventListener('contextmenu', function (e) {
-    // do something here...
     e.preventDefault();
 }, false);
 
