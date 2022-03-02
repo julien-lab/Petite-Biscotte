@@ -91,6 +91,13 @@
     transform: rotate(180deg);
  }
 
+#sens{
+    position: absolute;
+    top: 5%;
+    left: 52%;
+    transform: rotate(45deg);
+}
+
 #btn_listenAll2{
     position: absolute;
     font-size: 400%;

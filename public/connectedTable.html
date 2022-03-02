@@ -29,6 +29,9 @@
   <title>Petite Biscotte</title>
 </head>
 <body onkeydown="return disableRefresh(event)">
+
+<img id="sens" src="sens2.png" style="" alt=""/>
+
 <div id="btn_listenAll" onclick="delay()">&#9658;</div>
 <div id="btn_listenAll2" onclick="delay()">&#9658;</div>
 <div id="trash" onclick="clearTracks()"><img class="buttonImages" src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-trash-interface-kiranshastry-solid-kiranshastry.png"/></div>
@@ -67,6 +70,7 @@
   </audio>
 
 </div>
+
 
 <div id="Track1" class="Track1" ondrop="onDrop(event)" ondragover="allowDrop(event)" ontouchstart="playSongWhenTouchOnTrack(event)"  ></div>
 <div id="Track2" class="Track2" ondrop="onDrop(event)" ondragover="allowDrop(event)" ontouchstart="playSongWhenTouchOnTrack(event)" ></div>
