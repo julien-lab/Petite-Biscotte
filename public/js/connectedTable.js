@@ -10,6 +10,43 @@ const track3 = document.getElementById('Track3');
 // Join chatroom
 socket.emit('joinRoom', { username, room });
 
+function hideLogos(track,msg){
+    let x
+    for(let i = 0;i<cptLogos;i++){
+        let logo = document.getElementById(i.toString())
+        x = logo.style.left.replace("%","")
+        console.log("coord : ",x)
+        if(track === "Track1"){
+            positionsTrack1.forEach(element =>{
+                if (element[0]===undefined) return
+                if(element[0].toFixed(4).toString()===x){
+                    console.log("found")
+                    if(msg === "true") logo.style.display = "none"
+                    else logo.style.display = "block"
+                }
+            })
+        }
+        else if(track === "Track2"){
+            positionsTrack2.forEach(element =>{
+                if (element[0]===undefined) return
+                if(element[0].toFixed(4).toString()===x){
+                    if(msg === "true") logo.style.display = "none"
+                    else logo.style.display = "block"
+                }
+            })
+        }
+        else if(track === "Track3"){
+            positionsTrack3.forEach(element =>{
+                if (element[0]===undefined) return
+                if(element[0].toFixed(4).toString()===x){
+                    if(msg === "true") logo.style.display = "none"
+                    else logo.style.display = "block"
+                }
+            })
+        }
+    }
+}
+
 window.addEventListener('contextmenu', function (e) {
     e.preventDefault();
 }, false);
@@ -28,6 +65,7 @@ socket.on('hideTrack1', (msg) => {
         track1.style.display = 'block';
         canPlayTrack1 = true;
     }
+    hideLogos("Track1",msg)
 })
 
 socket.on('hideTrack2', (msg) => {
@@ -38,6 +76,7 @@ socket.on('hideTrack2', (msg) => {
         track2.style.display = 'block';
         canPlayTrack2 = true;
     }
+    hideLogos("Track2",msg)
 })
 
 socket.on('hideTrack3', (msg) => {
@@ -48,6 +87,7 @@ socket.on('hideTrack3', (msg) => {
         track3.style.display = 'block';
         canPlayTrack3 = true;
     }
+    hideLogos("Track3",msg)
 })
 
 socket.on('newLogo', (logo) => {
