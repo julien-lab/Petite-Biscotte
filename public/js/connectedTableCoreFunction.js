@@ -446,13 +446,13 @@ async function playComposition() {
     // sert à arrêter les audioz avant le démarrage de la piste par exemple quand un audio est en train d'être écouté
     stopComposition();
     if (!canPlay || soundsOnTracks.length === 0) return;
-    initCursor('Track1');
-    initCursor('Track2');
-    initCursor('Track3');
+    //initCursor('Track1');
+    //initCursor('Track2');
+    //initCursor('Track3');
     socket.emit('changeSmartphoneDisplay', 'changeState');
     canPlay = false;
     canSuppress = false;
-    for (let i = 0; i < 720; i++) {
+    for (let i = 0; i < 360; i++) {
         console.log('hello')
         let promise = sleep(55);
         for (let j=0;j<soundsOnTracks.length;j++) {

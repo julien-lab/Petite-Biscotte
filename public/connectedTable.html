@@ -72,9 +72,10 @@
 <div id="Track2" class="Track2" ondrop="onDrop(event)" ondragover="allowDrop(event)" ontouchstart="playSongWhenTouchOnTrack(event)" ></div>
 <div id="Track3" class="Track3" ondrop="onDrop(event)" ondragover="allowDrop(event)" ontouchstart="playSongWhenTouchOnTrack(event)" ></div>
 
-<div id="cursor1">|</div>
-<div id="cursor2">|</div>
-<div id="cursor3">|</div>
+<svg id="cursor" width="10" height="14%" viewBox="0 0 10 200" xmlns="http://www.w3.org/2000/svg">
+  <line x1="0" y1="0" x2="0" y2="100%" stroke-width="11" stroke="black" />
+</svg>
+
 
 <div class="soundbox">
   <div class="test">

@@ -287,35 +287,13 @@ a {
     border-radius: 50%;
 }
 
-#cursor1 {
+#cursor {
     position: absolute;
     z-index: 10;
-    top: 6.6%;
+    top: 8%;
     left: 50%;
-    color: blueviolet;
-    font-size: 72px;
-    font-weight: bold;
 }
 
-#cursor2 {
-    position: absolute;
-    z-index: 10;
-    top: 12.2%;
-    left: 50%;
-    color: blueviolet;
-    font-size: 63px;
-    font-weight: bold;
-}
-
-#cursor3 {
-    position: absolute;
-    z-index: 10;
-    top: 17.4%;
-    left: 50%;
-    color: blueviolet;
-    font-size: 55px;
-    font-weight: bold;
-}
 
 body {
     display: flex;
