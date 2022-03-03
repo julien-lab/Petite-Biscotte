@@ -10,6 +10,7 @@
     margin: 50px auto;
     min-height: 200px;
     position: relative;
+    z-index: 2;
 }
 
 .carousel-inner{
@@ -89,6 +90,13 @@
     -o-transform: rotate(180deg);
     transform: rotate(180deg);
  }
+
+#sens{
+    position: absolute;
+    top: 5%;
+    left: 52%;
+    transform: rotate(45deg);
+}
 
 #btn_listenAll2{
     position: absolute;
@@ -257,6 +265,7 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+    z-index: 1;
 }
 
 
@@ -271,6 +280,7 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+    z-index: 1;
 }
 
 
@@ -285,6 +295,7 @@ a {
     -webkit-mask-image: radial-gradient(transparent 65%, black 65%);
     mask-image: radial-gradient(transparent 65%, black 65%);
     border-radius: 50%;
+    z-index: 1;
 }
 
 #cursor {
@@ -334,6 +345,10 @@ body {
     color: #141414;
 }
 
+#volume{
+    z-index: 4;
+    width: 40%;
+}
 
 @-webkit-keyframes rotation {
     0%   { -webkit-transform: rotate(0deg); }

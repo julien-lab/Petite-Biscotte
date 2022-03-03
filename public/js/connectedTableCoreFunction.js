@@ -37,6 +37,7 @@ let volume = 0.5;
 
 function setVolume(newVolume){
     volume = newVolume
+    document.getElementById("volume").value = newVolume
 }
 
 function getOffset(el) {
@@ -186,6 +187,7 @@ function findLogoWhenDuplicate(soundName){
 var mylatesttap ;
 var doubleClickOn = false;
 function doubletap(x, y) {
+    logoToPlace = true
     var isDoubleTaped = false;
     const trackTargeted = document.elementFromPoint(x, y).id;
 
@@ -237,7 +239,15 @@ function startDrag(event){
     event.dataTransfer.setData("soundName",soundName)
 }
 
+let onlyOnetouchAtTime = true;
+
 function touchend(event) {
+    logoToPlace = true
+    if (!onlyOnetouchAtTime) {
+        event.preventDefault();
+        return;
+    }
+    onlyOnetouchAtTime = false;
     //let logo = null
     clearTrackFromPreview(lastTrack);
     const x = event.changedTouches[0].pageX;
@@ -261,6 +271,7 @@ function touchend(event) {
         trackDiv.setAttribute("style", "background:" + conicGradient);
         placeLogo(startPos,document.getElementById(soundName).duration,trackTargeted);
     }
+    onlyOnetouchAtTime = true;
 
 }
 
@@ -315,6 +326,9 @@ function constructConicGradient(startPos, soundDuration, trackTargeted, soundNam
     return writeConicGradientString(trackTargeted, soundsOnTracks);
 }
 
+let cptLogos = 0
+let logoToPlace = true
+
 function placeLogo(startPos,soundDuration, track, foundLogo = undefined) {
     let soundPercentage = (soundDuration*100)/20;
 
@@ -333,6 +347,7 @@ function placeLogo(startPos,soundDuration, track, foundLogo = undefined) {
     logo.style.position = "absolute"
     var index = Math.round(((startPos + endPos) / 10) - 1)
     let x,y
+    if(index > 72) return
     if(track === "Track1"){
         x = positionsTrack1[index][0]
         y = positionsTrack1[index][1] - (15*100/1296)
@@ -351,7 +366,12 @@ function placeLogo(startPos,soundDuration, track, foundLogo = undefined) {
     logo.style.zIndex = "100"
     logo.style.fontSize = "xx-large"
     logo.classList.add("placedLogo");
-    document.body.appendChild(logo)
+    logo.id = cptLogos.toString()
+    if(logoToPlace){
+        document.body.appendChild(logo)
+        cptLogos++
+    }
+
 
 }
 
@@ -382,6 +402,7 @@ function addSound(startPos, endPos, trackTargeted, soundName){
         //console.log(soundsOnTracks)
         soundsOnTracks = sortSoundsByStartPos(soundsOnTracks);
     }else{
+        logoToPlace = false
         let audio = document.getElementById("error404");
         audio.play();
     }
@@ -442,6 +463,14 @@ function stopComposition(){
 let exit = false;
 let canSuppress = true
 
+function delay(){
+    if (canPlay) {
+        socket.emit('warnBeforeChange');
+        setTimeout(function() {playComposition()}, 5000);
+        canPlay = false;
+    }
+}
+
 async function playComposition() {
     // sert à arrêter les audioz avant le démarrage de la piste par exemple quand un audio est en train d'être écouté
     stopComposition();
@@ -450,7 +479,6 @@ async function playComposition() {
     //initCursor('Track2');
     //initCursor('Track3');
     socket.emit('changeSmartphoneDisplay', 'changeState');
-    canPlay = false;
     canSuppress = false;
     for (let i = 0; i < 360; i++) {
         console.log('hello')
@@ -483,34 +511,6 @@ async function playComposition() {
     socket.emit("hideTrack3", "false");
 
 }
-
-function initCursor(track){
-    var trackDiv = document.getElementById(track);
-    const height = trackDiv.offsetHeight;
-    const width = trackDiv.offsetWidth;
-    console.log(height, width);
-
-    const sH = window.screen.height;
-    const sW = window.screen.width;
-
-    var hPercentage;
-    var wPercentage;
-    if(track === 'Track1'){
-        hPercentage = 87.5;
-        wPercentage =98;
-    }else if(track === 'Track2'){
-        hPercentage = 77.1;
-        wPercentage =88;
-    }else{
-        hPercentage = 67.5;
-        wPercentage =78;
-    }
-    var hPxToAdd = (sH - ((sH*hPercentage)/100));
-    var wPxToAdd = (sW - ((sW*wPercentage)/100));
-    moveCursor((height/2)-20,(width/2)-20, hPxToAdd, wPxToAdd, track);
-}
-
-
 
 async function moveCursor(h, w, hPxToAdd, wPxToAdd, track) {
    var test = true;
@@ -576,8 +576,9 @@ function clearTracks(){
 }
 
 function printMousePos(event) {
-    console.log(event.clientX,event.clientY)
-    console.log($(window).width(),$(window).height())
+    //console.log(event.clientX,event.clientY)
+    //console.log($(window).width(),$(window).height())
+    console.log(cptLogos)
 }
 
-//document.addEventListener("click", printMousePos);
+document.addEventListener("click", printMousePos);

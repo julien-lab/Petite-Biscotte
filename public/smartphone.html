@@ -41,8 +41,13 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/alexgibson/shake.js/master/shake.js"></script>
     <title>Petite Biscotte</title>
 </head>
-<body>
+<body onkeydown="return disableRefresh(event)">
+<br/>
 <div class="chat-container" id="chat">
+    <div style="text-align: center;" >
+        <button class="mdc-button mdc-button--raised" id="startTrack"> Start the audio track</button>
+    </div>
+    <br/>
     <header class="chat-header">
         <h1>Music</h1>
         <a id="leave-btn" class="btn">Leave Room</a>
@@ -73,9 +78,6 @@
         </div>
         <div data-role="recordings" ></div>
     </div>
-    <div style="text-align: center;" >
-        <button class="mdc-button mdc-button--raised" id="startTrack"> Start the audio track</button>
-    </div>
     <br>
 </div>
 <div id="playing" style="display: none">
@@ -85,28 +87,28 @@
     </div>
     <div class="topbox2">
         <img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/>
+        <br>
         <img id="stopMusic" height="40px" width="40px" src="https://www.freeiconspng.com/uploads/music-round-sound-stop-stop-button-technology-icon-15.png"/>
     </div>
 
-
-    <!--<label for="volume"></label>
-    <div id="centrer"><img id="logoVolume" src="https://img.icons8.com/ios-filled/50/000000/low-volume.png"/></div>-->
     <br>
-    <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    <div style="display: flex; justify-content: center">
+        <input id="volume" type="range" min="0" max="1" step="0.01" value="0.5" />
+    </div>
     <div id="divVolume" class="volumeControl" style="display: none"><button class="mdc-button mdc-button--raised" id="volumeButton"> Take back volume control</button></div>
     <br>
     <div class="divToggleButton">
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitches1" checked>
-            <label class="custom-control-label" for="customSwitches1">Exterior </label>
+            <label class="custom-control-label" for="customSwitches1">Exterior Track </label>
         </div>
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitches2" checked>
-            <label class="custom-control-label" for="customSwitches2">Middle </label>
+            <label class="custom-control-label" for="customSwitches2">Middle Track </label>
         </div>
         <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="customSwitches3" checked>
-            <label class="custom-control-label" for="customSwitches3">Interior </label>
+            <label class="custom-control-label" for="customSwitches3">Interior Track </label>
         </div>
     </div>
     <div id="importedAudio">
@@ -154,7 +156,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet1" name="effet1"
-                                               min="-1000" max="1000" onchange="addFilter('beatbox2','circle1','effet1')">
+                                               min="-1000" max="1000" oninput="addFilter('beatbox2','circle1','effet1')">
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +174,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet2" name="effet2"
-                                               min="-1000" max="1000" onchange="addFilter('trompette','circle2','effet2')">
+                                               min="-1000" max="1000" oninput="addFilter('trompette','circle2','effet2')">
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +192,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet3" name="effet3"
-                                               min="-1000" max="1000" onchange="addFilter('beatbox1','circle3','effet3')">
+                                               min="-1000" max="1000" oninput="addFilter('beatbox1','circle3','effet3')">
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +210,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet4" name="effet4"
-                                               min="-1000" max="1000" onchange="addFilter('pouet','circle4','effet4')">
+                                               min="-1000" max="1000" oninput="addFilter('pouet','circle4','effet4')">
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +228,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet5" name="effet5"
-                                               min="-1000" max="1000" onchange="addFilter('pouet2','circle5','effet5')">
+                                               min="-1000" max="1000" oninput="addFilter('pouet2','circle5','effet5')">
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +246,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet6" name="effet6"
-                                               min="-1000" max="1000" onchange="addFilter('Toc','circle6','effet6')">
+                                               min="-1000" max="1000" oninput="addFilter('Toc','circle6','effet6')">
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +264,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet7" name="effet7"
-                                               min="-1000" max="1000" onchange="addFilter('Flip','circle7','effet7')">
+                                               min="-1000" max="1000" oninput="addFilter('Flip','circle7','effet7')">
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +282,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet8" name="effet8"
-                                               min="-1000" max="1000" onchange="addFilter('Badada','circle8','effet8')">
+                                               min="-1000" max="1000" oninput="addFilter('Badada','circle8','effet8')">
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +300,7 @@
                                 <div class="settings">
                                     <div>
                                         <input type="range" id="effet9" name="effet9"
-                                               min="-1000" max="1000" onchange="addFilter('Boum','circle9','effet9')">
+                                               min="-1000" max="1000" oninput="addFilter('Boum','circle9','effet9')">
                                     </div>
                                 </div>
                             </div>
@@ -318,6 +320,11 @@
     </div>
 </div>
 
+<div class="fab">
+    <div id="fab-hdr">
+        <h3>Tracks starting in 5 seconds</h3>
+    </div>
+</div>
 </body>
 
 </html>

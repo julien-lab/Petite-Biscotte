@@ -70,7 +70,9 @@ stopMusic.addEventListener('click', (e) => {
 
 // On start track
 startTrack.addEventListener('click', (e) => {
-    socket.emit('askTochangeSmartphoneDisplay', 'please');
+    socket.emit('warnBeforeChange')
+    setTimeout(function() {socket.emit('askTochangeSmartphoneDisplay', 'please');}, 5000);
+
 })
 
 // Volume on change

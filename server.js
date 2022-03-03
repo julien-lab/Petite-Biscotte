@@ -20,7 +20,7 @@ const options = {
 };
 const server = https.createServer(options, app);
 
-
+let alreadyRequested = false;
 
 const io = socketio(server);
 
@@ -93,6 +93,14 @@ io.on('connection', (socket) => {
     io.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
   })
 
+  socket.on('warnBeforeChange', () => {
+    if (!alreadyRequested) {
+      alreadyRequested = true;
+      io.to("smartphone").emit('warnBeforeChange');
+      setTimeout(function(){alreadyRequested =false;}, 6000)
+    }
+  })
+
   socket.on('stopTrack', (msg) => {
     io.to("connectedTable").emit('stopTrack',msg);
   })
@@ -120,6 +128,10 @@ io.on('connection', (socket) => {
     io.emit('hideTrack3',msg);
   })
 
+  socket.on('restartTable', () => {
+    io.to("connectedTable").emit('restartTable');
+  })
+
 });
 
 
@@ -135,6 +147,8 @@ const app2 = express();
 const serverUnsafe = http.createServer(app2);
 
 const io2 = socketio(serverUnsafe);
+
+let alreadyRequested2 = false;
 
 // Set static folder
 app2.use(express.static(path.join(__dirname, 'public')));
@@ -206,6 +220,14 @@ io2.on('connection', (socket) => {
     io2.to("connectedTable").emit('askTochangeSmartphoneDisplay',msg);
   })
 
+  socket.on('warnBeforeChange', () => {
+    if (!alreadyRequested2) {
+      alreadyRequested2 = true;
+      io2.to("smartphone").emit('warnBeforeChange');
+      setTimeout(function(){alreadyRequested2 =false;}, 6000)
+    }
+  })
+
   socket.on('stopTrack', (msg) => {
     io2.to("connectedTable").emit('stopTrack',msg);
   })
@@ -231,6 +253,10 @@ io2.on('connection', (socket) => {
 
   socket.on('hideTrack3', (msg) => {
     io2.emit('hideTrack3',msg);
+  })
+
+  socket.on('restartTable', () => {
+    io2.to("connectedTable").emit('restartTable');
   })
 
 });

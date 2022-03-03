@@ -130,3 +130,7 @@ socket.on("newMap",(choice)=>{
   alreadySentLogos.set(choice,true)
 })
 
+socket.on('warnBeforeChange', () => {
+  openFAB();
+})
+
