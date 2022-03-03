@@ -102,6 +102,11 @@ socket.on('clearTracks', (e) => {
     clearTracks();
 });
 
+socket.on('restartTable', () => {
+    window.location.reload();
+});
+
+
 socket.on('askTochangeSmartphoneDisplay', (msg) => {
     if (canPlay && soundsOnTracks.length !== 0){
         canPlay = false;

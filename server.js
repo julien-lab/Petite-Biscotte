@@ -128,6 +128,10 @@ io.on('connection', (socket) => {
     io.emit('hideTrack3',msg);
   })
 
+  socket.on('restartTable', () => {
+    io.to("connectedTable").emit('restartTable');
+  })
+
 });
 
 
@@ -249,6 +253,10 @@ io2.on('connection', (socket) => {
 
   socket.on('hideTrack3', (msg) => {
     io2.emit('hideTrack3',msg);
+  })
+
+  socket.on('restartTable', () => {
+    io2.to("connectedTable").emit('restartTable');
   })
 
 });
